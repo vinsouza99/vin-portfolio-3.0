@@ -34,10 +34,14 @@
 		class="section-content h-full w-full flex-col items-center justify-center gap-5 text-left text-white"
 	>
 		{#if ContentComponent && ContentComponent !== null && ContentComponent !== undefined && contentProps !== null && contentProps !== undefined}
-			<ContentComponent {...contentProps} />
+			<div class="m-0 flex h-full w-full flex-col justify-center p-0">
+				<ContentComponent {...contentProps} />
+			</div>
 		{:else}
 			<!-- Optionally render a placeholder or nothing if content is not provided -->
-			<div class="h-full w-full">Placeholder</div>
+			<div class="glass-container m-0 flex h-full w-full flex-col justify-center p-0">
+				Placeholder
+			</div>
 		{/if}
 	</div>
 </section>

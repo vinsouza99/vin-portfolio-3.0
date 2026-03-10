@@ -60,51 +60,17 @@ body {
 }
 
 .glass-container {
-	position: relative;
-	border-radius: 0.75rem;
-	padding: 1px; /* lets the gradient border show */
-
-	/* Glass fill */
+	/*border: 1px solid rgba(255, 255, 255, 0.3);*/
+	border: 1px solid rgba(0, 116, 189, 0.2);
 	background: linear-gradient(
 		135deg,
-		color-mix(in srgb, var(--color-container) 80%, transparent),
-		color-mix(in srgb, var(--color-container) 60%, transparent)
+		rgba(255, 255, 255, 0.03) 0%,
+		rgba(255, 255, 255, 0.08) 50%,
+		rgba(255, 255, 255, 0.03) 100%
 	);
-	backdrop-filter: blur(16px) saturate(1.4);
-	-webkit-backdrop-filter: blur(16px) saturate(1.4);
-
-	/* Gradient border via box-shadow layering */
-	box-shadow:
-		/* Outer glow */
-		0 0 0 1px color-mix(in srgb, var(--color-secondary-500) 30%, transparent),
-		/* Top-left light catch — simulates 3D light source */ inset 2px 2px 4px
-			color-mix(in srgb, white 20%, transparent),
-		/* Bottom-right depth shadow */ inset -2px -2px 4px color-mix(in srgb, black 20%, transparent),
-		/* Outer drop shadow for lift */ 0 8px 32px color-mix(in srgb, black 25%, transparent),
-		0 2px 8px color-mix(in srgb, black 15%, transparent);
-}
-
-/* Gradient border using a pseudo-element */
-.glass-container::before {
-	content: '';
-	position: absolute;
-	inset: 0;
-	border-radius: inherit;
-	padding: 1px;
-	background: linear-gradient(
-		135deg,
-		color-mix(in srgb, var(--color-secondary-500) 60%, transparent),
-		color-mix(in srgb, white 10%, transparent) 40%,
-		color-mix(in srgb, var(--color-secondary-500) 40%, transparent)
-	);
-
-	/* Masks the fill, leaving only the border */
-	-webkit-mask:
-		linear-gradient(white 0 0) content-box,
-		linear-gradient(white 0 0);
-	-webkit-mask-composite: xor;
-	mask-composite: exclude;
-	pointer-events: none;
+	border-radius: 5%;
+	backdrop-filter: url(#glass);
+	transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 2.2);
 }
 .footer-mask {
 	background: linear-gradient(to top, var(--color-bg) 50%, transparent);

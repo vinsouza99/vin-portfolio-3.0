@@ -8,7 +8,27 @@
 </script>
 
 <svelte:head><link rel="icon" href={favicon} /></svelte:head>
-
+<svg style="position: absolute; width: 0; height: 0">
+	<filter
+		id="glass"
+		x="-50%"
+		y="-50%"
+		width="200%"
+		height="200%"
+		primitiveUnits="objectBoundingBox"
+	>
+		<feImage x="-50%" y="-50%" width="200%" height="200%" result="map" />
+		<feGaussianBlur in="SourceGraphic" stdDeviation="0.02" result="blur" />
+		<feDisplacementMap
+			id="disp"
+			in="blur"
+			in2="map"
+			scale="0.8"
+			xChannelSelector="R"
+			yChannelSelector="G"
+		></feDisplacementMap>
+	</filter>
+</svg>
 <Navbar class="nav-mask fixed top-0 right-0 left-0 z-10 mx-0 w-full gap-0!">
 	<NavBrand href="/">
 		<img src="/images/vin-logo-light.svg" class="me-3 h-6 sm:h-9" alt="Vin Logo" />
