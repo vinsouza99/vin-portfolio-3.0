@@ -27,11 +27,11 @@
   </script>
   
   <section class="block-content min-h-screen py-8 md:py-16">
-    <div class="max-w-fukk mx-auto px-4 md:px-8">
+    <div class="max-w-full mx-auto px-4 md:px-8">
       <ul class="timeline-list relative max-w-[700px] mx-auto list-none p-0">
         {#each items as item, i}
           <li style="--index: {i}" class="relative mb-12 pl-8 md:pl-12">
-            <div class="content animate-revealFromLeft">
+            <div class="glass-container content animate-revealFromLeft">
               <h3 class="text-primary-500 text-xl md:text-4xl font-black mb-2 leading-tight">
                 {item.title}
               </h3>
