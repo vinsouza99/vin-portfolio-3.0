@@ -29,16 +29,18 @@
 		></feDisplacementMap>
 	</filter>
 </svg>
-<Navbar class="nav-mask fixed top-0 right-0 left-0 z-10 mx-0 w-full gap-0!">
-	<NavBrand href="/">
+<Navbar class="nav-mask pointer-events-none fixed top-0 left-0 z-10 mx-0 h-45 w-fit gap-0!">
+	<NavBrand href="/" class="pointer-events-auto">
 		<img src="/images/vin-logo-light.svg" class="me-3 h-6 sm:h-9" alt="Vin Logo" />
 		<span class="sr-only">Vin Souza</span>
 	</NavBrand>
-	<div class="flex md:order-2">
-		<Button size="sm" class="cursor-pointer rounded-sm text-xl font-thin!" outline>resume</Button>
+	<div class="pointer-events-auto flex md:order-2">
+		<Button size="sm" class="glass-container cursor-pointer rounded-sm text-xl font-thin!" outline
+			>resume</Button
+		>
 		<NavHamburger color="primary" />
 	</div>
-	<NavUl class="order-1">
+	<NavUl class="pointer-events-auto order-1">
 		<NavLi href="/#skills" class="text-xl font-thin text-primary-900 active:text-primary-500"
 			>skills</NavLi
 		>

@@ -59,7 +59,7 @@
 
 <form
 	on:submit={submitForm}
-	class="glass-container flex max-w-xl flex-col space-y-1 divide-y divide-secondary-200/10 p-5"
+	class="glass-container flex max-w-xl flex-col space-y-1 divide-y divide-secondary-200/10 rounded-2xl p-5"
 >
 	{#if formStatus === 'success'}
 		<Alert color="green" class="mb-4" border={false}>

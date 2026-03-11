@@ -1,10 +1,12 @@
 <script lang="ts">
 	import { Footer, FooterCopyright, FooterIcon, ButtonGroup, Button } from 'flowbite-svelte';
 	import { GithubSolid, LinkedinSolid } from 'flowbite-svelte-icons';
+
+	const currentYear = new Date().getFullYear();
 </script>
 
 <Footer
-	class="footer-mask fixed bottom-0 left-0 z-20 w-full gap-5 p-4 text-text shadow-sm md:flex md:items-center md:justify-start md:p-6"
+	class="footer-mask fixed bottom-0 left-0 z-20 w-full gap-5 p-4 text-text shadow-sm md:flex md:max-w-[50vw] md:items-center md:justify-start md:p-6"
 >
 	<ButtonGroup
 		class="bg-transparent text-primary-800 *:ring-primary-700! hover:text-primary-500 active:text-primary-500"
@@ -33,13 +35,14 @@
 		>
 			<LinkedinSolid class="aspect-square h-6 w-6 text-primary-800 hover:text-primary-500" />
 		</FooterIcon>
-	</div>
-	<div class="flex w-full justify-center">
-		<FooterCopyright
-			href="/"
-			by="vin souza"
-			year={2026}
-			class="relative -left-[10%] font-thin text-primary-800"
-		/>
+		<div class="flex w-full justify-center">
+			<FooterCopyright
+				href="/"
+				by="vin souza"
+				year={currentYear}
+				// class="relative -left-[10%] font-thin text-primary-800"
+				class="font-thin text-primary-800/60"
+			/>
+		</div>
 	</div>
 </Footer>

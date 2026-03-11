@@ -32,7 +32,7 @@
 
 	--color-bg: #001221;
 	--color-container: #001e36;
-	--color-text: #dbefec;
+	--color-text: #aad9ff;
 
 	--font-mono: 'Azeret Mono', sans-serif;
 	--font-inria: 'Inria Sans', sans-serif;
@@ -68,13 +68,33 @@ body {
 		rgba(255, 255, 255, 0.08) 50%,
 		rgba(255, 255, 255, 0.03) 100%
 	);
-	border-radius: 5%;
 	backdrop-filter: url(#glass);
-	transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+	transition: all 0.1s cubic-bezier(0.175, 0.885, 0.32, 2.2);
 }
 .footer-mask {
 	background: linear-gradient(to top, var(--color-bg) 50%, transparent);
 }
 .nav-mask {
-	background: linear-gradient(to bottom, var(--color-bg) 60%, transparent);
+	background: linear-gradient(to bottom, var(--color-bg) 40%, transparent);
+}
+.section-summary {
+	padding: 2rem;
+	padding-right: 0;
+}
+.section-content {
+	padding: 2rem;
+	padding-left: 0;
+}
+@media (max-width: 768px) {
+	.section-summary {
+		padding: 1rem;
+	}
+	.section-content {
+		padding: 1rem;
+		padding-left: 0;
+	}
+	#works .section-content {
+		padding: 0;
+		overflow: scroll;
+	}
 }
