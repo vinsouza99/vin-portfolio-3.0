@@ -98,3 +98,44 @@ body {
 		overflow: scroll;
 	}
 }
+
+/* The Vertical Line */
+.timeline-list::before {
+	content: "";
+	@apply absolute left-[-0.25em] top-0 bottom-0 border-l-[5px] border-[#CCC] origin-top;
+	animation: scaleVertical 3s 1s ease both;
+  }
+
+  /* The Bottom Cap Dot */
+  .timeline-list::after {
+	content: "";
+	@apply absolute bottom-0 left-[-1em] w-5 h-5 rounded-full bg-[#DDD] border-[5px] border-[#DDD] shadow-sm;
+	animation: revealScaleUp 0.75s 2.82s ease both;
+  }
+
+  /* The Node Dots */
+  li::before {
+	content: "";
+	@apply absolute top-0 left-[-1.45em] w-[30px] h-[30px] rounded-full bg-[#02aa9d] border-[5px] border-white z-10;
+	animation: revealScaleUp 0.75s calc(0.8s + (var(--index) * 0.3s)) ease both;
+  }
+
+  .content {
+	animation: revealFromLeft 0.5s calc(1s + (var(--index) * 0.3s)) ease both;
+  }
+
+  @keyframes revealFromLeft {
+	0% { transform: translateX(-1em); opacity: 0; }
+	100% { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes scaleVertical {
+	0% { transform: scaleY(0); }
+	100% { transform: scaleY(1); }
+  }
+
+  @keyframes revealScaleUp {
+	0% { opacity: 0; transform: scale(0.5); }
+	50% { opacity: 1; transform: scale(1.3); }
+	100% { opacity: 1; transform: scale(1); }
+  }

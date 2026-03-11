@@ -29,7 +29,7 @@
   <section class="block-content min-h-screen py-8 md:py-16">
     <div class="max-w-full mx-auto px-4 md:px-8">
       <ul class="timeline-list relative max-w-[700px] mx-auto list-none p-0">
-        {#each items as item, i}
+        {#each items as item, i (i)}
           <li style="--index: {i}" class="relative mb-12 pl-8 md:pl-12">
             <div class="glass-container content animate-revealFromLeft">
               <h3 class="text-primary-500 text-xl md:text-4xl font-black mb-2 leading-tight">
@@ -45,7 +45,8 @@
     </div>
   </section>
   
-  <style lang="postcss">
+  <!-- <style>
+  @reference "../routes/+layout.css";
     /* The Vertical Line */
     .timeline-list::before {
       content: "";
@@ -86,4 +87,4 @@
       50% { opacity: 1; transform: scale(1.3); }
       100% { opacity: 1; transform: scale(1); }
     }
-  </style>
+  </style> -->
