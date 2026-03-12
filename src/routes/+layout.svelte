@@ -29,7 +29,7 @@
 		></feDisplacementMap>
 	</filter>
 </svg>
-<Navbar class="nav-mask pointer-events-none fixed top-0 left-0 z-10 mx-0 h-45 w-fit gap-0!">
+<Navbar class="nav-mask pointer-events-none fixed top-0 left-0 z-10 mx-0 h-45 w-full px-2 md:max-w- md:px-0 gap-0!">
 	<NavBrand href="/" class="pointer-events-auto">
 		<img src="/images/vin-logo-light.svg" class="me-3 h-6 sm:h-9" alt="Vin Logo" />
 		<span class="sr-only">Vin Souza</span>
@@ -64,10 +64,10 @@
 <style>
 	:global(nav > div > div) {
 		gap: 0.5rem;
-		margin-right: 1rem;
-		margin-left: 1rem;
+		/* margin-right: 1rem;
+		margin-left: 1rem; */
 		@media screen and (min-width: 768px) {
 			justify-content: flex-start !important;
-		}
+		} 
 	}
 </style>

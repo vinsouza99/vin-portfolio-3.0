@@ -14,7 +14,7 @@
 
 <section
 	id={header.toLowerCase().replace(/\s+/g, '-')}
-	class="content-section grid h-full min-h-screen grid-cols-1 sm:gap-2 md:grid-cols-2 md:gap-5 lg:gap-10"
+	class="overflow-visible w-full max-w-[1800px] mx-auto content-section grid p-5 md:p-10 h-full min-h-screen grid-cols-1 sm:gap-2 md:grid-cols-2 md:gap-5 lg:gap-10"
 >
 	<div class="section-summary relative h-full w-full">
 		<div

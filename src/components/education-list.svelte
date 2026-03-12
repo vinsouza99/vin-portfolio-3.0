@@ -27,7 +27,7 @@
 <div class="flex">
 	<!--Filter by tags -->
 	<ul
-		class="m-0 flex w-full list-none flex-row flex-nowrap gap-5 overflow-scroll p-5 md:flex-col md:p-0"
+		class="m-0 flex w-full list-none gap-5 overflow-scroll p-5 flex-col md:p-0"
 	>
 		{#each education as edu (edu.id)}
 			<li class="m-0 w-full min-w-[75%] p-0 md:w-auto">
