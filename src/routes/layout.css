@@ -59,7 +59,10 @@ body {
 	scroll-behavior: smooth;
 	box-sizing: border-box;
 }
-
+.content-width{
+	max-width: 1700px;
+	width: 100%;
+}
 .glass-container {
 	/*border: 1px solid rgba(255, 255, 255, 0.3);*/
 	border: 1px solid rgba(0, 116, 189, 0.2);

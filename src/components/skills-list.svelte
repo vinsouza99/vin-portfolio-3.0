@@ -91,10 +91,10 @@
 				I haven't learned that yet!
 			</p>
 		{:else}
-			<ul class="m-0 flex list-none flex-wrap items-start justify-start gap-5">
+			<ul class="m-0 list-none grid grid-rows-auto grid-cols-4 gap-5 lg:grid-cols-6 items-start justify-start">
 				{#each filteredSkills as skill (skill.name)}
 					<li
-						class="flex aspect-square! flex-col items-center justify-center gap-1 transition-all ease-in-out md:max-w-20"
+						class="flex grow aspect-square! flex-col items-center justify-center gap-1 transition-all ease-in-out md:max-w-20"
 						title={skill.name}
 					>
 						<div

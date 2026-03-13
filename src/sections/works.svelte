@@ -13,7 +13,7 @@
 
 <section
 	id="works"
-	class="content-section mx-auto grid h-full min-h-screen w-full max-w-450 grid-cols-1 sm:gap-2 md:grid-cols-2 md:gap-5 lg:gap-10"
+	class="content-section mx-auto grid h-full min-h-screen content-width grid-cols-1 sm:gap-2 md:grid-cols-2 md:gap-5 lg:gap-10"
 >
 	<div class="section-summary relative h-full w-full p-10 md:p-10 md:pr-0">
 		<div

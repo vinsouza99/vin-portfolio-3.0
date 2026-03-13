@@ -15,6 +15,8 @@
 	function closeMenu() {
 		isMenuOpen = false;
 	}
+
+	const navlinks = ["skills","works","career","education", "contact"]
 </script>
 
 <svelte:head><link rel="icon" href={favicon} /></svelte:head>
@@ -40,7 +42,7 @@
 	</filter>
 </svg>
 <nav class="nav-mask pointer-events-none fixed top-0 left-0 z-50 mx-0 h-45 w-full px-2 md:px-0">
-	<div class="mx-auto flex flex-wrap items-start justify-start gap-3 p-4">
+	<div class="mx-auto transition-all ease-in-out flex flex-wrap items-start justify-between md:justify-start gap-3 p-5 md:px-15 content-width">
 		<a href="/" class="pointer-events-auto relative z-50 flex items-center" onclick={closeMenu}>
 			<img src="/images/vin-logo-light.svg" class="me-3 h-6 sm:h-9" alt="Vin Logo" />
 			<span class="sr-only">Vin Souza</span>
@@ -50,7 +52,7 @@
 			class="pointer-events-auto relative z-50 flex items-start space-x-3 md:order-2 md:space-x-4"
 		>
 			<button
-				class="cursor-pointer rounded-sm border border-secondary-300/10 bg-transparent px-4 py-1.5 text-xl font-thin! text-secondary-300/50 hover:bg-secondary-500/10 hover:text-secondary-100"
+				class="cursor-pointer rounded-sm border border-secondary-300/10 bg-transparent px-4 py-1 text-xl font-thin! text-secondary-300/50 hover:bg-secondary-500/10 hover:text-secondary-100"
 			>
 				resume
 			</button>
@@ -96,46 +98,17 @@
 				: 'hidden'} pointer-events-auto w-full md:static md:order-1 md:flex md:w-auto md:bg-transparent md:dark:bg-transparent"
 		>
 			<ul class="flex flex-col items-start gap-8 p-4 md:mt-0 md:flex-row md:gap-4 md:p-0">
-				<li>
-					<a
-						href="/#skills"
-						onclick={closeMenu}
-						class="block px-3 py-2 text-2xl font-thin text-primary-900 hover:text-primary-500 active:text-primary-500 md:text-xl"
-						>skills</a
-					>
-				</li>
-				<li>
-					<a
-						href="/#works"
-						onclick={closeMenu}
-						class="block px-3 py-2 text-2xl font-thin text-primary-900 hover:text-primary-500 active:text-primary-500 md:text-xl"
-						>works</a
-					>
-				</li>
-				<li>
-					<a
-						href="/#career"
-						onclick={closeMenu}
-						class="block px-3 py-2 text-2xl font-thin text-primary-900 hover:text-primary-500 active:text-primary-500 md:text-xl"
-						>career</a
-					>
-				</li>
-				<li>
-					<a
-						href="/#education"
-						onclick={closeMenu}
-						class="block px-3 py-2 text-2xl font-thin text-primary-900 hover:text-primary-500 active:text-primary-500 md:text-xl"
-						>education</a
-					>
-				</li>
-				<li>
-					<a
-						href="/#contact"
-						onclick={closeMenu}
-						class="block px-3 py-2 text-2xl font-thin text-primary-900 hover:text-primary-500 active:text-primary-500 md:text-xl"
-						>contact</a
-					>
-				</li>
+				{#each navlinks as link (link)}
+					<li>
+						<a
+							href={`/#${link}`}
+							onclick={closeMenu}
+							class="block px-1 py-1 text-xl font-thin! text-primary-900 hover:text-primary-500 active:text-primary-500 md:text-xl"
+							>{link}</a
+						>
+					</li>
+				{/each}
+				
 			</ul>
 		</div>
 	</div>

@@ -31,8 +31,8 @@
 		</div>
 	{/if}
 	<div class="pointer-events-none flex flex-1 grow-2 flex-col justify-start gap-1 p-5">
-		<h3 class="text-left font-mono text-lg text-primary-600">{work.title}</h3>
-		<p class="text-left text-sm font-thin text-secondary-300/80">{work.shortDescription}</p>
+		<h3 class="text-left font-mono text-lg text-primary-600 flex ">{work.title}</h3>
+		<p class="text-left text-sm font-thin text-secondary-300/80 flex grow">{work.shortDescription}</p>
 		<div class="mt-2 flex flex-wrap gap-2 text-left">
 			{#each work.tags as tag (tag)}
 				<span
