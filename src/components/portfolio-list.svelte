@@ -18,6 +18,7 @@
 		{
 			id: 1,
 			title: 'BodyBuddy',
+			url: 'https://bodybuddy.vercel.app/',
 			coverPath: '/images/bodybuddy.png',
 			tags: ['React', 'Node.js', 'Express', 'PostgreSQL', 'System Design', 'JWT'],
 			startYear: 2024,
@@ -29,6 +30,7 @@
 		{
 			id: 2,
 			title: 'DriveBuddy',
+			url: 'https://wmdd.drivebuddy.ca/',
 			coverPath: '/images/drivebuddy.png',
 			tags: ['React Native', 'Node.js', 'Express', 'AWS', 'System Design', 'JWT'],
 			startYear: 2025,
@@ -39,7 +41,8 @@
 		{
 			id: 3,
 			title: 'Sebastian Richardson Portfolio',
-			coverPath: '/images/sebastian-richardson.png',
+			coverPath: '/images/seb-richardson.png',
+			url: 'https://sebrichardson.ca/',
 			tags: ['Svelte', 'Tailwind CSS', 'GSAP', 'JavaScript'],
 			startYear: 2025,
 			endYear: 2025,
@@ -55,7 +58,7 @@
 		class="m-0 flex w-full list-none flex-row flex-nowrap gap-5 overflow-scroll p-5 md:flex-col md:p-0"
 	>
 		{#each works as work (work.id)}
-			<li class="m-0 w-full min-w-[75%] flex-1 p-0 md:w-auto">
+			<li class="m-0 w-full min-w-[75%] flex-1 p-0">
 				<PortfolioItem
 					{work}
 					isSelected={selectedWork ? selectedWork.id === work.id : false}
