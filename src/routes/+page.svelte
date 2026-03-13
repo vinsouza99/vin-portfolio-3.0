@@ -12,4 +12,3 @@
 <Career />
 <Education />
 <Contact />
-πpot
