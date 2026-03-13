@@ -57,6 +57,7 @@ body {
 	background-color: var(--color-bg);
 	font-family: 'Inria Sans', sans-serif;
 	scroll-behavior: smooth;
+	box-sizing: border-box;
 }
 
 .glass-container {

@@ -94,7 +94,7 @@
 			<ul class="m-0 flex list-none flex-wrap items-start justify-start gap-5">
 				{#each filteredSkills as skill (skill.name)}
 					<li
-						class="flex aspect-square! grow flex-col items-center justify-center gap-1 transition-all ease-in-out md:max-w-20"
+						class="flex aspect-square! flex-col items-center justify-center gap-1 transition-all ease-in-out md:max-w-20"
 						title={skill.name}
 					>
 						<div
