@@ -14,12 +14,10 @@
 
 <section
 	id={header.toLowerCase().replace(/\s+/g, '-')}
-	class="overflow-visible content-width mx-auto content-section grid p-5 md:p-10 h-full min-h-screen grid-cols-1 sm:gap-2 md:grid-cols-2 md:gap-5 lg:gap-10"
+	class="content-width content-section mx-auto grid h-full grid-cols-1 overflow-visible p-5 sm:gap-2 md:min-h-screen md:grid-cols-2 md:gap-5 md:p-10 lg:gap-10"
 >
-	<div class="section-summary relative h-full w-full">
-		<div
-			class="flex flex-col content-center justify-center gap-5 text-left md:sticky md:top-80 md:gap-8"
-		>
+	<div class="section-summary relative h-fit w-full md:h-full">
+		<div class="flex flex-col gap-5 text-left md:sticky md:top-70 md:gap-8">
 			<h2
 				class="block font-mono text-6xl font-semibold text-primary-500 text-shadow-lg/60 text-shadow-primary-800/60"
 			>

@@ -1,0 +1,43 @@
+<script lang="ts">
+	import type { Job } from '$lib/models/job';
+
+	interface Props {
+		job: Job;
+		isSelected?: boolean;
+		onClick?: () => void;
+	}
+
+	let { job, isSelected = false, onClick = () => {} }: Props = $props();
+</script>
+
+<button
+	title={job.title}
+	onclick={onClick}
+	class="glass-container pointer-events-none flex flex-1 grow-2 flex-col justify-start gap-1 rounded-2xl p-5 {isSelected
+		? 'border-secondary-700/50 bg-secondary-500/20 text-secondary-100'
+		: 'border-secondary-300/10 bg-transparent text-secondary-300/50 hover:bg-secondary-500/10 hover:text-secondary-100'}"
+>
+	<h3 class="text-medium text-left font-mono text-primary-600 md:text-lg">
+		{job.company}
+	</h3>
+	<div class="flex gap-1 divide-x divide-secondary-800">
+		<p class="flex flex-1 text-left text-xs font-thin text-secondary-300/80 md:text-sm">
+			{job.title}
+		</p>
+		<p class="flex flex-1 text-left text-xs font-thin text-secondary-300/80 md:text-sm">
+			{job.location}
+		</p>
+	</div>
+	<p class="text-left text-xs font-thin text-secondary-300/80 md:text-sm">
+		{job.shortDescription}
+	</p>
+
+	<div class="mt-2 flex flex-wrap gap-2 text-left">
+		{#each job.tags as tag (tag)}
+			<span
+				class="inline-block rounded-full bg-secondary-500/20 px-2 py-1 text-xs font-thin text-secondary-300/80"
+				>{tag}</span
+			>
+		{/each}
+	</div>
+</button>

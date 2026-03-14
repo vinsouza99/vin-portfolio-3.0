@@ -53,7 +53,7 @@
 	<div class="flex flex-wrap gap-3">
 		{#each tags as tag (tag)}
 			<button
-				class="rounded-full border px-5 py-2 text-sm font-thin tracking-widest transition-colors duration-200 hover:cursor-pointer focus:ring-2 focus:ring-secondary-500 focus:ring-offset-2 focus:outline-none
+				class="rounded-2xl border px-5 py-2 text-sm font-thin tracking-widest transition-colors duration-200 hover:cursor-pointer focus:ring-2 focus:ring-secondary-500 focus:ring-offset-2 focus:outline-none
         {selectedTag === tag
 					? 'border-secondary-700/50 bg-secondary-500/20 text-secondary-100'
 					: 'border-secondary-300/10 bg-transparent text-secondary-300/50 hover:bg-secondary-500/10 hover:text-secondary-100'}"
@@ -69,7 +69,7 @@
 			id="search"
 			type="text"
 			placeholder="filter"
-			class="m-0! ml-2 rounded-full border border-secondary-300/10 bg-secondary-700/10 px-10 py-3 text-sm text-text placeholder:font-thin placeholder:text-secondary-200/50 focus:border-secondary-500 focus:outline-none"
+			class="m-0! ml-2 rounded-2xl border border-secondary-300/10 bg-secondary-700/10 px-10 py-3 text-sm text-text placeholder:font-thin placeholder:text-secondary-200/50 focus:border-secondary-500 focus:outline-none"
 			oninput={(e) => {
 				if (e && e.target instanceof HTMLInputElement) {
 					const query = e.target.value;
@@ -83,7 +83,7 @@
 		</Input>
 	</div>
 
-	<div class="glass-container min-h-[55vh] rounded-2xl p-10">
+	<div class="glass-container glowing-shadow min-h-[55vh] rounded-2xl p-10">
 		{#if filteredSkills.length === 0}
 			<p
 				class="block h-full w-full content-center self-center text-center text-lg font-thin text-text/50"
@@ -91,10 +91,12 @@
 				I haven't learned that yet!
 			</p>
 		{:else}
-			<ul class="m-0 list-none grid grid-rows-auto grid-cols-4 gap-5 lg:grid-cols-6 items-start justify-start">
+			<ul
+				class="grid-rows-auto m-0 grid list-none grid-cols-4 items-start justify-start gap-5 lg:grid-cols-6"
+			>
 				{#each filteredSkills as skill (skill.name)}
 					<li
-						class="flex grow aspect-square! flex-col items-center justify-center gap-1 transition-all ease-in-out md:max-w-20"
+						class="flex aspect-square! grow flex-col items-center justify-center gap-1 transition-all ease-in-out md:max-w-20"
 						title={skill.name}
 					>
 						<div

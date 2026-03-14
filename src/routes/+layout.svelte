@@ -16,7 +16,7 @@
 		isMenuOpen = false;
 	}
 
-	const navlinks = ["skills","works","career","education", "contact"]
+	const navlinks = ['skills', 'works', 'career', 'education', 'contact'];
 </script>
 
 <svelte:head><link rel="icon" href={favicon} /></svelte:head>
@@ -42,9 +42,15 @@
 	</filter>
 </svg>
 <nav class="nav-mask pointer-events-none fixed top-0 left-0 z-50 mx-0 h-45 w-full px-2 md:px-0">
-	<div class="mx-auto transition-all ease-in-out flex flex-wrap items-start justify-between md:justify-start gap-3 p-5 md:px-15 content-width">
+	<div
+		class="content-width mx-auto flex flex-wrap items-start justify-between gap-3 p-5 transition-all ease-in-out md:justify-start md:px-15"
+	>
 		<a href="/" class="pointer-events-auto relative z-50 flex items-center" onclick={closeMenu}>
-			<img src="/images/vin-logo-light.svg" class="me-3 h-6 sm:h-9" alt="Vin Logo" />
+			<img
+				src={isMenuOpen ? '/images/vin-logo-dark.svg' : '/images/vin-logo-light.svg'}
+				class="me-3 h-6 sm:h-9"
+				alt="Vin Logo"
+			/>
 			<span class="sr-only">Vin Souza</span>
 		</a>
 
@@ -52,7 +58,7 @@
 			class="pointer-events-auto relative z-50 flex items-start space-x-3 md:order-2 md:space-x-4"
 		>
 			<button
-				class="cursor-pointer rounded-sm border border-secondary-300/10 bg-transparent px-4 py-1 text-xl font-thin! text-secondary-300/50 hover:bg-secondary-500/10 hover:text-secondary-100"
+				class={`cursor-pointer rounded-xl border  bg-transparent px-4 py-1 text-xl font-thin! ${isMenuOpen ? 'border-secondary-500 text-secondary-500' : 'border-secondary-300/10 text-secondary-300/50'} hover:bg-secondary-500/10 hover:text-secondary-100`}
 			>
 				resume
 			</button>
@@ -71,7 +77,7 @@
 						xmlns="http://www.w3.org/2000/svg"
 						fill="none"
 						viewBox="0 0 24 24"
-						stroke="currentColor"
+						stroke="color-secondary-300"
 						stroke-width="2"
 					>
 						<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -108,7 +114,6 @@
 						>
 					</li>
 				{/each}
-				
 			</ul>
 		</div>
 	</div>
