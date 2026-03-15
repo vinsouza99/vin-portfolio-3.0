@@ -6,7 +6,7 @@
 </script>
 
 <Footer
-	class="footer-mask md:fixed md:bottom-0 md:left-0 z-20 w-full gap-5 p-4 text-text shadow-sm flex md:max-w-[50vw] align-center content-center items-center md:justify-start md:p-6"
+	class="footer-mask align-center z-20 flex w-full content-center items-center gap-5 p-4 text-text shadow-sm md:fixed md:bottom-0 md:left-5 md:max-w-[50vw] md:justify-start md:p-6"
 >
 	<ButtonGroup
 		class="bg-transparent text-primary-800 *:ring-primary-700! hover:text-primary-500 active:text-primary-500"

@@ -20,13 +20,14 @@
 	<h3 class="text-medium text-left font-mono text-primary-600 md:text-lg">
 		{job.company}
 	</h3>
-	<div class="flex gap-1 divide-x divide-secondary-800">
-		<p class="flex flex-1 text-left text-xs font-thin text-secondary-300/80 md:text-sm">
+	<div class="flex items-center gap-1 text-secondary-400">
+		<span class="text-left text-xs font-thin md:text-sm">
 			{job.title}
-		</p>
-		<p class="flex flex-1 text-left text-xs font-thin text-secondary-300/80 md:text-sm">
+		</span>
+		<span>-</span>
+		<span class="text-left text-xs font-thin md:text-sm">
 			{job.location}
-		</p>
+		</span>
 	</div>
 	<p class="text-left text-xs font-thin text-secondary-300/80 md:text-sm">
 		{job.shortDescription}

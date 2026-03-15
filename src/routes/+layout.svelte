@@ -43,7 +43,7 @@
 </svg>
 <nav class="nav-mask pointer-events-none fixed top-0 left-0 z-50 mx-0 h-45 w-full px-2 md:px-0">
 	<div
-		class="content-width mx-auto flex flex-wrap items-start justify-between gap-3 p-5 transition-all ease-in-out md:justify-start md:px-15"
+		class=" content-width mx-auto flex flex-wrap items-start justify-between gap-3 p-5 transition-all ease-in-out md:justify-start md:px-15"
 	>
 		<a href="/" class="pointer-events-auto relative z-50 flex items-center" onclick={closeMenu}>
 			<img
@@ -77,7 +77,7 @@
 						xmlns="http://www.w3.org/2000/svg"
 						fill="none"
 						viewBox="0 0 24 24"
-						stroke="color-secondary-300"
+						stroke="fill-secondary-300"
 						stroke-width="2"
 					>
 						<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
