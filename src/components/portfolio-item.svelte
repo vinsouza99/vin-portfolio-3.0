@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Work } from '$lib/models/work';
+	import Tag from './ui/tag.svelte';
 
 	interface Props {
 		work: Work;
@@ -7,7 +8,6 @@
 		onClick?: () => void;
 	}
 
-	// Destructure props using the $props rune
 	let { work, isSelected = false, onClick }: Props = $props();
 </script>
 
@@ -51,11 +51,7 @@
 			</p>
 			<div class="flex flex-wrap gap-2 text-left @md:mt-2">
 				{#each work.tags as tag (tag)}
-					<span
-						class="inline-block rounded-full bg-secondary-500/20 px-2 py-1 text-xs font-thin text-secondary-300/80"
-					>
-						{tag}
-					</span>
+					<Tag text={tag} />
 				{/each}
 			</div>
 		</div>

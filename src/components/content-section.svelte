@@ -3,14 +3,8 @@
 	generics="P extends Record<string, unknown>, DP extends Record<string, unknown>, T = unknown"
 >
 	/* eslint-disable @typescript-eslint/no-explicit-any */
-
+	import type { ContentSectionSelectionContext } from '$lib/models/content-section-context';
 	import type { Component } from 'svelte';
-
-	export interface ContentSectionSelectionContext<T> {
-		selectedItem: T | null;
-		onSelect: (item: T) => void;
-		onDeselect: () => void;
-	}
 
 	interface Props<P, DP> {
 		/** Section id is derived from header (lowercase, spaces to hyphens) */
@@ -21,7 +15,7 @@
 		summaryComponent?: Component<Record<string, unknown>>;
 		summaryProps?: Record<string, unknown>;
 		/** Optional: when provided, right content gets selection props and left shows this when an item is selected */
-		detailComponent?: Component<DP & { selectedItem: T; onDeselect: () => void }>;
+		detailComponent?: Component<DP & { selectedItem: T; onDeselect?: () => void }>;
 		detailProps?: DP;
 		/** Right column: main content. Receives contentProps and, when detailComponent is set, selection context. */
 		content: Component<P & Partial<ContentSectionSelectionContext<T>>>;

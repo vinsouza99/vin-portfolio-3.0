@@ -1,7 +1,9 @@
 <script lang="ts">
+	/* eslint-disable svelte/no-navigation-without-resolve */
 	import './layout.css';
 	import favicon from '$lib/assets/favicon.svg';
 	import Footer from '../components/footer.svelte';
+	import { resolve } from '$app/paths';
 
 	let { children } = $props();
 
@@ -45,7 +47,11 @@
 	<div
 		class=" content-width mx-auto flex flex-wrap items-start justify-between gap-3 p-5 transition-all ease-in-out md:justify-start md:px-15"
 	>
-		<a href="/" class="pointer-events-auto relative z-50 flex items-center" onclick={closeMenu}>
+		<a
+			href={resolve('/')}
+			class="pointer-events-auto relative z-50 flex items-center"
+			onclick={closeMenu}
+		>
 			<img
 				src={isMenuOpen ? '/images/vin-logo-dark.svg' : '/images/vin-logo-light.svg'}
 				class="me-3 h-6 sm:h-9"

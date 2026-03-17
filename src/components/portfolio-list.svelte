@@ -1,14 +1,9 @@
 <script lang="ts">
 	import PortfolioItem from './portfolio-item.svelte';
 	import type { Work } from '$lib/models/work';
+	import type { ContentProps } from '$lib/models/content-section-content-props';
 
-	interface Props {
-		selectedItem?: Work | null;
-		onSelect?: (work: Work) => void;
-		onDeselect?: () => void;
-	}
-
-	let { selectedItem = null, onSelect, onDeselect }: Props = $props();
+	let { selectedItem = null, onSelect, onDeselect }: ContentProps<Work> = $props();
 
 	const handleClick = (work: Work) => {
 		if (selectedItem?.id === work.id) {
@@ -49,7 +44,7 @@
 			endYear: 2024,
 			shortDescription:
 				'An AI-powered fitness web platform for people who want to exercise in their own homes or on the go, at their own pace. The AI analysis checks your form in real-time, ensuring correct posture for a safe and effective workout',
-			longDescription: `BodyBuddy is an AI-powered fitness web platform for people who want to exercise in their own homes or on the go, at their own pace. The AI analysis checks your form in real-time, ensuring correct posture for a safe and effective workout. It also helps you create personalized workout plans based on your fitness level and goals using OpenAI API. This project is part of Langara's program curriculum. Working in a cross-functional team of UI/UX designers and developers as the development lead, I was responsible for leading 3 other devs throughout the development process of 12 weeks, as well as making crucial decisions regarding the technical stack. Besides project management, my role was mainly backend development with Node and Express and database management with PostgreSQL. It was my first time leading a Software development project and it was as rewarding as it was challenging. I'm very proud of what we accomplished.`
+			longDescription: `BodyBuddy is an AI-powered fitness web platform for people who want to exercise in their own homes or on the go, at their own pace. The AI analysis checks your form in real-time, ensuring correct posture for a safe and effective workout. It also helps you create personalized workout plans based on your fitness level and goals using OpenAI API. </br></br> This project is part of Langara's program curriculum. Working in a cross-functional team of UI/UX designers and developers as the development lead, I was responsible for leading 3 other devs throughout the development process of 12 weeks, as well as making crucial decisions regarding the technical stack. </br> Besides project management, my role was mainly backend development with Node and Express and database management with PostgreSQL. It was my first time leading a Software development project and it was as rewarding as it was challenging. I'm very proud of what we accomplished.`
 		},
 		{
 			id: 3,

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Job } from '$lib/models/job';
+	import Tag from './ui/tag.svelte';
 
 	interface Props {
 		job: Job;
@@ -13,7 +14,7 @@
 <button
 	title={job.title}
 	onclick={onClick}
-	class="glass-container pointer-events-none flex flex-1 grow-2 flex-col justify-start gap-1 rounded-2xl p-5 {isSelected
+	class="glass-container flex flex-1 grow-2 flex-col justify-start gap-1 rounded-2xl p-5 {isSelected
 		? 'border-secondary-700/50 bg-secondary-500/20 text-secondary-100'
 		: 'border-secondary-300/10 bg-transparent text-secondary-300/50 hover:bg-secondary-500/10 hover:text-secondary-100'}"
 >
@@ -35,10 +36,7 @@
 
 	<div class="mt-2 flex flex-wrap gap-2 text-left">
 		{#each job.tags as tag (tag)}
-			<span
-				class="inline-block rounded-full bg-secondary-500/20 px-2 py-1 text-xs font-thin text-secondary-300/80"
-				>{tag}</span
-			>
+			<Tag text={tag} />
 		{/each}
 	</div>
 </button>

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Edu } from '$lib/models/edu';
 	import { BookCheck, GraduationCap } from 'lucide-svelte';
+	import Tag from './ui/tag.svelte';
 
 	interface Props {
 		edu: Edu;
@@ -46,10 +47,7 @@
 		<p class="text-left text-xs font-thin text-secondary-300 md:text-sm">{edu.shortDescription}</p>
 		<div class="mt-2 flex flex-wrap gap-2 text-left">
 			{#each edu.tags as tag, i (i)}
-				<span
-					class="inline-block rounded-full bg-secondary-500/20 px-2 py-1 text-xs font-thin text-secondary-300/80"
-					>{tag}</span
-				>
+				<Tag text={tag} />
 			{/each}
 		</div>
 	</div>

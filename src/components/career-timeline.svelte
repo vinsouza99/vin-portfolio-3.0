@@ -4,10 +4,11 @@
 	import { ScrollTrigger } from 'gsap/ScrollTrigger';
 	import { type Job } from '$lib/models/job';
 	import JobItem from './job-item.svelte';
+	import type { ContentProps } from '$lib/models/content-section-content-props';
 
 	gsap.registerPlugin(ScrollTrigger);
 
-	export let items: Job[] = [
+	let items: Job[] = [
 		{
 			id: 1,
 			title: 'Full-Stack Web & Mobile Developer',
@@ -90,6 +91,8 @@
 			tags: ['HTML', 'CSS', 'Java', 'JSP', 'Oracle SQL', 'Primefaces', 'SQL', 'Cybersecurity']
 		}
 	];
+
+	let { selectedItem = null, onSelect, onDeselect }: ContentProps<Job> = $props();
 
 	const PRIMARY_500 = '#6afff5';
 	const SECONDARY_900 = '#003052';
@@ -280,6 +283,13 @@
 			ScrollTrigger.getAll().forEach((t) => t.kill());
 		};
 	});
+	const handleClick = (job: Job) => {
+		if (selectedItem?.id === job.id) {
+			onDeselect?.();
+		} else {
+			onSelect?.(job);
+		}
+	};
 </script>
 
 <div class="h-full md:py-20">
@@ -322,7 +332,11 @@
 						>{item.startYear}{item.endYear ? ` - ${item.endYear}` : ''}</span
 					>
 					<div class="career-timeline__item-content" bind:this={itemEls[i]}>
-						<JobItem job={item} />
+						<JobItem
+							job={item}
+							isSelected={selectedItem != null && selectedItem.id === item.id}
+							onClick={() => handleClick(item)}
+						/>
 					</div>
 				</div>
 			{/each}
