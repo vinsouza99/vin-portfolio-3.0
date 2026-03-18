@@ -18,7 +18,7 @@
 				'As part of the AI division, developed the user interface for an iPad remote controller of AI-powered EO/IR camera systems used in the maritime industry worldwide. Collaborated with the ROS software running on the cameras.',
 			url: 'https://current-ai.com',
 			startYear: 2025,
-			endYear: 2026,
+			endYear: Infinity,
 			longDescription:
 				'As part of the AI division, developed the user interface for an iPad remote controller of AI-powered EO/IR camera systems used in the maritime industry worldwide. Collaborated with the ROS software running on the cameras.',
 
@@ -125,14 +125,13 @@
 		ScrollTrigger.create({
 			trigger: containerEl,
 			start: 'top bottom',
-			end: 'bottom bottom',
+			end: 'bottom -50%',
 			onUpdate: () => {
 				const rect = containerEl.getBoundingClientRect();
 				const viewportCenter = window.innerHeight / 2;
 				const timelineHeight = rect.height;
 				// Progress 0 when center is at timeline top, 1 when center is at timeline bottom
-				let progress =
-					timelineHeight > 0 ? ((viewportCenter - rect.top) / timelineHeight) * 1.5 : 0;
+				let progress = timelineHeight > 0 ? (viewportCenter - rect.top) / timelineHeight : 0;
 				progress = Math.max(0, Math.min(1, progress));
 				maxProgress = Math.max(maxProgress, progress);
 				progressTween.progress(maxProgress);
@@ -253,7 +252,7 @@
 						ease: 'power2.out',
 						scrollTrigger: {
 							trigger: el,
-							start: 'top 88%',
+							start: 'top center',
 							toggleActions: 'play none none none'
 						}
 					});
@@ -329,7 +328,9 @@
 					style="grid-row: {i + 1};"
 				>
 					<span class="career-timeline__years font-mono text-3xl" bind:this={yearsEls[i]}
-						>{item.startYear}{item.endYear ? ` - ${item.endYear}` : ''}</span
+						>{item.startYear}{item.endYear
+							? ` - ${item.endYear == Infinity ? 'present' : item.endYear}`
+							: ''}</span
 					>
 					<div class="career-timeline__item-content" bind:this={itemEls[i]}>
 						<JobItem
@@ -357,12 +358,9 @@
 	.career-timeline__item-content {
 		perspective: 60rem;
 	}
-	.career-timeline__line-skeleton {
-		height: calc(100% + 4rem + var(--spacing) * 10);
-	}
+	.career-timeline__line-skeleton,
 	.career-timeline__line-progress {
-		/* max-height: calc(100% + 4rem + var(--spacing) * 10); */
-		max-height: calc(100%);
+		height: calc(100% + 4rem + var(--spacing) * 10);
 	}
 	/* Year text default state (GSAP animates to primary when at center) */
 	.career-timeline__years {

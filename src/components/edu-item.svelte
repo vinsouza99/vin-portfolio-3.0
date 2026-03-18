@@ -37,12 +37,13 @@
 			class="size-20 object-cover object-center mix-blend-screen"
 		/> -->
 	</div>
-	<div class="pointer-events-none flex flex-1 grow-2 flex-col justify-start gap-1 p-5">
+	<div class="pointer-events-none flex flex-1 grow-2 flex-col justify-start gap-1 p-5 md:gap-2">
 		<h3 class="text-medium text-left font-mono text-primary-600 md:text-lg">{edu.title}</h3>
-		<div class="justify-left flex flex-nowrap items-center gap-2 text-secondary-400/80">
-			<span class="flex text-left text-xs font-thin md:text-sm">{edu.institution}</span>
-			<span>-</span>
-			<span class="flex text-left text-xs font-thin md:text-sm">{edu.location}</span>
+		<div
+			class="flex items-center gap-1 divide-x divide-secondary-700/50 tracking-wide text-secondary-400 uppercase"
+		>
+			<span class="flex pr-3 text-left text-xs font-thin md:text-xs">{edu.institution}</span>
+			<span class="flex pl-3 text-left text-xs font-thin md:text-xs">{edu.location}</span>
 		</div>
 		<p class="text-left text-xs font-thin text-secondary-300 md:text-sm">{edu.shortDescription}</p>
 		<div class="mt-2 flex flex-wrap gap-2 text-left">

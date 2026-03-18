@@ -6,12 +6,18 @@
 		selectedItem: Edu;
 	}
 
-	let { selectedItem }: Props = $props();
+	const { selectedItem }: Props = $props();
 </script>
 
 <Detail
 	title={selectedItem.title}
-	subtitle=""
+	subtitleParts={[
+		selectedItem.institution,
+		selectedItem.location,
+		`${selectedItem.startYear}${selectedItem.endYear ? `-${selectedItem.endYear}` : ''}`
+	]}
 	description={selectedItem.longDescription}
 	tags={selectedItem.tags}
+	url={selectedItem.url}
+	urlLabel={selectedItem.urlLabel}
 />

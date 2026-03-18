@@ -11,7 +11,9 @@
 
 <Detail
 	title={selectedItem.title}
-	subtitle=""
+	subtitleParts={[
+		`${selectedItem.startYear}${selectedItem.endYear ? `-${selectedItem.endYear}` : ''}`
+	]}
 	description={selectedItem.longDescription}
 	tags={selectedItem.tags}
 	url={selectedItem.url}

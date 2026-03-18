@@ -55,7 +55,11 @@
 >
 	<!-- Left column: summary (default) or detail (when item selected) -->
 	<div class="section-summary relative h-fit w-full md:h-full">
-		<div class="flex flex-col gap-5 text-left md:sticky md:top-70 md:gap-8">
+		<div
+			class="flex flex-col gap-5 text-left md:sticky md:top-{leftContentProps && DetailComponent
+				? '0 h-full justify-center'
+				: '70'} md:gap-8"
+		>
 			{#if leftContentProps && DetailComponent}
 				<DetailComponent {...leftContentProps as any} />
 			{:else if SummaryComponent}

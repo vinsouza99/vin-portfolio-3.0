@@ -7,4 +7,6 @@ export interface Edu extends Milestone {
 	longDescription?: string;
 	tags?: string[]; // Optional tags for categorization
 	type?: string; // Optional type for categorization (e.g., "degree", "certificate")
+	url?: string;
+	urlLabel?: string;
 }

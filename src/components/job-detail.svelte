@@ -11,9 +11,11 @@
 
 <Detail
 	title={selectedItem.company}
-	subtitle={selectedItem.title}
-	startDate={selectedItem.startYear}
-	endDate={selectedItem.endYear}
+	subtitleParts={[
+		selectedItem.title,
+		selectedItem.location,
+		`${selectedItem.startYear}${selectedItem.endYear ? `-${selectedItem.endYear == Infinity ? 'present' : selectedItem.endYear}` : ''}`
+	]}
 	description={selectedItem.longDescription}
 	tags={selectedItem.tags}
 	url={selectedItem.url}
