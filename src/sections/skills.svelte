@@ -7,5 +7,4 @@
 	header="skills"
 	summary="In my short but intense journey on full-stack web development I studied and worked with some of the most popular languages, frameworks, tools and libraries on the market"
 	content={SkillsList}
-	contentProps={{}}
 />

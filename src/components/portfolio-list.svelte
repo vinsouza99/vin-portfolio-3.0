@@ -1,9 +1,19 @@
 <script lang="ts">
 	import PortfolioItem from './portfolio-item.svelte';
 	import type { Work } from '$lib/models/work';
+	import { works } from '$lib/db/works';
 	import type { ContentProps } from '$lib/models/content-section-content-props';
+	import { tick } from 'svelte';
 
 	let { selectedItem = null, onSelect, onDeselect }: ContentProps<Work> = $props();
+
+	const INITIAL_VISIBLE_COUNT = 3;
+	const visibleWorks = $derived(works.slice(0, INITIAL_VISIBLE_COUNT));
+	const remainingWorks = $derived(works.slice(INITIAL_VISIBLE_COUNT));
+
+	let isExpanded = $state(false);
+	let remainingContainer = $state<HTMLDivElement | null>(null);
+	let remainingHeight = $state('0px');
 
 	const handleClick = (work: Work) => {
 		if (selectedItem?.id === work.id) {
@@ -12,81 +22,89 @@
 			onSelect?.(work);
 		}
 	};
-	let works: Work[] = [
-		{
-			id: 1,
-			title: 'CURRENT AI',
-			url: 'https://current-ai.com/',
-			coverPath: '/images/cai.png',
-			tags: [
-				'React',
-				'Python',
-				'ROS',
-				'Tailwind',
-				'TypeScript',
-				'React Native',
-				'System Design',
-				'Docker'
-			],
-			startYear: 2025,
-			endYear: 2026,
-			shortDescription:
-				'I developed the user interface for an iPad remote controller of AI-powered EO/IR camera systems used in the maritime industry worldwide and collaborated with the ROS software running on the cameras.',
-			longDescription: `As part of the AI division, developed the user interface for an iPad remote controller of AI-powered EO/IR camera systems used in the maritime industry worldwide. Collaborated with the ROS software running on the cameras.`
-		},
-		{
-			id: 2,
-			title: 'BodyBuddy',
-			url: 'https://bodybuddy.vercel.app/',
-			coverPath: '/images/bodybuddy.png',
-			tags: ['React', 'Node.js', 'Express', 'PostgreSQL', 'System Design'],
-			startYear: 2024,
-			endYear: 2024,
-			shortDescription:
-				'An AI-powered fitness web platform for people who want to exercise in their own homes or on the go, at their own pace. The AI analysis checks your form in real-time, ensuring correct posture for a safe and effective workout',
-			longDescription: `BodyBuddy is an AI-powered fitness web platform for people who want to exercise in their own homes or on the go, at their own pace. The AI analysis checks your form in real-time, ensuring correct posture for a safe and effective workout. It also helps you create personalized workout plans based on your fitness level and goals using OpenAI API. </br></br> This project is part of Langara's program curriculum. Working in a cross-functional team of UI/UX designers and developers as the development lead, I was responsible for leading 3 other devs throughout the development process of 12 weeks, as well as making crucial decisions regarding the technical stack. </br> Besides project management, my role was mainly backend development with Node and Express and database management with PostgreSQL. It was my first time leading a Software development project and it was as rewarding as it was challenging. I'm very proud of what we accomplished.`
-		},
-		{
-			id: 3,
-			title: 'DriveBuddy',
-			url: 'https://wmdd.drivebuddy.ca/',
-			coverPath: '/images/drivebuddy.png',
-			tags: ['React Native', 'Node.js', 'Express', 'AWS', 'System Design'],
-			startYear: 2025,
-			endYear: 2025,
-			shortDescription: `An AI-powered mobile app designed to help drivers stay safe by detecting early signs of drowsiness. The face and eye monitoring technology uses the frontal camera to track sleepiness signs and issues instant sound and voice alerts notify drivers and the app suggests nearby rest stops to encourage timely breaks.`,
-			longDescription: `DriveBuddy is an AI-powered mobile app designed to help drivers stay safe by detecting early signs of drowsiness. The face and eye monitoring technology uses the frontal camera and a machine learning model to track signs like frequent blinking or closed eyes. When drowsiness is detected, instant sound and voice alerts notify drivers and the app suggests nearby rest stops to encourage timely breaks. The Administrator Dashboard (a web platform) provides real-time insights into driver safety, alerting companies to potential risks before they become incidents. I had the honour to serve as the development lead once again for this project, which was our capstone project for Langara's Post-Degree diploma. Featuring among 5 others impressive projects, DriveBuddy won 2 awards: Best In Show and Best in Development`
-		},
-		{
-			id: 4,
-			title: "Seb's Portfolio",
-			coverPath: '/images/seb-richardson.png',
-			url: 'https://sebrichardson.ca/',
-			tags: ['Svelte', 'Tailwind CSS', 'GSAP', 'JavaScript'],
-			startYear: 2025,
-			endYear: 2025,
-			shortDescription: `A freelance project for a talented UI/UX designer.`,
-			longDescription: `DriveBuddy is an AI-powered mobile app designed to help drivers stay safe by detecting early signs of drowsiness. The face and eye monitoring technology uses the frontal camera and a machine learning model to track signs like frequent blinking or closed eyes. When drowsiness is detected, instant sound and voice alerts notify drivers and the app suggests nearby rest stops to encourage timely breaks. The Administrator Dashboard (a web platform) provides real-time insights into driver safety, alerting companies to potential risks before they become incidents. I had the honour to serve as the development lead once again for this project, which was our capstone project for Langara's Post-Degree diploma. Featuring among 5 others impressive projects, DriveBuddy won 2 awards: Best In Show and Best in Development`
+
+	const toggleExpanded = async () => {
+		if (!remainingContainer || remainingWorks.length === 0) return;
+
+		if (isExpanded) {
+			// If we're currently at "auto", lock to px first so we can animate to 0.
+			remainingHeight = `${remainingContainer.scrollHeight}px`;
+			await tick();
+			remainingHeight = '0px';
+			isExpanded = false;
+			return;
 		}
-	];
+
+		isExpanded = true;
+		await tick();
+		remainingHeight = `${remainingContainer.scrollHeight}px`;
+	};
+
+	const handleRemainingTransitionEnd = () => {
+		if (!remainingContainer) return;
+		if (isExpanded) remainingHeight = 'auto';
+	};
 </script>
 
 <div class="flex">
 	<!--Filter by tags -->
-	<ul
-		class=" m-0 flex w-full list-none flex-row flex-nowrap items-end gap-5 overflow-scroll p-5 md:flex-col md:p-0"
-	>
-		{#each works as work (work.id)}
-			<li
-				class="m-1 w-full min-w-[70%] flex-1 justify-self-end overflow-visible p-0 transition-all ease-in-out md:max-w-[95%] md:hover:translate-x-[-1%] {selectedItem?.id ===
-					work.id && 'translate-x-[-1%]'}"
-			>
-				<PortfolioItem
-					{work}
-					isSelected={selectedItem != null && selectedItem.id === work.id}
-					onClick={() => handleClick(work)}
-				/>
-			</li>
-		{/each}
-	</ul>
+	<div class="w-full">
+		<ul
+			class="m-0 flex w-full list-none flex-row flex-nowrap items-end gap-5 overflow-visible p-5 md:flex-col md:p-0"
+		>
+			{#each visibleWorks as work (work.id)}
+				<li
+					class="m-1 w-full min-w-[70%] flex-1 justify-self-end overflow-visible p-0 transition-all ease-in-out md:max-w-[95%] md:hover:translate-x-[-1%] {selectedItem?.id ===
+						work.id && 'translate-x-[-1%]'}"
+				>
+					<PortfolioItem
+						{work}
+						isSelected={selectedItem != null && selectedItem.id === work.id}
+						onClick={() => handleClick(work)}
+					/>
+				</li>
+			{/each}
+
+			{#if remainingWorks.length > 0}
+				<li class="w-full flex-1 overflow-visible p-0">
+					<div
+						bind:this={remainingContainer}
+						class={`${isExpanded ? 'overflow-hidden' : 'overflow-hidden'} transition-[height] duration-500 ease-in-out motion-reduce:transition-none`}
+						style="height: {isExpanded ? remainingHeight : '0px'};"
+						ontransitionend={handleRemainingTransitionEnd}
+						aria-hidden={!isExpanded}
+					>
+						<ul
+							class="m-0 flex w-full list-none flex-row flex-nowrap items-end gap-5 overflow-visible md:flex-col"
+						>
+							{#each remainingWorks as work (work.id)}
+								<li
+									class="w-full min-w-[70%] flex-1 justify-self-end overflow-visible p-0 transition-all ease-in-out md:max-w-[95%] md:hover:translate-x-[-1%] {selectedItem?.id ===
+										work.id && 'translate-x-[-1%]'}"
+								>
+									<PortfolioItem
+										{work}
+										isSelected={selectedItem != null && selectedItem.id === work.id}
+										onClick={() => handleClick(work)}
+									/>
+								</li>
+							{/each}
+						</ul>
+					</div>
+					{#if !isExpanded}
+						<div class="mt-4 flex w-full justify-center md:justify-start">
+							<button
+								type="button"
+								class="w-full cursor-pointer rounded-md px-4 py-2 font-mono text-sm tracking-wider text-secondary-400/50 uppercase transition hover:text-primary-500 focus:ring-2 focus:ring-secondary-400/50 focus:outline-none"
+								aria-expanded={isExpanded}
+								onclick={toggleExpanded}
+							>
+								show more
+							</button>
+						</div>
+					{/if}
+				</li>
+			{/if}
+		</ul>
+	</div>
 </div>

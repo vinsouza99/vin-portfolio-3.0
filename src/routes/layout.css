@@ -74,7 +74,10 @@ body {
 	);
 	backdrop-filter: url(#glass);
 	transition: all 0.1s cubic-bezier(0.175, 0.885, 0.32, 2.2);
-	/*box-shadow: 0 8px 50px rgba(102, 192, 255, 0.08);*/
+}
+.bg-glow-sm {
+	backdrop-filter: url(#glass);
+	box-shadow: 0 5px 25px rgba(102, 192, 255, 0.3);
 }
 .footer-mask {
 	background: linear-gradient(to top, var(--color-bg) 50%, transparent);

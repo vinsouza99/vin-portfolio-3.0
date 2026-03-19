@@ -54,7 +54,7 @@
 		>
 			<img
 				src={isMenuOpen ? '/images/vin-logo-dark.svg' : '/images/vin-logo-light.svg'}
-				class="me-3 h-6 sm:h-9"
+				class="bg-glow-sm me-3 h-6 sm:h-9"
 				alt="Vin Logo"
 			/>
 			<span class="sr-only">Vin Souza</span>
@@ -64,7 +64,7 @@
 			class="pointer-events-auto relative z-50 flex items-start space-x-3 md:order-2 md:space-x-4"
 		>
 			<button
-				class={`cursor-pointer rounded-xl border  bg-transparent px-4 py-1 text-xl font-thin! ${isMenuOpen ? 'border-secondary-500 text-secondary-500' : 'border-secondary-300/10 text-secondary-300/50'} hover:bg-secondary-500/10 hover:text-secondary-100`}
+				class={`hover:bg-glow-sm cursor-pointer rounded-md border bg-transparent px-4 py-1 text-xl font-thin! text-primary-900 hover:border-primary-700/50 hover:bg-primary-800 hover:text-white ${isMenuOpen ? 'border-secondary-500 text-secondary-500' : 'border-primary-500/10'}`}
 			>
 				resume
 			</button>

@@ -1,31 +1,9 @@
 <script lang="ts">
 	import { Input, Label } from 'flowbite-svelte';
 	import { SearchOutline } from 'flowbite-svelte-icons';
-
-	interface Skill {
-		name: string;
-		iconPath: string;
-		tags?: string[]; // Optional tags for categorization
-	}
+	import { skills } from '$lib/db/skills';
 
 	// Props for the skills list
-	let skills: Skill[] = [
-		{ name: 'HTML', iconPath: '/images/html.svg', tags: ['frontend', 'languages'] },
-		{ name: 'CSS', iconPath: '/images/css.svg', tags: ['frontend', 'languages'] },
-		{ name: 'JavaScript', iconPath: '/images/js.svg', tags: ['frontend', 'backend', 'languages'] },
-		{
-			name: 'TypeScript',
-			iconPath: '/images/typescript.svg',
-			tags: ['frontend', 'backend', 'languages']
-		},
-		{ name: 'React', iconPath: '/images/react.svg', tags: ['frontend'] },
-		{ name: 'Node.js', iconPath: '/images/node.svg', tags: ['backend'] },
-		{ name: 'Express', iconPath: '/images/express.svg', tags: ['backend'] },
-		{ name: 'Python', iconPath: '/images/python.svg', tags: ['backend', 'languages'] },
-		{ name: 'Docker', iconPath: '/images/docker.svg', tags: ['devops'] },
-		{ name: 'Git', iconPath: '/images/git.svg', tags: ['devops'] }
-	];
-
 	const tags = ['all', 'frontend', 'backend', 'devops', 'languages'];
 	let selectedTag = $state('all');
 
@@ -48,14 +26,14 @@
 	};
 </script>
 
-<div class="flex flex-col gap-5">
+<div class="flex flex-col gap-5 overflow-visible">
 	<!--Filter by tags -->
-	<div class="flex flex-wrap gap-3">
+	<div class="flex flex-wrap gap-3 overflow-visible">
 		{#each tags as tag (tag)}
 			<button
-				class="rounded-2xl border px-5 py-2 text-sm font-thin tracking-widest transition-colors duration-200 hover:cursor-pointer focus:ring-2 focus:ring-secondary-500 focus:ring-offset-2 focus:outline-none
+				class="cursor-pointer rounded-xl border px-5 py-2 text-sm font-thin tracking-widest transition-colors duration-200 focus:ring-2 focus:ring-secondary-500 focus:ring-offset-2 focus:outline-none
         {selectedTag === tag
-					? 'border-secondary-700/50 bg-secondary-500/20 text-secondary-100'
+					? 'bg-glow-sm border-primary-700/50 bg-primary-800 text-white'
 					: 'border-secondary-300/10 bg-transparent text-secondary-300/50 hover:bg-secondary-500/10 hover:text-secondary-100'}"
 				onclick={() => filterByTag(tag)}
 			>

@@ -41,19 +41,19 @@
 			endYear: 2025,
 			type: 'degree',
 			shortDescription: `Specialization in the entire process of building web and mobile apps, from concept to deployment`,
-			longDescription: `This two-year post-degree diploma program focuses on web and mobile app design and development, from concept to deployment. The tech stack ranges from design software (Figma, Photoshop) to modern web frameworks such as React, CMS tools like WordPress, and server management with Apache and AWS. However, the most valuable skills I gained aside from the technical ones were project management related. I had the opportunity to serve as the development lead for both BodyBuddy and DriveBuddy and these experiences had an unvaluable impact on my personal and professional development.`
+			longDescription: `This two-year post-degree diploma program focuses on web and mobile app design and development, from concept to deployment. <br/><br/>The tech stack ranges from design software to modern web frameworks such as React, CMS tools like WordPress, and server management with Apache and AWS. However, the most valuable skills I gained aside from the technical ones were project management related. <br/><br/>I had the opportunity to serve as the development lead for both BodyBuddy and DriveBuddy and these experiences had an unvaluable impact on my personal and professional development.`
 		},
 		{
 			id: 3,
 			title: "Harvard's CS50 Web Programming Professional Certificate",
 			location: 'Online',
 			institution: 'Harvard University',
-			tags: ['Python', 'Django', 'JavaScript', 'HTML', 'SQL', 'HTML', 'CSS'],
+			tags: ['Python', 'Django', 'JavaScript', 'HTML', 'SQL', 'CSS'],
 			startYear: 2020,
 			endYear: 2021,
 			type: 'certificate',
 			shortDescription: `My entry point to the career path of web development`,
-			longDescription: `This course on the edX platform was my entry point to the career path of web development. Offered by Harvard's CS50 program, this course was not only an excellent introduction to the topic, but it also helped me discover my passion for app development. This course dives deeply into the design and implementation of web apps with Python, JavaScript, and SQL using frameworks like Django, React, and Bootstrap. As part of my final project, I did a very simple but special website called JSnake, that is detailed in my portfolio. At the end of that very intense program, I earned my first professional Certificate, that you can find here`,
+			longDescription: `This course on the edX platform was my entry point to the career path of web development.  <br/><br/>Offered by Harvard's CS50 program, it was not only an excellent introduction to the topic, but it also helped me discover my passion for app development. This course dives deeply into the design and implementation of web apps with Python, JavaScript, and SQL using frameworks like Django, React, and Bootstrap. <br/><br/>As part of my final project, I did a very simple but special website called JSnake, that is detailed in my portfolio. At the end of that very intense program, I earned my first professional Certificate, that you can find here`,
 			url: 'https://courses.edx.org/certificates/bc857b54e42d436981747ef17f061d81',
 
 			urlLabel: 'Verified Certificate'
@@ -67,7 +67,9 @@
 			tags: ['Docker', 'YML', 'Containers', 'Microservices'],
 			startYear: 2025,
 			shortDescription: `Granted me a working knowledge of one of the most used CI/CD tools in the market`,
-			longDescription: `DriveBuddy is an AI-powered mobile app designed to help drivers stay safe by detecting early signs of drowsiness. The face and eye monitoring technology uses the frontal camera and a machine learning model to track signs like frequent blinking or closed eyes. When drowsiness is detected, instant sound and voice alerts notify drivers and the app suggests nearby rest stops to encourage timely breaks. The Administrator Dashboard (a web platform) provides real-time insights into driver safety, alerting companies to potential risks before they become incidents. I had the honour to serve as the development lead once again for this project, which was our capstone project for Langara's Post-Degree diploma. Featuring among 5 others impressive projects, DriveBuddy won 2 awards: Best In Show and Best in Development`
+			longDescription: `An industry-recognized Docker Foundations Professional Certificate.<br/><br/>I learned how to use Docker to deploy and manage applications as images that run on containers. This knowledge proved to be very helpful in real projects like Current AI.`,
+			url: 'https://www.linkedin.com/learning/certificates/6be982f69980db3cf9ce50a0290018a8facb234b808e58670bbd6447e12ba570',
+			urlLabel: 'Verified Certificate'
 		}
 	];
 </script>
