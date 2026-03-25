@@ -1,9 +1,11 @@
 <script lang="ts">
 	/* eslint-disable svelte/no-navigation-without-resolve */
 	import './layout.css';
+	import Logo from '$lib/assets/logo.svelte';
 	import favicon from '$lib/assets/favicon.svg';
 	import Footer from '../components/footer.svelte';
 	import { resolve } from '$app/paths';
+	import { isSmallScreen } from '$lib/hooks/is-small-screen';
 
 	let { children } = $props();
 
@@ -52,11 +54,12 @@
 			class="pointer-events-auto relative z-50 flex items-center"
 			onclick={closeMenu}
 		>
-			<img
-				src={isMenuOpen ? '/images/vin-logo-dark.svg' : '/images/vin-logo-light.svg'}
-				class="bg-glow-sm me-3 h-6 sm:h-9"
-				alt="Vin Logo"
-			/>
+			<div class="me-3 flex h-6 w-11 shrink-0 items-center sm:h-9 sm:w-16">
+				<Logo
+					glow={isMenuOpen}
+					fill={isMenuOpen && $isSmallScreen ? '#0074bd' : '#6afff5'}
+				/>
+			</div>
 			<span class="sr-only">Vin Souza</span>
 		</a>
 
@@ -64,7 +67,7 @@
 			class="pointer-events-auto relative z-50 flex items-start space-x-3 md:order-2 md:space-x-4"
 		>
 			<button
-				class={`hover:bg-glow-sm cursor-pointer rounded-md border bg-transparent px-4 py-1 text-xl font-thin! text-primary-900 hover:border-primary-700/50 hover:bg-primary-800 hover:text-white ${isMenuOpen ? 'border-secondary-500 text-secondary-500' : 'border-primary-500/10'}`}
+				class={`glass-button hover:bg-glow-sm cursor-pointer rounded-md border bg-transparent px-4 py-1 text-xl font-thin! text-primary-900 hover:border-primary-700/50 hover:bg-primary-800 hover:text-white ${isMenuOpen ? 'border-secondary-500 text-secondary-500' : 'border-primary-500/10'}`}
 			>
 				resume
 			</button>
@@ -115,7 +118,7 @@
 						<a
 							href={`/#${link}`}
 							onclick={closeMenu}
-							class="block px-1 py-1 text-xl font-thin! text-primary-900 hover:text-primary-500 active:text-primary-500 md:text-xl"
+							class="block px-1 py-1 text-xl font-thin! text-primary-900 transition text-shadow-lg/60 hover:text-primary-500 hover:text-shadow-primary-800/60 active:text-primary-500 md:text-xl"
 							>{link}</a
 						>
 					</li>

@@ -7,8 +7,8 @@
 	import Contact from '../sections/contact.svelte';
 </script>
 <Landing />
-<Skills />
-<Works />
-<Career />
-<Education />
+<Skills endTrigger="#works" />
+<Works endTrigger="#career" />
+<Career endTrigger="#education" />
+<Education endTrigger="#contact" />
 <Contact />

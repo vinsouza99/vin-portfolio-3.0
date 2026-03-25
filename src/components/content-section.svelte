@@ -23,6 +23,12 @@
 		/** Right column: main content. Receives contentProps and, when detailComponent is set, selection context. */
 		content: Component<P & Partial<ContentSectionSelectionContext<T>>>;
 		contentProps?: Omit<P, keyof ContentSectionSelectionContext<T>>;
+		/**
+		 * Optional GSAP ScrollTrigger `endTrigger`.
+		 * Pass another `content-section`'s section id (e.g. `#works`) so adjacent
+		 * sections can coordinate their sticky-summary fade-out.
+		 */
+		endTrigger?: HTMLElement | string | null;
 	}
 
 	let {
@@ -33,7 +39,8 @@
 		detailComponent: DetailComponent,
 		detailProps = {} as DP,
 		content: ContentComponent,
-		contentProps = {} as Omit<P, keyof ContentSectionSelectionContext<T>>
+		contentProps = {} as Omit<P, keyof ContentSectionSelectionContext<T>>,
+		endTrigger = null
 	}: Props<P, DP> = $props(); // Use the interface directly here
 
 	let selectedItem = $state<T | unknown | null>(null);
@@ -130,17 +137,20 @@
 			gsap.set(leftWrapperEl, { autoAlpha: 0 });
 			scrollTrigger = ScrollTrigger.create({
 				trigger: sectionEl,
-				// Only show this section's summary while the viewport center is within the section.
+				// Only show this section's summary while the viewport center is within range.
 				// This prevents two adjacent sections from both showing their sticky summary at once.
-				start: 'top center-=80px',
-				end: 'bottom bottom-=80px',
+				start: 'top center-=5%',
+				endTrigger: endTrigger || undefined,
+				// When `endTrigger` is another section, fade out when that other section's
+				// top crosses the viewport center (instead of this section's bottom).
+				end: endTrigger ? 'top bottom+=10px' : 'bottom center-=10%',
 				onEnter: () => gsap.to(leftWrapperEl, { autoAlpha: 1, duration: 0.5, ease: 'power2.out' }),
 				onEnterBack: () =>
 					gsap.to(leftWrapperEl, { autoAlpha: 1, duration: 0.5, ease: 'power2.out' }),
 				// If we're past the section enough that the sticky would have to move, fade out immediately.
-				onLeave: () => gsap.to(leftWrapperEl, { autoAlpha: 0, duration: 0.1, ease: 'power2.out' }),
+				onLeave: () => gsap.to(leftWrapperEl, { autoAlpha: 0, duration: 0.5, ease: 'power2.out' }),
 				onLeaveBack: () =>
-					gsap.to(leftWrapperEl, { autoAlpha: 0, duration: 0.1, ease: 'power2.out' })
+					gsap.to(leftWrapperEl, { autoAlpha: 0, duration: 0.5, ease: 'power2.out' })
 			});
 		};
 
@@ -168,7 +178,7 @@
 <section
 	id={sectionId}
 	bind:this={sectionEl}
-	class="content-width content-section mx-auto grid h-full grid-cols-1 overflow-visible p-5 sm:gap-2 md:min-h-screen md:grid-cols-2 md:gap-5 md:p-10 lg:gap-10"
+	class="content-width content-section mx-auto grid grid-cols-1 overflow-visible p-5 sm:gap-2 md:grid-cols-2 md:gap-5 md:p-10 lg:gap-10"
 >
 	<!-- Left column: summary (default) or detail (when item selected) -->
 	<div class="section-summary relative h-fit w-full md:h-full">

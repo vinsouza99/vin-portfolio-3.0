@@ -6,6 +6,7 @@
 	import JobItem from './job-item.svelte';
 	import type { ContentProps } from '$lib/models/content-section-content-props';
 	import { jobs } from '$lib/db/jobs';
+	import { isSmallScreen } from '$lib/hooks/is-small-screen';
 
 	gsap.registerPlugin(ScrollTrigger);
 
@@ -32,9 +33,9 @@
 			lineProgressEl,
 			{ scaleY: 0 },
 			{
-				scaleY: 1,
+				scaleY: 1.195,
 				ease: 'none',
-				duration: 1,
+				duration: 2,
 				paused: true
 			}
 		);
@@ -42,7 +43,7 @@
 		ScrollTrigger.create({
 			trigger: containerEl,
 			start: 'top bottom',
-			end: 'bottom -50%',
+			end: 'bottom center-=50%',
 			onUpdate: () => {
 				const rect = containerEl.getBoundingClientRect();
 				const viewportCenter = window.innerHeight / 2;
@@ -208,14 +209,14 @@
 	};
 </script>
 
-<div class="h-full md:py-20">
+<div class="md:min-h-[120vh] md:py-20">
 	<div
-		class="career-timeline block-content min-h-screen py-8 md:min-h-[120vh] md:py-16"
+		class="career-timeline block-content min-h-screen py-8 md:py-16"
 		bind:this={containerEl}
-		style="--row-count: {jobs.length}"
+		style="--row-count: {$isSmallScreen ? jobs.length : jobs.length + 2}"
 	>
 		<div
-			class="career-timeline__grid mx-auto grid max-w-full grid-cols-[auto_1fr] grid-rows-[repeat(var(--row-count),auto)] gap-x-4 gap-y-10 px-0 md:max-w-4xl md:gap-x-6 md:gap-y-20 md:px-8"
+			class="career-timeline__grid mx-auto grid max-w-full grid-cols-[auto_1fr] grid-rows-[repeat(var(--row-count),1fr)] gap-x-4 gap-y-10 px-0 md:max-w-4xl md:gap-x-6 md:gap-y-20 md:px-8"
 		>
 			<!-- Full-height skeleton line (column 1, all rows) -->
 			<div
@@ -258,6 +259,10 @@
 					</div>
 				</div>
 			{/each}
+			{#if !$isSmallScreen}
+				<div class="flex w-full bg-bg text-bg select-none">.</div>
+				<div class="flex w-full bg-bg text-bg select-none">.</div>
+			{/if}
 		</div>
 	</div>
 </div>

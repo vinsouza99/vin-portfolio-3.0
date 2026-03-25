@@ -64,7 +64,7 @@ export const jobs: Job[] = [
 		url: 'https://current-ai.com',
 		startYear: 2023,
 		longDescription:
-			'As a full-stack .NET developer, I would work on web apps for the Transit Department of my homestate in Brazil, which were to be used by millions of drivers and officers. More specifically, the app I was responsible for most of the time was a vehicle control system that allowed services scheduling, vehicle registration and updating, and reports generation. I would work together with a team of developers on new features and improvements for this system. Moreover, this position required strong Software Engineering skills for code optimization. Other responsabilities involved code versioning with Tortoise SVN and project planning with Agile (SCRUM).',
+			'I worked on web apps for the Transit Department of my homestate in Brazil, which were to be used by millions of drivers and officers. The app I was responsible for most of the time was a vehicle control system that allowed services scheduling, vehicle registration and updating, and reports generation.<br/><br/> I would work together with a team of developers and designers on new features and improvements for this system, and I could put my software engineering skillsto work.<br/><br/> Other responsabilities involved code versioning with Tortoise SVN and project planning with Agile (SCRUM).',
 
 		tags: ['C#', 'MySQL', '.NET', 'TortoiseSVN', 'SCRUM']
 	},
@@ -77,7 +77,7 @@ export const jobs: Job[] = [
 			'Worked on different web-based control systems, being responsible for the entire process of software development, from design to coding, testing, and deployment',
 		startYear: 2022,
 		endYear: 2023,
-		longDescription: `Millennium IE is a local print shop based in the same city where I went to university. The apps I worked on were different web-based control systems for both the company's employees and clients, and they required caution from me, as the information I was dealing with was sensitive. As the only developer at that small company, I was responsible for the entire process of software development, from design to coding, testing, and deployment. Additionally, I had to learn by myself most of the technologies used in the project, since that was my very first professional experience with web development. It was a tremendously valuable experience, and I left that job confident that I could learn easily any technology necessary for a project. Aside from a complete redesign of their system towards a more modern and pleasant UI, my biggest legacy there was a program written in Java that automated the very tiring and time-consuming task of gathering data from an API and storing in the database at regular intervals.`,
+		longDescription: `I maintained different web-based control systems for both the company's employees and clients. As the only developer at that small company, I was responsible for the entire process of software development, from design to coding, testing, and deployment. I even did some pentesting on the side. <br/> <br/> Aside from a complete redesign of their system towards a more modern and pleasant UI, my biggest legacy there was a program written in Java that automated the very tiring and time-consuming task of gathering data from an API and storing in the database at regular intervals.`,
 
 		tags: ['HTML', 'CSS', 'Java', 'JSP', 'Oracle SQL', 'Primefaces', 'SQL', 'Cybersecurity']
 	}

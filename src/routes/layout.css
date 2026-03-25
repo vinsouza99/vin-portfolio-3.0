@@ -64,7 +64,6 @@ body {
 	width: 100%;
 }
 .glass-container {
-	/*border: 1px solid rgba(255, 255, 255, 0.3);*/
 	border: 1px solid rgba(0, 116, 189, 0.2);
 	background: linear-gradient(
 		135deg,
@@ -74,6 +73,16 @@ body {
 	);
 	backdrop-filter: url(#glass);
 	transition: all 0.1s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+}
+.glass-button {
+	/* border: 1px solid rgba(0, 116, 189, 0.2);
+	background: linear-gradient(
+		135deg,
+		rgba(0, 186, 172, 0.03) 0%,
+		rgba(0, 186, 172, 0.08) 50%,
+		rgba(0, 186, 172, 0.03) 100%
+	); */
+	backdrop-filter: url(#glass);
 }
 .bg-glow-sm {
 	backdrop-filter: url(#glass);
