@@ -12,6 +12,8 @@
 	interface Props<P, DP> {
 		/** Section id is derived from header (lowercase, spaces to hyphens) */
 		header: string;
+		/** Optional explicit id for anchor navigation. */
+		sectionId?: string;
 		/** Default left column: plain text description. Ignored if summaryComponent is provided. */
 		summary?: string;
 		/** Optional: custom component for default left column (replaces header+summary when provided) */
@@ -33,6 +35,7 @@
 
 	let {
 		header,
+		sectionId,
 		summary = '',
 		summaryComponent: SummaryComponent,
 		summaryProps = {},
@@ -51,7 +54,7 @@
 		selectedItem = null;
 	};
 
-	const sectionId = $derived(header.toLowerCase().replace(/\s+/g, '-'));
+	const resolvedSectionId = $derived(sectionId ?? header.toLowerCase().replace(/\s+/g, '-'));
 	const isInteractive = $derived(!!DetailComponent);
 
 	const leftContentProps = $derived(
@@ -176,7 +179,7 @@
 </script>
 
 <section
-	id={sectionId}
+	id={resolvedSectionId}
 	bind:this={sectionEl}
 	class="content-width content-section mx-auto grid grid-cols-1 overflow-visible p-5 sm:gap-2 md:grid-cols-2 md:gap-5 md:p-10 lg:gap-10"
 >

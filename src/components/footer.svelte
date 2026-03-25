@@ -1,8 +1,19 @@
 <script lang="ts">
 	import { Footer, FooterCopyright, FooterIcon, ButtonGroup, Button } from 'flowbite-svelte';
 	import { GithubSolid, LinkedinSolid } from 'flowbite-svelte-icons';
+	import { getLanguageContext, type Locale } from '$lib/i18n';
 
 	const currentYear = new Date().getFullYear();
+	const language = getLanguageContext();
+
+	const setLocale = async (locale: Locale) => {
+		language.set(locale);
+		await fetch('/api/locale', {
+			method: 'POST',
+			headers: { 'content-type': 'application/json' },
+			body: JSON.stringify({ locale })
+		});
+	};
 </script>
 
 <Footer
@@ -13,13 +24,17 @@
 	>
 		<Button
 			outline
-			class="cursor-pointer border-0 px-1 font-thin text-primary-500 hover:text-primary-500 active:text-primary-500"
+			title="English"
+			class={`cursor-pointer border-0 px-1 font-thin hover:text-primary-500 active:text-primary-500 ${$language === 'en' ? 'text-primary-500' : 'text-primary-800'}`}
+			onclick={() => void setLocale('en')}
 			><span aria-hidden="true" class="not-sr-only">EN</span><span class="sr-only">English</span
 			></Button
 		>
 		<Button
 			outline
-			class="cursor-pointer border-0 px-1 font-thin text-primary-800 hover:text-primary-500 active:text-primary-500"
+			title="Português (BR)"
+			class={`cursor-pointer border-0 px-1 font-thin hover:text-primary-500 active:text-primary-500 ${$language === 'pt-BR' ? 'text-primary-500' : 'text-primary-800'}`}
+			onclick={() => void setLocale('pt-BR')}
 			><span aria-hidden="true" class="not-sr-only">PT</span><span class="sr-only">Português</span
 			></Button
 		>

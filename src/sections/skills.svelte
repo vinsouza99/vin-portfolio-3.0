@@ -1,13 +1,16 @@
 <script lang="ts">
 	import ContentSection from '../components/content-section.svelte';
 	import SkillsList from '../components/skills-list.svelte';
+	import { getLanguageContext, t } from '$lib/i18n';
 
 	let { endTrigger }: { endTrigger?: string | null } = $props();
+	const language = getLanguageContext();
 </script>
 
 <ContentSection
-	header="skills"
-	summary="In my short but intense journey on full-stack web development I studied and worked with some of the most popular languages, frameworks, tools and libraries on the market"
+	sectionId="skills"
+	header={t($language, 'sections.skills.title')}
+	summary={t($language, 'sections.skills.summary')}
 	content={SkillsList}
 	endTrigger={endTrigger}
 />

@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { getLanguageContext, t } from '$lib/i18n';
+
+	const language = getLanguageContext();
 </script>
 
 <section
@@ -8,11 +11,12 @@
 		<div
 			class="flex flex-col content-center justify-center gap-5 text-left font-mono text-primary-500 text-shadow-lg/60 text-shadow-primary-800/60 md:sticky md:top-80 md:gap-8"
 		>
-			<p class="block text-medium md:text-xl">Hello, world!</p>
+			<p class="block text-medium md:text-xl">{t($language, 'landing.hello')}</p>
 			<h2 class="block text-5xl md:text-6xl font-semibold">
-				I'm <span class="text-[#dbefec] text-shadow-lg/60 text-shadow-[#dbefec]/60">Vin</span>
+				{t($language, 'landing.intro')}
+				<span class="text-[#dbefec] text-shadow-lg/60 text-shadow-[#dbefec]/60">Vin</span>
 			</h2>
-			<p class="block text-medium md:text-xl">and I'm a full-stack developer :)</p>
+			<p class="block text-medium md:text-xl">{t($language, 'landing.role')}</p>
 			<p></p>
 		</div>
 	</div>

@@ -2,13 +2,16 @@
 	import ContentSection from '../components/content-section.svelte';
 	import PortfolioList from '../components/portfolio-list.svelte';
 	import WorkDetail from '../components/work-detail.svelte';
+	import { getLanguageContext, t } from '$lib/i18n';
 
 	let { endTrigger }: { endTrigger?: string | null } = $props();
+	const language = getLanguageContext();
 </script>
 
 <ContentSection
-	header="works"
-	summary="The thing that drew me towards web development in the first place was the process itself. It is fun despite all the work required to pull something cool off. During my work experiences and studies, both formal and self-conducted, I've built many things I'm proud of. Here are some of them!"
+	sectionId="works"
+	header={t($language, 'sections.works.title')}
+	summary={t($language, 'sections.works.summary')}
 	detailComponent={WorkDetail}
 	content={PortfolioList}
 	endTrigger={endTrigger}

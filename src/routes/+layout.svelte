@@ -6,8 +6,12 @@
 	import Footer from '../components/footer.svelte';
 	import { resolve } from '$app/paths';
 	import { isSmallScreen } from '$lib/hooks/is-small-screen';
+	import { setLanguageContext, t, type Locale } from '$lib/i18n';
 
-	let { children } = $props();
+	let { children, data } = $props<{ children: import('svelte').Snippet; data: { locale: Locale } }>();
+	const language = setLanguageContext('en');
+	const currentLocale = $derived(data.locale);
+	const navkeys = ['skills', 'works', 'career', 'education', 'contact'] as const;
 
 	let isMenuOpen = $state(false);
 
@@ -20,7 +24,16 @@
 		isMenuOpen = false;
 	}
 
-	const navlinks = ['skills', 'works', 'career', 'education', 'contact'];
+	const navlinks = $derived(
+		navkeys.map((key) => ({
+			key,
+			label: t($language, `nav.${key}`)
+		}))
+	);
+
+	$effect(() => {
+		language.set(currentLocale);
+	});
 </script>
 
 <svelte:head><link rel="icon" href={favicon} /></svelte:head>
@@ -69,7 +82,7 @@
 			<button
 				class={`glass-button hover:bg-glow-sm cursor-pointer rounded-md border bg-transparent px-4 py-1 text-xl font-thin! text-primary-900 hover:border-primary-700/50 hover:bg-primary-800 hover:text-white ${isMenuOpen ? 'border-secondary-500 text-secondary-500' : 'border-primary-500/10'}`}
 			>
-				resume
+				{t($language, 'nav.resume')}
 			</button>
 
 			<button
@@ -113,13 +126,13 @@
 				: 'hidden'} pointer-events-auto w-full md:static md:order-1 md:flex md:w-auto md:bg-transparent md:dark:bg-transparent"
 		>
 			<ul class="flex flex-col items-start gap-8 p-4 md:mt-0 md:flex-row md:gap-4 md:p-0">
-				{#each navlinks as link (link)}
+				{#each navlinks as link (link.key)}
 					<li>
 						<a
-							href={`/#${link}`}
+							href={`/#${link.key}`}
 							onclick={closeMenu}
 							class="block px-1 py-1 text-xl font-thin! text-primary-900 transition text-shadow-lg/60 hover:text-primary-500 hover:text-shadow-primary-800/60 active:text-primary-500 md:text-xl"
-							>{link}</a
+							>{link.label}</a
 						>
 					</li>
 				{/each}
