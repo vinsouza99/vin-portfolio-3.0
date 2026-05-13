@@ -8,7 +8,10 @@
 	import { isSmallScreen } from '$lib/hooks/is-small-screen';
 	import { setLanguageContext, t, type Locale } from '$lib/i18n';
 
-	let { children, data } = $props<{ children: import('svelte').Snippet; data: { locale: Locale } }>();
+	let { children, data } = $props<{
+		children: import('svelte').Snippet;
+		data: { locale: Locale };
+	}>();
 	const language = setLanguageContext('en');
 	const currentLocale = $derived(data.locale);
 	const navkeys = ['skills', 'works', 'career', 'education', 'contact'] as const;
@@ -68,10 +71,7 @@
 			onclick={closeMenu}
 		>
 			<div class="me-3 flex h-6 w-11 shrink-0 items-center sm:h-9 sm:w-16">
-				<Logo
-					glow={isMenuOpen}
-					fill={isMenuOpen && $isSmallScreen ? '#0074bd' : '#6afff5'}
-				/>
+				<Logo glow={isMenuOpen} fill={isMenuOpen && $isSmallScreen ? '#0074bd' : '#6afff5'} />
 			</div>
 			<span class="sr-only">Vin Souza</span>
 		</a>
@@ -79,11 +79,14 @@
 		<div
 			class="pointer-events-auto relative z-50 flex items-start space-x-3 md:order-2 md:space-x-4"
 		>
-			<button
+			<a
+				href={t($language, 'nav.resume.link')}
+				target="_blank"
+				rel="noopener noreferrer"
 				class={`glass-button hover:bg-glow-sm cursor-pointer rounded-md border bg-transparent px-4 py-1 text-xl font-thin! text-primary-900 hover:border-primary-700/50 hover:bg-primary-800 hover:text-white ${isMenuOpen ? 'border-secondary-500 text-secondary-500' : 'border-primary-500/10'}`}
 			>
 				{t($language, 'nav.resume')}
-			</button>
+			</a>
 
 			<button
 				type="button"
