@@ -83,7 +83,7 @@
 				href={t($language, 'nav.resume.link')}
 				target="_blank"
 				rel="noopener noreferrer"
-				class={`glass-button hover:bg-glow-sm cursor-pointer rounded-md border bg-transparent px-4 py-1 text-xl font-thin! text-primary-900 hover:border-primary-700/50 hover:bg-primary-800 hover:text-white ${isMenuOpen ? 'border-secondary-500 text-secondary-500' : 'border-primary-500/10'}`}
+				class={`holographic-button glass-button hover:bg-glow-sm cursor-pointer rounded-md border bg-transparent px-4 py-1 text-xl font-thin! text-primary-900 hover:border-primary-700/50  hover:text-white ${isMenuOpen ? 'border-secondary-500 text-secondary-500' : 'border-primary-500/10'}`}
 			>
 				{t($language, 'nav.resume')}
 			</a>

@@ -15,7 +15,7 @@
 	title={job.title}
 	onclick={onClick}
 	class="glass-container flex flex-1 grow-2 cursor-pointer flex-col justify-start gap-1 rounded-2xl p-5 {isSelected
-		? 'border-secondary-700/50 bg-secondary-500/20 text-secondary-100'
+		? 'border-secondary-700/50 bg-secondary-500/20 text-secondary-100 outline-1 outline-primary-500'
 		: 'border-secondary-300/10 bg-transparent text-secondary-300/50 hover:bg-secondary-500/10 hover:text-secondary-100'}"
 >
 	<h3 class="text-medium text-left font-mono text-primary-600 md:text-lg">

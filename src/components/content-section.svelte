@@ -184,10 +184,13 @@
 	class="content-width content-section mx-auto grid grid-cols-1 overflow-visible p-5 sm:gap-2 md:grid-cols-2 md:gap-5 md:p-10 lg:gap-10"
 >
 	<!-- Left column: summary (default) or detail (when item selected) -->
-	<div class="section-summary relative h-fit w-full md:h-full">
+	<div class="section-summary relative hidden h-fit w-full text-bg md:block md:h-full">.</div>
+	<div
+		class="section-summary relative h-fit w-full md:fixed md:top-0 md:bottom-0 md:left-0 md:ml-8 md:h-full md:max-w-[48vw]"
+	>
 		<div
 			bind:this={leftWrapperEl}
-			class="flex flex-col gap-5 text-left md:sticky md:top-1/2 md:-translate-y-1/2 md:gap-8"
+			class="my-auto flex flex-col content-center items-center justify-center gap-5 self-center text-left md:relative md:h-full md:gap-8"
 		>
 			<div bind:this={leftSwapEl}>
 				{#if renderedLeftKind === 'detail' && DetailComponent}
@@ -196,7 +199,7 @@
 					<SummaryComponent {...renderedLeftProps as any} />
 				{:else}
 					<h2
-						class="block font-mono text-6xl font-semibold text-primary-500 text-shadow-lg/60 text-shadow-primary-800/60"
+						class="mb-1 block font-mono text-6xl font-semibold text-primary-500 text-shadow-lg/60 text-shadow-primary-800/60 md:mb-5"
 					>
 						{header}
 					</h2>

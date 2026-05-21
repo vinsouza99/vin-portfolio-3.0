@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import type { Edu } from '$lib/models/edu';
 	import { BookCheck, GraduationCap } from 'lucide-svelte';
 	import Tag from './ui/tag.svelte';
@@ -11,9 +12,25 @@
 
 	// Destructure props using the $props rune
 	let { edu, isSelected = false, onClick }: Props = $props();
+
+	let rootButton: HTMLButtonElement | null = null;
+	let showIcon = $state(true);
+
+	onMount(() => {
+		if (!rootButton) return;
+
+		const observer = new ResizeObserver(([entry]) => {
+			showIcon = entry.contentRect.width >= 400;
+		});
+
+		observer.observe(rootButton);
+
+		return () => observer.disconnect();
+	});
 </script>
 
 <button
+	bind:this={rootButton}
 	title={edu.title}
 	class="glass-container flex h-fit w-full flex-row gap-0 overflow-hidden rounded-2xl! bg-bg/0 p-0 transition-colors duration-300 ease-in-out hover:cursor-pointer! hover:bg-bg/50! focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-secondary-700/50 focus:outline-none data-[selected=true]:border-secondary-700/50 data-[selected=true]:bg-secondary-500/20 data-[selected=true]:text-secondary-100
         {isSelected
@@ -21,22 +38,24 @@
 		: 'border-secondary-300/10 bg-transparent text-secondary-300/50 hover:bg-secondary-500/10 hover:text-secondary-100'}"
 	onclick={onClick}
 >
-	<div
-		class="rounded-0 pointer-events-none hidden w-fit content-center overflow-hidden p-1 md:m-3 md:mr-0 md:block md:h-auto md:rounded-md"
-	>
-		<div class="flex content-center items-center rounded-full border-5 border-primary-500 p-4">
-			{#if edu.type === 'degree'}
-				<GraduationCap class="size-12 text-primary-500" />
-			{:else}
-				<BookCheck class="size-12 text-primary-500" />
-			{/if}
+	{#if showIcon}
+		<div
+			class="rounded-0 pointer-events-none hidden w-fit content-center overflow-hidden p-1 md:m-3 md:mr-0 md:block md:h-auto md:rounded-md"
+		>
+			<div class="flex content-center items-center rounded-full border-5 border-primary-500 p-4">
+				{#if edu.type === 'degree'}
+					<GraduationCap class="size-12 text-primary-500" />
+				{:else}
+					<BookCheck class="size-12 text-primary-500" />
+				{/if}
+			</div>
+			<!-- <img
+				src="/images/type-education.svg"
+				alt={edu.title}
+				class="size-20 object-cover object-center mix-blend-screen"
+			/> -->
 		</div>
-		<!-- <img
-			src="/images/type-education.svg"
-			alt={edu.title}
-			class="size-20 object-cover object-center mix-blend-screen"
-		/> -->
-	</div>
+	{/if}
 	<div class="pointer-events-none flex flex-1 grow-2 flex-col justify-start gap-1 p-5 md:gap-2">
 		<h3 class="text-medium text-left font-mono text-primary-600 md:text-lg">{edu.title}</h3>
 		<div

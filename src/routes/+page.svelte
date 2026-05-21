@@ -6,6 +6,7 @@
 	import Skills from '../sections/skills.svelte';
 	import Contact from '../sections/contact.svelte';
 </script>
+
 <Landing />
 <Skills endTrigger="#works" />
 <Works endTrigger="#career" />

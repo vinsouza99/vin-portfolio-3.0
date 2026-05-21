@@ -64,7 +64,7 @@ export const jobs: Job[] = [
 		url: 'https://current-ai.com',
 		startYear: 2023,
 		longDescription:
-			'I worked on web apps for the Transit Department of my homestate in Brazil, which were to be used by millions of drivers and officers. The app I was responsible for most of the time was a vehicle control system that allowed services scheduling, vehicle registration and updating, and reports generation.<br/><br/> I would work together with a team of developers and designers on new features and improvements for this system, and I could put my software engineering skillsto work.<br/><br/> Other responsabilities involved code versioning with Tortoise SVN and project planning with Agile (SCRUM).',
+			'I worked with a team of developers and designers on web apps for the Transit Department of my homestate in Brazil, which were to be used by millions of drivers and officers. The app I was responsible for most of the time was a vehicle control system that allowed services scheduling, vehicle registration and updating, and reports generation. Other responsabilities involved code versioning with Tortoise SVN and project planning with Agile (SCRUM).',
 
 		tags: ['C#', 'MySQL', '.NET', 'TortoiseSVN', 'SCRUM']
 	},

@@ -84,9 +84,10 @@ body {
 	); */
 	backdrop-filter: url(#glass);
 }
+
 .bg-glow-sm {
 	backdrop-filter: url(#glass);
-	box-shadow: 0 5px 25px rgba(102, 192, 255, 0.3);
+	box-shadow: 0 1px 15px rgba(102, 192, 255, 0.3);
 }
 .footer-mask {
 	background: linear-gradient(to top, var(--color-bg) 50%, transparent);
@@ -114,4 +115,30 @@ body {
 		padding: 0;
 		overflow: scroll;
 	}
+}
+.holographic-button {
+	position: relative;
+	overflow: hidden;
+}
+.holographic-button::before {
+	content: '';
+	position: absolute;
+	top: -50%;
+	left: -50%;
+	width: 200%;
+	height: 200%;
+	background: linear-gradient(0deg, transparent, transparent 30%, rgba(0, 255, 255, 0.3));
+	transform: rotate(-45deg);
+	transition: all 0.5s ease;
+	opacity: 0;
+}
+
+.holographic-button:hover {
+	transform: scale(1.05);
+	box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+.holographic-button:hover::before {
+	opacity: 1;
+	transform: rotate(-45deg) translateY(100%);
 }

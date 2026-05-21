@@ -33,7 +33,7 @@
 			<button
 				class="cursor-pointer rounded-xl border px-5 py-2 text-sm font-thin tracking-widest transition-colors duration-200 focus:ring-2 focus:ring-secondary-500 focus:ring-offset-2 focus:outline-none
         {selectedTag === tag
-					? 'bg-glow-sm border-primary-700/50 bg-primary-800 text-white'
+					? 'border border-secondary-500/50 bg-secondary-800/50 font-semibold text-white'
 					: 'border-secondary-300/10 bg-transparent text-secondary-300/50 hover:bg-secondary-500/10 hover:text-secondary-100'}"
 				onclick={() => filterByTag(tag)}
 			>
