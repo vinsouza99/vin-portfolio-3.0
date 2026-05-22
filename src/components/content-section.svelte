@@ -190,7 +190,7 @@
 	>
 		<div
 			bind:this={leftWrapperEl}
-			class="my-auto flex flex-col content-center items-center justify-center gap-5 self-center text-left md:relative md:h-full md:gap-8"
+			class="my-auto flex min-h-0 flex-col content-center items-center justify-center gap-5 self-center text-left md:relative md:h-full md:gap-8"
 		>
 			<div bind:this={leftSwapEl}>
 				{#if renderedLeftKind === 'detail' && DetailComponent}

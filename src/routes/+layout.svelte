@@ -134,7 +134,7 @@
 						<a
 							href={`/#${link.key}`}
 							onclick={closeMenu}
-							class="block px-1 py-1 text-xl font-thin! text-primary-900 transition text-shadow-lg/60 hover:text-primary-500 hover:text-shadow-primary-800/60 active:text-primary-500 md:text-xl"
+							class="block px-1 py-1 text-xl font-thin! text-primary-900 transition text-shadow-md text-shadow-secondary-800/0 hover:text-primary-500 hover:text-shadow-primary-800/20 active:text-primary-500 md:text-xl"
 							>{link.label}</a
 						>
 					</li>

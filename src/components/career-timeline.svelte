@@ -216,7 +216,7 @@
 		style="--row-count: {$isSmallScreen ? jobs.length : jobs.length + 2}"
 	>
 		<div
-			class="career-timeline__grid mx-auto grid max-w-full grid-cols-[auto_1fr] grid-rows-[repeat(var(--row-count),1fr)] gap-x-4 gap-y-10 px-0 md:max-w-4xl md:gap-x-6 md:gap-y-20 md:px-8"
+			class="career-timeline__grid mx-auto grid max-w-full grid-cols-[auto_1fr] grid-rows-[repeat(var(--row-count),1fr)] gap-x-4 gap-y-10 px-0 md:max-w-4xl md:gap-x-6 md:gap-y-20 md:pl-8 lg:px-8"
 		>
 			<!-- Full-height skeleton line (column 1, all rows) -->
 			<div
