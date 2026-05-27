@@ -35,7 +35,7 @@
 			{
 				scaleY: 1.195,
 				ease: 'none',
-				duration: 2,
+				duration: 2.6,
 				paused: true
 			}
 		);
@@ -43,7 +43,7 @@
 		ScrollTrigger.create({
 			trigger: containerEl,
 			start: 'top bottom',
-			end: 'bottom center-=50%',
+			end: 'bottom center-=55%',
 			onUpdate: () => {
 				const rect = containerEl.getBoundingClientRect();
 				const viewportCenter = window.innerHeight / 2;

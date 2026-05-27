@@ -133,11 +133,11 @@
 
 			if (!sectionEl || !leftWrapperEl) return;
 			if (!isMdUp) {
-				gsap.set(leftWrapperEl, { clearProps: 'opacity' });
+				gsap.set(leftWrapperEl, { clearProps: 'opacity,zIndex' });
 				return;
 			}
 
-			gsap.set(leftWrapperEl, { autoAlpha: 0 });
+			gsap.set(leftWrapperEl, { autoAlpha: 0, zIndex: -1 });
 			scrollTrigger = ScrollTrigger.create({
 				trigger: sectionEl,
 				// Only show this section's summary while the viewport center is within range.
@@ -147,13 +147,15 @@
 				// When `endTrigger` is another section, fade out when that other section's
 				// top crosses the viewport center (instead of this section's bottom).
 				end: endTrigger ? 'top bottom+=10px' : 'bottom center-=10%',
-				onEnter: () => gsap.to(leftWrapperEl, { autoAlpha: 1, duration: 0.5, ease: 'power2.out' }),
+				onEnter: () =>
+					gsap.to(leftWrapperEl, { autoAlpha: 1, zIndex: 1000, duration: 0.5, ease: 'power2.out' }),
 				onEnterBack: () =>
-					gsap.to(leftWrapperEl, { autoAlpha: 1, duration: 0.5, ease: 'power2.out' }),
+					gsap.to(leftWrapperEl, { autoAlpha: 1, zIndex: 1000, duration: 0.5, ease: 'power2.out' }),
 				// If we're past the section enough that the sticky would have to move, fade out immediately.
-				onLeave: () => gsap.to(leftWrapperEl, { autoAlpha: 0, duration: 0.5, ease: 'power2.out' }),
+				onLeave: () =>
+					gsap.to(leftWrapperEl, { autoAlpha: 0, zIndex: -1, duration: 0.5, ease: 'power2.out' }),
 				onLeaveBack: () =>
-					gsap.to(leftWrapperEl, { autoAlpha: 0, duration: 0.5, ease: 'power2.out' })
+					gsap.to(leftWrapperEl, { autoAlpha: 0, zIndex: -1, duration: 0.5, ease: 'power2.out' })
 			});
 		};
 
@@ -172,6 +174,8 @@
 		};
 	});
 
+	// fixed wrapper visibility/z-index is handled in ScrollTrigger callbacks
+
 	$effect(() => {
 		// Run the "replace" animation when summary/detail content changes (md+ only)
 		void replaceLeftWithFade(targetLeft);
@@ -184,15 +188,15 @@
 	class="content-width content-section mx-auto grid grid-cols-1 overflow-visible p-5 sm:gap-2 md:grid-cols-2 md:gap-5 md:p-10 lg:gap-10"
 >
 	<!-- Left column: summary (default) or detail (when item selected) -->
-	<div class="section-summary relative hidden h-fit w-full text-bg md:block md:h-full">.</div>
+	<div class="section-summary relative hidden h-fit w-full text-bg md:block md:h-full">&nbsp;</div>
 	<div
 		class="section-summary relative h-fit w-full md:fixed md:top-0 md:bottom-0 md:left-0 md:ml-8 md:h-full md:max-w-[48vw]"
 	>
 		<div
 			bind:this={leftWrapperEl}
-			class="my-auto flex min-h-0 flex-col content-center items-center justify-center gap-5 self-center text-left md:relative md:h-full md:gap-8"
+			class="my-auto flex min-h-0 flex-col content-center items-start justify-center gap-5 self-center text-left md:relative md:h-screen md:gap-8"
 		>
-			<div bind:this={leftSwapEl}>
+			<div bind:this={leftSwapEl} class="">
 				{#if renderedLeftKind === 'detail' && DetailComponent}
 					<DetailComponent {...renderedLeftProps as any} />
 				{:else if renderedLeftKind === 'summaryComponent' && SummaryComponent}
@@ -204,9 +208,7 @@
 						{header}
 					</h2>
 					{#if summary}
-						<p class="block text-xl font-thin text-text">
-							{summary}
-						</p>
+						<p class="block text-xl font-thin text-text">{summary}</p>
 					{/if}
 				{/if}
 			</div>

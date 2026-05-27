@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Work } from '$lib/models/work';
-	import Tag from './ui/tag.svelte';
+	import Tag from '../ui/tag.svelte';
 
 	interface Props {
 		work: Work;

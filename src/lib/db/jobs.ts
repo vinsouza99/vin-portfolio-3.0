@@ -38,7 +38,7 @@ export const jobs: Job[] = [
 		url: 'https://current-ai.com',
 		startYear: 2025,
 		longDescription:
-			'During my last term in Langara College, I got the part-time position of full-stack developer at the Fine Arts department. The system I was responsible for is a website that serves as a platform for graduates of the Fine Arts program to publish their work. More technically, the system is a headless CMS built with Next.js and WordPress, served by an Apache web server hosted in a AWS EC2 instance. My tasks involve working closely with the clients to modify the existing system for this year’s edition, as the frontend changes every year. The site is live here',
+			'During my last term in Langara College, I got the part-time position of full-stack developer at the Fine Arts department. The system I was responsible for is a website that serves as a platform for graduates of the Fine Arts program to publish their work. More technically, the system is a headless CMS built with Next.js and WordPress, served by an Apache web server hosted in a AWS EC2 instance. My tasks involve working closely with the clients to modify the existing system for this year’s edition, as the frontend changes every year. The site is live <a href="https://past.langarafinagradshow.com/2024" class="external_link" target="_blank" rel="noopener noreferrer">here</a>',
 
 		tags: [
 			'TypeScript',
@@ -77,7 +77,7 @@ export const jobs: Job[] = [
 			'Worked on different web-based control systems, being responsible for the entire process of software development, from design to coding, testing, and deployment',
 		startYear: 2022,
 		endYear: 2023,
-		longDescription: `I maintained different web-based control systems for both the company's employees and clients. As the only developer at that small company, I was responsible for the entire process of software development, from design to coding, testing, and deployment. I even did some pentesting on the side. <br/> <br/> Aside from a complete redesign of their system towards a more modern and pleasant UI, my biggest legacy there was a program written in Java that automated the very tiring and time-consuming task of gathering data from an API and storing in the database at regular intervals.`,
+		longDescription: `I maintained different web-based control systems for both the company's employees and clients. As the only developer at that small company, I was responsible for the entire process of software development, from design to coding, testing, and deployment. I even did some pentesting on the side. Aside from a complete redesign of their system towards a more modern and pleasant UI, my biggest legacy there was a program written in Java that automated the very tiring and time-consuming task of gathering data from an API and storing in the database at regular intervals.`,
 
 		tags: ['HTML', 'CSS', 'Java', 'JSP', 'Oracle SQL', 'Primefaces', 'SQL', 'Cybersecurity']
 	}

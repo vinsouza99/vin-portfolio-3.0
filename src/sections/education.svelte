@@ -1,7 +1,7 @@
 <script lang="ts">
-	import ContentSection from '../components/content-section.svelte';
-	import EducationList from '../components/education-list.svelte';
-	import EduDetail from '../components/edu-detail.svelte';
+	import ContentSection from '../components/ui/content-section.svelte';
+	import EducationList from '../components/edu/education-list.svelte';
+	import EduDetail from '../components/edu/edu-detail.svelte';
 	import { getLanguageContext, t } from '$lib/i18n';
 
 	let { endTrigger }: { endTrigger?: string | null } = $props();
@@ -14,5 +14,5 @@
 	summary={t($language, 'sections.education.summary')}
 	detailComponent={EduDetail}
 	content={EducationList}
-	endTrigger={endTrigger}
+	{endTrigger}
 />

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ContentSection from '../components/content-section.svelte';
+	import ContentSection from '../components/ui/content-section.svelte';
 	import ContactForm from '../components/contact-form.svelte';
 	import { getLanguageContext, t } from '$lib/i18n';
 
@@ -13,5 +13,5 @@
 	summary={t($language, 'sections.contact.summary')}
 	content={ContactForm}
 	contentProps={{}}
-	endTrigger={endTrigger}
+	{endTrigger}
 />

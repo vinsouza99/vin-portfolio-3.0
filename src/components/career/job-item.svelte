@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Job } from '$lib/models/job';
-	import Tag from './ui/tag.svelte';
+	import Tag from '../ui/tag.svelte';
 
 	interface Props {
 		job: Job;

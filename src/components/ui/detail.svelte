@@ -15,7 +15,7 @@
 	const { title, subtitleParts, description, tags, url, urlLabel }: Props = $props();
 </script>
 
-<div class="flex h-full flex-col gap-1 md:gap-5">
+<div class="flex h-full min-h-[25vh] flex-col gap-1 md:gap-5">
 	<h2
 		class="block font-mono text-4xl font-semibold text-primary-500 text-shadow-lg/60 text-shadow-primary-800/60"
 	>
@@ -51,7 +51,7 @@
 		</div>
 	{/if}
 	<div
-		class="max-h-[25vh] min-h-0 flex-1 overflow-scroll text-left text-xs font-thin text-text md:text-lg"
+		class="h-full max-h-[25vh] min-h-0 flex-1 overflow-scroll text-left text-xs font-thin text-text md:text-lg"
 	>
 		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 		{@html description}

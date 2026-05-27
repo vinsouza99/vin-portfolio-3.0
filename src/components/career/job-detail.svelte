@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Job } from '$lib/models/job';
-	import Detail from './ui/detail.svelte';
+	import Detail from '../ui/detail.svelte';
 
 	interface Props {
 		selectedItem: Job;

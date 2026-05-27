@@ -142,3 +142,9 @@ body {
 	opacity: 1;
 	transform: rotate(-45deg) translateY(100%);
 }
+.external_link {
+	@apply text-primary-700 transition-colors duration-75 ease-in-out;
+}
+.external_link:hover {
+	@apply text-primary-500 underline;
+}

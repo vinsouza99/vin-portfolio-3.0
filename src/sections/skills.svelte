@@ -1,6 +1,6 @@
 <script lang="ts">
-	import ContentSection from '../components/content-section.svelte';
-	import SkillsList from '../components/skills-list.svelte';
+	import ContentSection from '../components/ui/content-section.svelte';
+	import SkillsList from '../components/skills/skills-list.svelte';
 	import { getLanguageContext, t } from '$lib/i18n';
 
 	let { endTrigger }: { endTrigger?: string | null } = $props();
@@ -12,5 +12,5 @@
 	header={t($language, 'sections.skills.title')}
 	summary={t($language, 'sections.skills.summary')}
 	content={SkillsList}
-	endTrigger={endTrigger}
+	{endTrigger}
 />

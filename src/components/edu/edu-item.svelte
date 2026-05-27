@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import type { Edu } from '$lib/models/edu';
 	import { BookCheck, GraduationCap } from 'lucide-svelte';
-	import Tag from './ui/tag.svelte';
+	import Tag from '../ui/tag.svelte';
 
 	interface Props {
 		edu: Edu;
