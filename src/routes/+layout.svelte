@@ -2,7 +2,7 @@
 	/* eslint-disable svelte/no-navigation-without-resolve */
 	import './layout.css';
 	import Logo from '$lib/assets/logo.svelte';
-	import favicon from '$lib/assets/favicon.svg';
+	import favicon from '$lib/assets/favicon.png';
 	import Footer from '../components/footer.svelte';
 	import { resolve } from '$app/paths';
 	import { isSmallScreen } from '$lib/hooks/is-small-screen';
@@ -39,7 +39,7 @@
 	});
 </script>
 
-<svelte:head><link rel="icon" href={favicon} /></svelte:head>
+<svelte:head><link rel="icon" href={favicon} /><title>Vin Souza</title></svelte:head>
 <svg style="position: absolute; width: 0; height: 0">
 	<filter
 		id="glass"
