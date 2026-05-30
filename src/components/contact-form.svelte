@@ -1,6 +1,77 @@
 <script lang="ts">
-	import { Label, Input, Button, Alert } from 'flowbite-svelte';
+	import { Label, Input, Button, Alert, Toast, ToastContainer } from 'flowbite-svelte';
 	import { Copy } from 'lucide-svelte';
+	import { getLanguageContext, t } from '$lib/i18n';
+	import { fly } from 'svelte/transition';
+	import { onDestroy } from 'svelte';
+	import { CheckCircleSolid } from 'flowbite-svelte-icons';
+
+	const language = getLanguageContext();
+
+	type ToastType = 'success' | 'error';
+	const ToastColor = {
+		success: 'green',
+		error: 'red'
+	};
+
+	interface ToastItem {
+		id: number;
+		message: string;
+		color: 'green' | 'red';
+		timeoutId?: ReturnType<typeof setTimeout>;
+		visible: boolean;
+	}
+
+	let toasts = $state<ToastItem[]>([]);
+	let nextId = $state(1);
+
+	function addToast(type: ToastType, message: string) {
+		const newToast: ToastItem = {
+			id: nextId,
+			message: message,
+			color: ToastColor[type],
+			visible: true
+		};
+
+		// Auto-dismiss after 5 seconds
+		const timeoutId = setTimeout(() => {
+			dismissToast(newToast.id);
+		}, 5000);
+		newToast.timeoutId = timeoutId;
+
+		toasts = [...toasts, newToast];
+		nextId++;
+	}
+
+	function dismissToast(id: number) {
+		// Clear timeout if it exists
+		const toast = toasts.find((t) => t.id === id);
+		if (toast?.timeoutId) {
+			clearTimeout(toast.timeoutId);
+		}
+
+		// Set visible to false to trigger outro transition
+		toasts = toasts.map((t) => (t.id === id ? { ...t, visible: false } : t));
+
+		setTimeout(() => {
+			toasts = toasts.filter((t) => t.id !== id);
+		}, 300); // Slightly longer than transition duration
+	}
+
+	function handleClose(id: number) {
+		return () => {
+			dismissToast(id);
+		};
+	}
+
+	onDestroy(() => {
+		// Clear all pending timeouts on unmount
+		toasts.forEach((toast) => {
+			if (toast.timeoutId) {
+				clearTimeout(toast.timeoutId);
+			}
+		});
+	});
 
 	// Form State
 	let name = '';
@@ -46,6 +117,7 @@
 			errorMessage = 'A network error occurred. Please try again later.';
 		} finally {
 			isSubmitting = false;
+			addToast('success', t($language, 'sections.contact.form.success'));
 		}
 	};
 	const copyEmail = async () => {
@@ -57,14 +129,36 @@
 	};
 </script>
 
+<ToastContainer position="top-right">
+	{#each toasts as toast (toast.id)}
+		<Toast
+			color={toast.color}
+			dismissable={false}
+			transition={fly}
+			params={{ x: 200, duration: 800 }}
+			class="glass-container w-64 border-0 bg-secondary-800/10 text-text backdrop-blur-sm"
+			onclose={handleClose(toast.id)}
+			bind:toastStatus={toast.visible}
+		>
+			{#snippet icon()}
+				<CheckCircleSolid class="h-5 w-5" />
+				<span class="sr-only">Check icon</span>
+			{/snippet}
+			{toast.message}
+		</Toast>
+	{/each}
+</ToastContainer>
 <form
 	on:submit={submitForm}
 	class="glass-container flex max-w-xl flex-col space-y-1 divide-y divide-secondary-200/10 rounded-2xl p-5"
 >
 	{#if formStatus === 'success'}
-		<Alert color="green" class="mb-4" border={false}>
-			Your message has been sent successfully! I will get back to you soon.
-		</Alert>
+		<Toast>
+			{t($language, 'sections.contact.form.success')}
+		</Toast>
+		<!-- <Alert color="green" class="mb-4" border={false}>
+			{t($language, 'sections.contact.form.success')}
+		</Alert> -->
 	{/if}
 
 	{#if formStatus === 'error'}
@@ -73,18 +167,22 @@
 		</Alert>
 	{/if}
 	<div class="flex w-full items-baseline font-thin">
-		<Label for="email" class="text-md mb-2 w-15 font-thin text-secondary-700">from *</Label>
+		<Label for="email" class="text-md mb-2 w-15 font-thin text-secondary-700"
+			>{t($language, 'sections.contact.form.from')} *</Label
+		>
 		<Input
 			id="email"
 			type="email"
-			placeholder="your email"
+			placeholder={t($language, 'sections.contact.form.email-placeholder')}
 			bind:value={email}
 			required
-			class="w-full border-0! bg-transparent outline-0! placeholder:text-text/50"
+			class="ml-1 w-full border-0! bg-transparent text-text! outline-0! placeholder:text-text/50 "
 		></Input>
 	</div>
 	<div class="flex w-full items-baseline font-thin">
-		<label for="my-email" class="text-md mb-2 w-15 font-thin text-secondary-700">to</label>
+		<label for="my-email" class="text-md mb-2 w-15 font-thin text-secondary-700"
+			>{t($language, 'sections.contact.form.to')}</label
+		>
 		<button
 			id="my-email"
 			type="button"
@@ -96,12 +194,14 @@
 		</button>
 	</div>
 	<div class="flex w-full items-baseline font-thin">
-		<Label for="subject" class="text-md mb-2 w-15 font-thin text-secondary-700">subject</Label>
+		<Label for="subject" class="text-md mb-2 w-15 font-thin text-secondary-700"
+			>{t($language, 'sections.contact.form.subject')}</Label
+		>
 		<Input
 			id="subject"
 			type="text"
-			class="border-0! bg-transparent outline-0! placeholder:text-text/50"
-			placeholder="what's up?"
+			class="ml-1 border-0! bg-transparent text-text outline-0! placeholder:text-text/50"
+			placeholder={t($language, 'sections.contact.form.subject-placeholder')}
 			bind:value={subject}
 		></Input>
 	</div>
@@ -109,11 +209,11 @@
 	<div class="text-md flex w-full items-baseline font-thin">
 		<textarea
 			id="message"
-			placeholder="your message"
+			placeholder={t($language, 'sections.contact.form.message-placeholder')}
 			rows={6}
 			bind:value={message}
 			required
-			class="h-50 w-full grow resize-none border-0! bg-transparent px-0 outline-0! placeholder:text-sm placeholder:font-thin placeholder:text-text/50"
+			class="h-50 w-full grow resize-none rounded-lg border-0! bg-secondary-800/10 text-text outline-0! placeholder:text-sm placeholder:font-thin placeholder:text-text/50"
 		></textarea>
 	</div>
 	<div class="m-0 flex items-center justify-end py-1">
@@ -125,10 +225,10 @@
 			outline
 		>
 			{#if isSubmitting}
-				Sending...
+				{t($language, 'sections.contact.form.submitting')}
 			{:else}
 				<!-- <Send class="h-6 w-6" /> -->
-				send
+				{t($language, 'sections.contact.form.submit-button')}
 			{/if}
 		</Button>
 	</div>

@@ -35,7 +35,18 @@ export const messages = {
 		'sections.education.summary':
 			'"An intelligent heart acquires knowledge, and the ear of the wise seeks knowledge." - Proverbs 18:15',
 		'sections.contact.title': 'contact',
-		'sections.contact.summary': 'Get in touch whenever you feel like building something awesome.'
+		'sections.contact.summary': 'Get in touch whenever you feel like building something awesome.',
+		'sections.contact.form.from': 'from',
+		'sections.contact.form.to': 'to',
+		'sections.contact.form.email-placeholder': 'your email',
+		'sections.contact.form.message-placeholder': 'your message',
+		'sections.contact.form.subject': `subject`,
+		'sections.contact.form.subject-placeholder': `what's up?`,
+		'sections.contact.form.submit-button': 'send',
+		'sections.contact.form.submitting': 'Sending...',
+		'sections.contact.form.success': 'Message sent successfully!',
+		'sections.contact.form.error':
+			'An error occurred while sending the message. Please try again later.'
 	},
 	'pt-BR': {
 		'nav.skills': 'habilidades',
@@ -61,7 +72,18 @@ export const messages = {
 		'sections.education.summary':
 			'"O coração inteligente adquire conhecimento, e o ouvido dos sábios procura o saber." - Provérbios 18:15',
 		'sections.contact.title': 'contato',
-		'sections.contact.summary': 'Entre em contato sempre que quiser construir algo incrível'
+		'sections.contact.summary': 'Entre em contato sempre que quiser construir algo incrível',
+		'sections.contact.form.from': 'de',
+		'sections.contact.form.to': 'para',
+		'sections.contact.form.email-placeholder': 'seu email',
+		'sections.contact.form.message-placeholder': 'sua mensagem',
+		'sections.contact.form.subject': `assunto`,
+		'sections.contact.form.subject-placeholder': `o que há de novo?`,
+		'sections.contact.form.submit-button': 'enviar',
+		'sections.contact.form.submitting': 'Enviando...',
+		'sections.contact.form.success': 'Mensagem enviada com sucesso!',
+		'sections.contact.form.error':
+			'Um erro ocorreu ao enviar a mensagem. Por favor, tente novamente mais tarde.'
 	}
 } as const;
 

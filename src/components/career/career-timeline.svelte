@@ -260,8 +260,8 @@
 				</div>
 			{/each}
 			{#if !$isSmallScreen}
-				<div class="flex w-full bg-bg text-bg select-none">.</div>
-				<div class="flex w-full bg-bg text-bg select-none">.</div>
+				<div class="flex w-full bg-bg text-black opacity-0 select-none">.</div>
+				<div class="flex w-full bg-bg text-black opacity-0 select-none">.</div>
 			{/if}
 		</div>
 	</div>
