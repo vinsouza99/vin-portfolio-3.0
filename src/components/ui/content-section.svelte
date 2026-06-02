@@ -133,7 +133,7 @@
 
 			if (!sectionEl || !leftWrapperEl) return;
 			if (!isMdUp) {
-				gsap.set(leftWrapperEl, { clearProps: 'opacity,zIndex' });
+				gsap.set(leftWrapperEl, { clearProps: 'opacity,zIndex,position' });
 				return;
 			}
 
@@ -145,21 +145,36 @@
 				start: 'top center-=5%',
 				endTrigger: endTrigger || undefined,
 				// When `endTrigger` is another section, fade out when that other section's
-				// top crosses the viewport center (instead of this section's bottom).
-				end: endTrigger ? 'top bottom+=10px' : 'bottom center-=10%',
+				// top crosses 10px above the viewport bottom.
+				end: endTrigger ? 'top bottom-=40%' : 'bottom center-=10%',
 				onEnter: () =>
-					gsap.to(leftWrapperEl, { autoAlpha: 1, zIndex: 1000, duration: 0.5, ease: 'power2.out' }),
+					gsap.to(leftWrapperEl, {
+						autoAlpha: 1,
+						zIndex: 1000,
+						duration: 0.75,
+						ease: 'power2.out'
+					}),
 				onEnterBack: () =>
-					gsap.to(leftWrapperEl, { autoAlpha: 1, zIndex: 1000, duration: 0.5, ease: 'power2.out' }),
+					gsap.to(leftWrapperEl, {
+						autoAlpha: 1,
+						zIndex: 1000,
+						duration: 0.75,
+						ease: 'power2.out'
+					}),
 				// If we're past the section enough that the sticky would have to move, fade out immediately.
 				onLeave: () =>
-					gsap.to(leftWrapperEl, { autoAlpha: 0, zIndex: -1, duration: 0.5, ease: 'power2.out' }),
+					gsap.to(leftWrapperEl, { autoAlpha: 0, zIndex: -1, duration: 0.75, ease: 'power2.out' }),
 				onLeaveBack: () =>
-					gsap.to(leftWrapperEl, { autoAlpha: 0, zIndex: -1, duration: 0.5, ease: 'power2.out' })
+					gsap.to(leftWrapperEl, { autoAlpha: 0, zIndex: -1, duration: 0.75, ease: 'power2.out' })
 			});
+
+			// Refresh ScrollTrigger to ensure trigger positions are accurate
+			ScrollTrigger.refresh();
 		};
 
 		setupScroll();
+
+		gsap.to(leftWrapperEl, { autoAlpha: 0, zIndex: -1 });
 
 		// Keep ScrollTrigger state consistent if viewport crosses md breakpoint
 		mq.addEventListener('change', setupScroll);
@@ -196,7 +211,7 @@
 			bind:this={leftWrapperEl}
 			class="my-auto flex min-h-0 flex-col content-center items-start justify-center gap-5 self-center text-left md:relative md:h-screen md:gap-8"
 		>
-			<div bind:this={leftSwapEl} class="">
+			<div bind:this={leftSwapEl} class="-z-1">
 				{#if renderedLeftKind === 'detail' && DetailComponent}
 					<DetailComponent {...renderedLeftProps as any} />
 				{:else if renderedLeftKind === 'summaryComponent' && SummaryComponent}

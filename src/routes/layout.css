@@ -49,7 +49,6 @@
 }
 * {
 	box-sizing: border-box;
-	scroll-behavior: smooth !important;
 	scroll-snap-type: proximity;
 }
 
