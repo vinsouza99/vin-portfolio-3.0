@@ -125,6 +125,7 @@
 			isMdUp = mq.matches;
 		};
 		updateMq();
+		if (!isMdUp) gsap.set(leftWrapperEl, { clearProps: 'all' });
 		mq.addEventListener('change', updateMq);
 
 		const setupScroll = () => {
@@ -133,11 +134,11 @@
 
 			if (!sectionEl || !leftWrapperEl) return;
 			if (!isMdUp) {
-				gsap.set(leftWrapperEl, { clearProps: 'opacity,zIndex,position' });
+				gsap.set(leftWrapperEl, { clearProps: 'all' });
 				return;
 			}
 
-			gsap.set(leftWrapperEl, { autoAlpha: 0, zIndex: -1 });
+			gsap.set(leftWrapperEl, { autoAlpha: 0, zIndex: -1, pointerEvents: 'none' });
 			scrollTrigger = ScrollTrigger.create({
 				trigger: sectionEl,
 				// Only show this section's summary while the viewport center is within range.
@@ -162,10 +163,30 @@
 						ease: 'power2.out'
 					}),
 				// If we're past the section enough that the sticky would have to move, fade out immediately.
-				onLeave: () =>
-					gsap.to(leftWrapperEl, { autoAlpha: 0, zIndex: -1, duration: 0.75, ease: 'power2.out' }),
-				onLeaveBack: () =>
-					gsap.to(leftWrapperEl, { autoAlpha: 0, zIndex: -1, duration: 0.75, ease: 'power2.out' })
+				onLeave: () => {
+					gsap.to(leftWrapperEl, {
+						autoAlpha: 0,
+						zIndex: -1,
+						pointerEvents: 'auto',
+						duration: 0.75,
+						ease: 'power2.out'
+					});
+					setTimeout(() => {
+						renderedLeftKind = 'default';
+					}, 750);
+				},
+				onLeaveBack: () => {
+					gsap.to(leftWrapperEl, {
+						autoAlpha: 0,
+						zIndex: -1,
+						pointerEvents: 'auto',
+						duration: 0.75,
+						ease: 'power2.out'
+					});
+					setTimeout(() => {
+						renderedLeftKind = 'default';
+					}, 750);
+				}
 			});
 
 			// Refresh ScrollTrigger to ensure trigger positions are accurate
@@ -174,7 +195,9 @@
 
 		setupScroll();
 
-		gsap.to(leftWrapperEl, { autoAlpha: 0, zIndex: -1 });
+		if (isMdUp) {
+			gsap.to(leftWrapperEl, { autoAlpha: 0, zIndex: -1, pointerEvents: 'none' });
+		}
 
 		// Keep ScrollTrigger state consistent if viewport crosses md breakpoint
 		mq.addEventListener('change', setupScroll);
@@ -200,30 +223,30 @@
 <section
 	id={resolvedSectionId}
 	bind:this={sectionEl}
-	class="content-width content-section mx-auto grid grid-cols-1 overflow-visible p-5 sm:gap-2 md:grid-cols-2 md:gap-5 md:p-10 lg:gap-10"
+	class="content-width section-content mx-auto mt-50 grid grid-cols-1 overflow-visible p-5 sm:gap-2 md:mt-0 md:grid-cols-2 md:gap-5 md:p-10 lg:gap-10"
 >
 	<!-- Left column: summary (default) or detail (when item selected) -->
-	<div class="section-summary relative hidden h-fit w-full text-bg md:block md:h-full">&nbsp;</div>
+	<div class="section-summary relative hidden h-fit w-full text-bg md:block md:h-full">.</div>
 	<div
-		class="section-summary relative h-fit w-full md:fixed md:top-0 md:bottom-0 md:left-0 md:ml-8 md:h-full md:max-w-[48vw]"
+		class="section-summary relative h-fit w-full self-center overflow-hidden md:fixed md:top-0 md:bottom-0 md:left-0 md:ml-8 md:h-full md:max-w-[48vw]"
 	>
 		<div
 			bind:this={leftWrapperEl}
 			class="my-auto flex min-h-0 flex-col content-center items-start justify-center gap-5 self-center text-left md:relative md:h-screen md:gap-8"
 		>
-			<div bind:this={leftSwapEl} class="-z-1">
+			<div bind:this={leftSwapEl} class="">
 				{#if renderedLeftKind === 'detail' && DetailComponent}
 					<DetailComponent {...renderedLeftProps as any} />
 				{:else if renderedLeftKind === 'summaryComponent' && SummaryComponent}
 					<SummaryComponent {...renderedLeftProps as any} />
 				{:else}
 					<h2
-						class="mb-1 block font-mono text-6xl font-semibold text-primary-500 text-shadow-lg/60 text-shadow-primary-800/60 md:mb-5"
+						class="mb-5 block font-mono text-4xl font-semibold text-wrap wrap-break-word text-primary-500 text-shadow-lg/60 text-shadow-primary-800/60 md:mb-5 md:text-6xl"
 					>
 						{header}
 					</h2>
 					{#if summary}
-						<p class="block text-xl font-thin text-text">{summary}</p>
+						<p class="block text-lg font-thin text-text md:text-xl">{summary}</p>
 					{/if}
 				{/if}
 			</div>
@@ -250,9 +273,7 @@
 				{/if}
 			</div>
 		{:else}
-			<div class="glass-container m-0 flex h-full w-full flex-col justify-center p-0">
-				Placeholder
-			</div>
+			<div class="glass-container m-0 flex h-full w-full flex-col justify-center p-0"></div>
 		{/if}
 	</div>
 </section>

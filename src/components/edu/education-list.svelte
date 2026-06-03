@@ -76,9 +76,7 @@
 
 <div class="flex">
 	<!--Filter by tags -->
-	<ul
-		class=" m-0 flex w-full list-none flex-col flex-nowrap items-end gap-5 overflow-scroll p-5 md:p-0"
-	>
+	<ul class=" m-0 flex w-full list-none flex-col flex-nowrap items-end gap-5 overflow-scroll p-0">
 		{#each education as edu (edu.id)}
 			<li
 				class="m-1 w-full flex-1 justify-self-end overflow-visible p-0 transition-all ease-in-out md:max-w-[95%] md:min-w-[70%] md:hover:translate-x-[-1%] {selectedItem?.id ===

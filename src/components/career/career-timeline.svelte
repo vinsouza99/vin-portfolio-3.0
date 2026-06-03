@@ -205,6 +205,7 @@
 			onDeselect?.();
 		} else {
 			onSelect?.(job);
+			window.location.hash = `#career`;
 		}
 	};
 </script>
@@ -216,7 +217,7 @@
 		style="--row-count: {$isSmallScreen ? jobs.length : jobs.length + 2}"
 	>
 		<div
-			class="career-timeline__grid mx-auto grid max-w-full grid-cols-[auto_1fr] grid-rows-[repeat(var(--row-count),1fr)] gap-x-4 gap-y-10 px-0 md:max-w-4xl md:gap-x-6 md:gap-y-20 md:pl-8 lg:px-8"
+			class="career-timeline__grid mx-auto grid max-w-full grid-cols-[auto_1fr] grid-rows-[repeat(var(--row-count),1fr)] gap-x-1 gap-y-10 px-0 md:max-w-4xl md:gap-x-6 md:gap-y-20 md:pl-8 lg:px-8"
 		>
 			<!-- Full-height skeleton line (column 1, all rows) -->
 			<div
@@ -227,7 +228,7 @@
 			></div>
 			<!-- Full-height progress line (same span, scales on scroll) -->
 			<div
-				class="career-timeline__line-progress col-start-1 mt-1 h-full w-2.5 origin-top justify-self-center rounded-full md:mb-10 md:justify-self-center"
+				class="career-timeline__line-progress col-start-1 mt-1 h-full w-1 origin-top justify-self-center rounded-full md:mb-10 md:w-2.5 md:justify-self-center"
 				style="background-color: {PRIMARY_500}; grid-row: 1 / -2;"
 				bind:this={lineProgressEl}
 				aria-hidden="true"
@@ -235,16 +236,13 @@
 			{#each jobs as item, i (i)}
 				<!-- Stop dot (left column, same row as item) -->
 				<div
-					class="career-timeline__stop z-10 col-start-1 size-8 justify-self-center rounded-full border-8 border-solid bg-bg md:justify-self-end"
+					class="career-timeline__stop z-10 col-start-1 size-4 justify-self-center rounded-full border-8 border-solid bg-bg md:size-8 md:justify-self-end"
 					style="grid-row: {i + 1};"
 					bind:this={stopEls[i]}
 					aria-hidden="true"
 				></div>
 				<!-- Item content (right column) -->
-				<div
-					class="col-start-2 flex flex-col items-start gap-1 md:gap-3"
-					style="grid-row: {i + 1};"
-				>
+				<div class="col-start-2 flex flex-col items-start gap-3" style="grid-row: {i + 1};">
 					<span class="career-timeline__years font-mono text-3xl" bind:this={yearsEls[i]}
 						>{item.startYear}{item.endYear
 							? ` - ${item.endYear == Infinity ? 'present' : item.endYear}`

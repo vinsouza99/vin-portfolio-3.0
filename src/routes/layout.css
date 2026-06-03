@@ -107,8 +107,7 @@ body {
 		padding: 1rem;
 	}
 	.section-content {
-		padding: 1rem;
-		padding-left: 0;
+		padding: 1rem 0.5rem;
 	}
 	#works .section-content {
 		padding: 0;

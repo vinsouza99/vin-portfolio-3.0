@@ -28,7 +28,7 @@
 
 <div class="flex flex-col gap-5 overflow-visible md:h-[110vh]">
 	<!--Filter by tags -->
-	<div class="flex flex-wrap gap-3 overflow-visible">
+	<div class="flex flex-wrap gap-1 overflow-visible md:gap-3">
 		{#each tags as tag (tag)}
 			<button
 				class="cursor-pointer rounded-xl border px-5 py-2 text-sm font-thin tracking-widest transition-colors duration-200 focus:ring-2 focus:ring-secondary-500 focus:ring-offset-2 focus:outline-none
@@ -61,7 +61,7 @@
 		</Input>
 	</div>
 
-	<div class="glass-container glowing-shadow min-h-[55vh] rounded-2xl p-10">
+	<div class="glass-container glowing-shadow min-h-[55vh] rounded-2xl p-5 md:p-10">
 		{#if filteredSkills.length === 0}
 			<p
 				class="block h-full w-full content-center self-center text-center text-lg font-thin text-text/50"

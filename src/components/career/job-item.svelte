@@ -22,12 +22,12 @@
 		{job.company}
 	</h3>
 	<div
-		class="flex items-center gap-1 divide-x divide-secondary-700/50 tracking-wide text-secondary-400 uppercase"
+		class="flex flex-wrap items-center gap-1 tracking-wide text-secondary-400 uppercase md:divide-x md:divide-secondary-700/50"
 	>
 		<span class="pr-3 text-left text-xs font-thin md:text-xs">
 			{job.title}
 		</span>
-		<span class="pl-3 text-left text-xs font-thin md:text-xs">
+		<span class="text-left text-xs font-thin md:pl-3 md:text-xs">
 			{job.location}
 		</span>
 	</div>

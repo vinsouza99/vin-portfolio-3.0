@@ -90,7 +90,7 @@
 >
 	<div class="section-summary relative hidden h-fit w-full text-bg md:block md:h-full"></div>
 	<div
-		class="section-summary relative h-fit w-full md:fixed md:top-0 md:bottom-0 md:left-0 md:ml-8 md:h-full md:max-w-[48vw]"
+		class="section-summary relative h-fit w-full self-center md:fixed md:top-0 md:bottom-0 md:left-0 md:ml-8 md:h-full md:max-w-[48vw]"
 	>
 		<div
 			bind:this={leftWrapperEl}

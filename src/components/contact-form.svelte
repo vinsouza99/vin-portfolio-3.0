@@ -166,8 +166,8 @@
 			{errorMessage}
 		</Alert>
 	{/if}
-	<div class="flex w-full items-baseline font-thin">
-		<Label for="email" class="text-md mb-2 w-15 font-thin text-secondary-700"
+	<div class="flex w-full flex-col items-baseline font-thin md:flex-row">
+		<Label for="email" class="text-md w-15 font-thin text-secondary-500 md:mb-2"
 			>{t($language, 'sections.contact.form.from')} *</Label
 		>
 		<Input
@@ -176,31 +176,31 @@
 			placeholder={t($language, 'sections.contact.form.email-placeholder')}
 			bind:value={email}
 			required
-			class="ml-1 w-full border-0! bg-transparent text-text! outline-0! placeholder:text-text/50 "
+			class="w-full border-0! bg-transparent px-0 text-text! outline-0! placeholder:text-text/50 md:ml-1 md:px-2.5 "
 		></Input>
 	</div>
-	<div class="flex w-full items-baseline font-thin">
-		<label for="my-email" class="text-md mb-2 w-15 font-thin text-secondary-700"
+	<div class="flex w-full flex-col items-baseline font-thin md:flex-row">
+		<label for="my-email" class="text-md w-15 font-thin text-secondary-500 md:mb-2"
 			>{t($language, 'sections.contact.form.to')}</label
 		>
 		<button
 			id="my-email"
 			type="button"
 			on:click={copyEmail}
-			class="group my-1 flex w-fit cursor-pointer rounded-sm border-0! bg-transparent px-2 py-1 text-sm font-thin! tracking-wide text-text outline-0! transition-colors duration-75 ease-in-out hover:bg-secondary-100/10"
+			class="group my-1 flex w-fit cursor-pointer rounded-sm border-0! bg-transparent py-1 text-sm font-thin! tracking-wide text-text outline-0! transition-colors duration-75 ease-in-out hover:bg-secondary-100/10 md:px-2"
 		>
 			<span>vinsouza1039@gmail.com</span>
 			<Copy class="hover:group:text-text h-5 w-5 border-0 bg-transparent p-1! text-text/50" />
 		</button>
 	</div>
-	<div class="flex w-full items-baseline font-thin">
-		<Label for="subject" class="text-md mb-2 w-15 font-thin text-secondary-700"
+	<div class="flex w-full flex-col items-baseline font-thin md:flex-row">
+		<Label for="subject" class="text-md w-15 font-thin text-secondary-500 md:mb-2"
 			>{t($language, 'sections.contact.form.subject')}</Label
 		>
 		<Input
 			id="subject"
 			type="text"
-			class="ml-1 border-0! bg-transparent text-text outline-0! placeholder:text-text/50"
+			class="border-0! bg-transparent px-0 text-text outline-0! placeholder:text-text/50 md:ml-1 md:px-2.5"
 			placeholder={t($language, 'sections.contact.form.subject-placeholder')}
 			bind:value={subject}
 		></Input>
