@@ -63,7 +63,7 @@
 </svg>
 <nav class="nav-mask pointer-events-none fixed top-0 left-0 z-50 mx-0 h-45 w-full px-2 md:px-0">
 	<div
-		class=" content-width mx-auto flex flex-wrap items-start justify-between gap-3 p-5 transition-all ease-in-out md:justify-start md:px-15"
+		class=" content-width mx-auto flex flex-wrap items-start justify-between gap-3 p-5 transition-all ease-in-out md:justify-start md:px-10 lg:px-15"
 	>
 		<a
 			href={resolve('/')}

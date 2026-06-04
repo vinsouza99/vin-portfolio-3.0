@@ -82,6 +82,25 @@
 	let leftWrapperEl: HTMLDivElement | null = null; // sticky wrapper (md+)
 	let leftSwapEl: HTMLDivElement | null = null; // fades on content replacement
 
+	// Ensure only one fixed summary wrapper can receive pointer events at a time
+	const enforceSingleActive = (active: HTMLElement | null) => {
+		try {
+			const all = document.querySelectorAll('div.section-summary.md\\:fixed');
+			all.forEach((el) => {
+				if (el === active) {
+					(el as HTMLElement).style.pointerEvents = 'auto';
+					(el as HTMLElement).style.zIndex = '1000';
+				} else {
+					(el as HTMLElement).style.pointerEvents = 'none';
+					(el as HTMLElement).style.zIndex = '-1';
+				}
+			});
+		} catch (e) {
+			// ignore in non-browser environments
+			console.warn('enforceSingleActive failed', e);
+		}
+	};
+
 	let isMdUp = $state(false);
 	let renderedLeftKind = $state<LeftKind>('default');
 	let renderedLeftProps = $state<Record<string, unknown>>({});
@@ -148,26 +167,34 @@
 				// When `endTrigger` is another section, fade out when that other section's
 				// top crosses 10px above the viewport bottom.
 				end: endTrigger ? 'top bottom-=40%' : 'bottom center-=10%',
-				onEnter: () =>
+				onEnter: () => {
+					enforceSingleActive(leftWrapperEl);
 					gsap.to(leftWrapperEl, {
 						autoAlpha: 1,
 						zIndex: 1000,
+						pointerEvents: 'auto',
 						duration: 0.75,
 						ease: 'power2.out'
-					}),
-				onEnterBack: () =>
+					});
+				},
+				onEnterBack: () => {
+					enforceSingleActive(leftWrapperEl);
 					gsap.to(leftWrapperEl, {
 						autoAlpha: 1,
 						zIndex: 1000,
+						pointerEvents: 'auto',
 						duration: 0.75,
 						ease: 'power2.out'
-					}),
+					});
+				},
 				// If we're past the section enough that the sticky would have to move, fade out immediately.
 				onLeave: () => {
+					// hide this wrapper and ensure others are disabled as well
+					enforceSingleActive(null);
 					gsap.to(leftWrapperEl, {
 						autoAlpha: 0,
 						zIndex: -1,
-						pointerEvents: 'auto',
+						pointerEvents: 'none',
 						duration: 0.75,
 						ease: 'power2.out'
 					});
@@ -176,10 +203,12 @@
 					}, 750);
 				},
 				onLeaveBack: () => {
+					// hide this wrapper and ensure others are disabled as well
+					enforceSingleActive(null);
 					gsap.to(leftWrapperEl, {
 						autoAlpha: 0,
 						zIndex: -1,
-						pointerEvents: 'auto',
+						pointerEvents: 'none',
 						duration: 0.75,
 						ease: 'power2.out'
 					});
@@ -228,10 +257,10 @@
 	<!-- Left column: summary (default) or detail (when item selected) -->
 	<div class="section-summary relative hidden h-fit w-full text-bg md:block md:h-full">.</div>
 	<div
-		class="section-summary relative h-fit w-full self-center overflow-hidden md:fixed md:top-0 md:bottom-0 md:left-0 md:ml-8 md:h-full md:max-w-[48vw]"
+		bind:this={leftWrapperEl}
+		class="section-summary relative h-fit w-full self-center overflow-hidden md:fixed md:top-0 md:bottom-0 md:left-0 md:ml-[5%] md:h-full md:max-w-[45vw] lg:ml-8"
 	>
 		<div
-			bind:this={leftWrapperEl}
 			class="my-auto flex min-h-0 flex-col content-center items-start justify-center gap-5 self-center text-left md:relative md:h-screen md:gap-8"
 		>
 			<div bind:this={leftSwapEl} class="">
@@ -241,12 +270,16 @@
 					<SummaryComponent {...renderedLeftProps as any} />
 				{:else}
 					<h2
-						class="mb-5 block font-mono text-4xl font-semibold text-wrap wrap-break-word text-primary-500 text-shadow-lg/60 text-shadow-primary-800/60 md:mb-5 md:text-6xl"
+						class="mb-5 block text-center font-mono text-4xl font-semibold text-wrap wrap-break-word text-primary-500 text-shadow-lg/60 text-shadow-primary-800/60 md:text-left md:text-6xl"
 					>
 						{header}
 					</h2>
 					{#if summary}
-						<p class="block text-lg font-thin text-text md:text-xl">{summary}</p>
+						<p
+							class="block px-1 text-center text-lg font-thin text-text md:px-0 md:text-left md:text-xl"
+						>
+							{summary}
+						</p>
 					{/if}
 				{/if}
 			</div>
