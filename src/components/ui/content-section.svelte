@@ -89,7 +89,7 @@
 			all.forEach((el) => {
 				if (el === active) {
 					(el as HTMLElement).style.pointerEvents = 'auto';
-					(el as HTMLElement).style.zIndex = '1000';
+					(el as HTMLElement).style.zIndex = '1';
 				} else {
 					(el as HTMLElement).style.pointerEvents = 'none';
 					(el as HTMLElement).style.zIndex = '-1';
@@ -157,7 +157,11 @@
 				return;
 			}
 
-			gsap.set(leftWrapperEl, { autoAlpha: 0, zIndex: -1, pointerEvents: 'none' });
+			gsap.set(leftWrapperEl, {
+				autoAlpha: 0,
+				zIndex: -1,
+				pointerEvents: 'none'
+			});
 			scrollTrigger = ScrollTrigger.create({
 				trigger: sectionEl,
 				// Only show this section's summary while the viewport center is within range.
@@ -171,7 +175,7 @@
 					enforceSingleActive(leftWrapperEl);
 					gsap.to(leftWrapperEl, {
 						autoAlpha: 1,
-						zIndex: 1000,
+						zIndex: 1,
 						pointerEvents: 'auto',
 						duration: 0.75,
 						ease: 'power2.out'
@@ -181,7 +185,7 @@
 					enforceSingleActive(leftWrapperEl);
 					gsap.to(leftWrapperEl, {
 						autoAlpha: 1,
-						zIndex: 1000,
+						zIndex: 1,
 						pointerEvents: 'auto',
 						duration: 0.75,
 						ease: 'power2.out'
@@ -225,7 +229,11 @@
 		setupScroll();
 
 		if (isMdUp) {
-			gsap.to(leftWrapperEl, { autoAlpha: 0, zIndex: -1, pointerEvents: 'none' });
+			gsap.to(leftWrapperEl, {
+				autoAlpha: 0,
+				zIndex: -1,
+				pointerEvents: 'none'
+			});
 		}
 
 		// Keep ScrollTrigger state consistent if viewport crosses md breakpoint
@@ -255,7 +263,12 @@
 	class="content-width section-content mx-auto mt-50 grid grid-cols-1 overflow-visible p-5 sm:gap-2 md:mt-0 md:grid-cols-2 md:gap-5 md:p-10 lg:gap-10"
 >
 	<!-- Left column: summary (default) or detail (when item selected) -->
-	<div class="section-summary relative hidden h-fit w-full text-bg md:block md:h-full">.</div>
+	<!-- <div
+		aria-hidden="true"
+		class="section-summary grid-row relative hidden h-fit w-full text-bg opacity-0 md:block md:h-full"
+	>
+		.
+	</div> -->
 	<div
 		bind:this={leftWrapperEl}
 		class="section-summary relative h-fit w-full self-center overflow-hidden md:fixed md:top-0 md:bottom-0 md:left-0 md:ml-[5%] md:h-full md:max-w-[45vw] lg:ml-8"
@@ -288,10 +301,12 @@
 
 	<!-- Right column: content (optionally with selection context) -->
 	<div
-		class="section-content flex h-full min-h-0 w-full flex-col items-center justify-center gap-5 overflow-visible text-left text-white md:w-full"
+		class="section-content col-span-1 col-start-1 flex h-full min-h-0 w-full flex-col items-center justify-center gap-5 overflow-visible text-left text-white md:col-span-1 md:col-start-2 md:w-full md:gap-8"
 	>
 		{#if ContentComponent}
-			<div class="m-0 flex min-h-0 w-full flex-1 flex-col justify-center overflow-visible p-0">
+			<div
+				class="content-component-wrapper m-0 flex min-h-0 w-full flex-1 justify-center overflow-visible p-0"
+			>
 				{#if isInteractive}
 					<ContentComponent
 						{...{

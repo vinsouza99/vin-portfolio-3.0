@@ -94,6 +94,16 @@ body {
 .nav-mask {
 	background: linear-gradient(to bottom, var(--color-bg) 25%, transparent);
 }
+.fade-scroll-mask {
+	background: linear-gradient(
+		to bottom,
+		var(--color-bg) 0%,
+		transparent 25%,
+		transparent 75%,
+		var(--color-bg) 100%
+	);
+}
+
 .section-summary {
 	padding: 2rem;
 	padding-right: 0;
@@ -118,6 +128,13 @@ body {
 	.section-summary {
 		padding: 0rem;
 	}
+	#contact .section-content {
+		padding: 0;
+		overflow: scroll;
+	}
+}
+#contact .content-component-wrapper {
+	flex-direction: row;
 }
 .holographic-button {
 	position: relative;
@@ -150,4 +167,22 @@ body {
 }
 .external_link:hover {
 	@apply text-primary-500 underline;
+}
+
+:global(input:-webkit-autofill),
+:global(textarea:-webkit-autofill),
+:global(select:-webkit-autofill),
+:global(input:-webkit-autofill:hover),
+:global(textarea:-webkit-autofill:hover),
+:global(select:-webkit-autofill:hover),
+:global(input:-webkit-autofill:focus),
+:global(textarea:-webkit-autofill:focus),
+:global(select:-webkit-autofill:focus) {
+	-webkit-text-fill-color: var(--color-text) !important;
+	background-color: transparent !important;
+	box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.12) !important;
+	background-clip: content-box !important;
+	transition:
+		background-color 9999s ease-out 0s,
+		color 9999s ease-out 0s;
 }

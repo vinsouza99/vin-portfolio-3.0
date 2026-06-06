@@ -58,7 +58,7 @@
 				},
 				// If we're past the section enough that the sticky would have to move, fade out immediately.
 				onLeave: () => {
-					gsap.to(leftWrapperEl, { autoAlpha: 0, zIndex: -1, duration: 0.5, ease: 'power2.out' });
+					gsap.to(leftWrapperEl, { autoAlpha: 0, zIndex: 1000, duration: 0.5, ease: 'power2.out' });
 				}
 			});
 
@@ -88,9 +88,8 @@
 	bind:this={sectionEl}
 	class="content-section content-width z-1000 mx-auto grid h-full min-h-screen grid-cols-1 bg-bg p-5 sm:gap-2 md:grid-cols-2 md:gap-5 md:p-10 lg:gap-10"
 >
-	<div class="section-summary relative hidden h-fit w-full text-bg md:block md:h-full"></div>
 	<div
-		class="section-summary relative h-fit w-full self-center md:fixed md:top-0 md:bottom-0 md:left-0 md:ml-8 md:h-full md:max-w-[48vw]"
+		class="section-summary relative h-fit w-full self-center md:fixed md:top-80 md:bottom-0 md:left-0 md:ml-8 md:h-full md:max-w-[48vw]"
 	>
 		<div
 			bind:this={leftWrapperEl}

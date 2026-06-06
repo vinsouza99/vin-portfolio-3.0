@@ -46,11 +46,11 @@
 	};
 </script>
 
-<div class="flex">
+<div class="relative flex w-full overflow-hidden">
 	<!--Filter by tags -->
-	<div class="w-full">
+	<div class=" w-full overflow-scroll">
 		<ul
-			class="m-0 flex w-full list-none flex-row flex-nowrap items-end gap-5 overflow-visible p-5 md:flex-col md:p-0"
+			class=" m-0 flex w-full list-none flex-row flex-nowrap items-end gap-5 overflow-visible p-5 md:flex-col md:p-0"
 		>
 			{#each visibleWorks as work (work.id)}
 				<li
@@ -107,4 +107,7 @@
 			{/if}
 		</ul>
 	</div>
+	<div
+		class="pointer-events-none absolute top-0 right-0 bottom-0 w-50 bg-linear-to-r from-transparent to-bg md:hidden"
+	></div>
 </div>

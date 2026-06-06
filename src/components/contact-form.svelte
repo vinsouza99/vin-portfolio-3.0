@@ -150,7 +150,7 @@
 </ToastContainer>
 <form
 	on:submit={submitForm}
-	class="glass-container flex max-w-xl flex-col space-y-1 divide-y divide-secondary-200/10 rounded-2xl p-5"
+	class="glass-container w-full max-w-xl flex-col space-y-1 divide-y divide-secondary-200/10 rounded-2xl p-5"
 >
 	{#if formStatus === 'success'}
 		<Toast>
@@ -233,3 +233,13 @@
 		</Button>
 	</div>
 </form>
+
+<style>
+	:global(input:-webkit-autofill),
+	:global(textarea:-webkit-autofill),
+	:global(select:-webkit-autofill) {
+		-webkit-text-fill-color: var(--text-text) !important;
+		box-shadow: inset 0 0 0 1000px rgba(255, 255, 255, 0.05) !important;
+		background-color: transparent !important;
+	}
+</style>
