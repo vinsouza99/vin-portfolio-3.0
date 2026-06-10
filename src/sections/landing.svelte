@@ -36,37 +36,65 @@
 
 			if (!sectionEl || !leftWrapperEl) return;
 			if (!isMdUp) {
-				gsap.set(leftWrapperEl, { clearProps: 'opacity,zIndex,position' });
+				gsap.set(leftWrapperEl, { clearProps: 'all' });
 				return;
 			}
 
-			gsap.set(leftWrapperEl, { autoAlpha: 0, zIndex: 1000 });
+			gsap.set(leftWrapperEl, { autoAlpha: 0, zIndex: -1, pointerEvents: 'none' });
 			scrollTrigger = ScrollTrigger.create({
 				trigger: sectionEl,
 				// Only show this section's summary while the viewport center is within range.
 				// This prevents two adjacent sections from both showing their sticky summary at once.
-				start: 'top top',
+				start: 'top center-=5%',
 				endTrigger: endTrigger || undefined,
 				// When `endTrigger` is another section, fade out when that other section's
 				// top crosses 10px above the viewport bottom.
-				end: endTrigger ? 'top bottom-=50%' : 'bottom center-=10%',
+				end: endTrigger ? 'top bottom-=40%' : 'bottom center-=10%',
 				onEnter: () => {
-					gsap.to(leftWrapperEl, { autoAlpha: 1, zIndex: 1000, duration: 0.5, ease: 'power2.out' });
+					gsap.to(leftWrapperEl, {
+						autoAlpha: 1,
+						zIndex: 1000,
+						pointerEvents: 'auto',
+						duration: 0.5,
+						ease: 'power2.out'
+					});
 				},
 				onEnterBack: () => {
-					gsap.to(leftWrapperEl, { autoAlpha: 1, zIndex: 1000, duration: 0.5, ease: 'power2.out' });
+					gsap.to(leftWrapperEl, {
+						autoAlpha: 1,
+						zIndex: 1000,
+						pointerEvents: 'auto',
+						duration: 0.5,
+						ease: 'power2.out'
+					});
 				},
-				// If we're past the section enough that the sticky would have to move, fade out immediately.
 				onLeave: () => {
-					gsap.to(leftWrapperEl, { autoAlpha: 0, zIndex: 1000, duration: 0.5, ease: 'power2.out' });
+					gsap.to(leftWrapperEl, {
+						autoAlpha: 0,
+						zIndex: -1,
+						pointerEvents: 'none',
+						duration: 0.5,
+						ease: 'power2.out'
+					});
+				},
+				onLeaveBack: () => {
+					gsap.to(leftWrapperEl, {
+						autoAlpha: 0,
+						zIndex: -1,
+						pointerEvents: 'none',
+						duration: 0.5,
+						ease: 'power2.out'
+					});
 				}
 			});
 
 			// Refresh ScrollTrigger to ensure trigger positions are accurate
 			ScrollTrigger.refresh();
 
-			// Manually trigger fade-in on initial load since the landing section is already in view
-			gsap.to(leftWrapperEl, { autoAlpha: 1, zIndex: 1000, duration: 0.5, ease: 'power2.out' });
+			// Set initial state: landing is already visible on page load, so show it immediately
+			if (scrollTrigger.isActive) {
+				gsap.set(leftWrapperEl, { autoAlpha: 1, zIndex: 1000, pointerEvents: 'auto' });
+			}
 		};
 
 		setupScroll();
@@ -86,10 +114,10 @@
 <section
 	id="landing"
 	bind:this={sectionEl}
-	class="content-section content-width z-1000 mx-auto grid h-full min-h-screen grid-cols-1 bg-bg p-5 sm:gap-2 md:grid-cols-2 md:gap-5 md:p-10 lg:gap-10"
+	class="content-section content-width mx-auto grid h-full min-h-screen grid-cols-1 p-5 sm:gap-2 md:grid-cols-2 md:gap-5 md:p-10 lg:gap-10"
 >
 	<div
-		class="section-summary relative h-fit w-full self-center md:fixed md:top-80 md:bottom-0 md:left-0 md:ml-8 md:h-full md:max-w-[48vw]"
+		class="section-summary relative h-full w-full self-center md:fixed md:top-0 md:bottom-0 md:left-0 md:ml-8 md:h-full md:max-w-[48vw]"
 	>
 		<div
 			bind:this={leftWrapperEl}
