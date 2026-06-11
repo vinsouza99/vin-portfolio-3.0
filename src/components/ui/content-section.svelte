@@ -81,6 +81,7 @@
 	let sectionEl: HTMLElement | null = null;
 	let leftWrapperEl: HTMLDivElement | null = null; // sticky wrapper (md+)
 	let leftSwapEl: HTMLDivElement | null = null; // fades on content replacement
+	let isFixedReady = $state(false);
 
 	// Ensure only one fixed summary wrapper can receive pointer events at a time
 	const enforceSingleActive = (active: HTMLElement | null) => {
@@ -153,10 +154,12 @@
 
 			if (!sectionEl || !leftWrapperEl) return;
 			if (!isMdUp) {
+				isFixedReady = false;
 				gsap.set(leftWrapperEl, { clearProps: 'all' });
 				return;
 			}
 
+			isFixedReady = true;
 			gsap.set(leftWrapperEl, {
 				autoAlpha: 0,
 				zIndex: -1,
@@ -271,10 +274,12 @@
 	</div> -->
 	<div
 		bind:this={leftWrapperEl}
-		class="section-summary relative h-fit w-full self-center overflow-hidden md:fixed md:top-0 md:bottom-0 md:left-0 md:ml-[5%] md:h-full md:max-w-[45vw] lg:ml-8"
+		class={isFixedReady
+			? 'section-summary relative h-fit w-full self-center overflow-hidden md:fixed md:top-0 md:bottom-0 md:left-0 md:ml-[5%] md:h-full md:max-w-[45vw] lg:ml-8'
+			: 'section-summary relative h-fit w-full self-center overflow-hidden md:sticky md:top-0 md:ml-[5%] md:h-full md:max-w-[45vw] lg:ml-8'}
 	>
 		<div
-			class="my-auto flex min-h-0 flex-col content-center items-start justify-center gap-5 self-center text-left md:relative md:h-screen md:gap-8"
+			class="my-auto flex min-h-0 flex-col content-center items-center justify-center gap-5 self-center text-left md:relative md:h-screen md:items-start md:gap-8"
 		>
 			<div bind:this={leftSwapEl} class="">
 				{#if renderedLeftKind === 'detail' && DetailComponent}

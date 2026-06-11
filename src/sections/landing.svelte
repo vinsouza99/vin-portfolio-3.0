@@ -16,6 +16,7 @@
 
 	let { endTrigger = null }: Props = $props(); // Use the interface directly here
 	let isMdUp = $state(false);
+	let isFixedReady = $state(false);
 	let sectionEl: HTMLElement | null = null;
 	let leftWrapperEl: HTMLElement | null = null;
 	let scrollTrigger: ScrollTrigger | null = null;
@@ -36,10 +37,12 @@
 
 			if (!sectionEl || !leftWrapperEl) return;
 			if (!isMdUp) {
+				isFixedReady = false;
 				gsap.set(leftWrapperEl, { clearProps: 'all' });
 				return;
 			}
 
+			isFixedReady = true;
 			gsap.set(leftWrapperEl, { autoAlpha: 0, zIndex: -1, pointerEvents: 'none' });
 			scrollTrigger = ScrollTrigger.create({
 				trigger: sectionEl,
@@ -114,22 +117,23 @@
 <section
 	id="landing"
 	bind:this={sectionEl}
-	class="content-section content-width mx-auto grid h-full min-h-screen grid-cols-1 p-5 sm:gap-2 md:grid-cols-2 md:gap-5 md:p-10 lg:gap-10"
+	class="content-section content-width mx-auto grid h-full min-h-screen grid-cols-1 p-5 sm:gap-2 md:grid-cols-2 md:gap-5 md:p-10 md:pl-0 lg:gap-10"
 >
 	<div
-		class="section-summary relative h-full w-full self-center md:fixed md:top-0 md:bottom-0 md:left-0 md:ml-8 md:h-full md:max-w-[48vw]"
+		class={isFixedReady
+			? 'section-summary relative flex h-full w-full justify-center self-center md:fixed md:top-0 md:bottom-0 md:left-0 md:ml-8 md:h-full md:max-w-[48vw] md:justify-start'
+			: 'section-summary relative flex  h-full w-full justify-center self-center md:ml-8 md:h-full md:max-w-[48vw] md:justify-start'}
 	>
 		<div
 			bind:this={leftWrapperEl}
 			class="flex flex-col content-center justify-center gap-5 text-left font-mono text-primary-500 text-shadow-lg/60 text-shadow-primary-800/60 md:sticky md:top-80 md:gap-8"
 		>
-			<p class="text-medium block md:text-xl">{t($language, 'landing.hello')}</p>
-			<h2 class="block text-5xl font-semibold md:text-6xl">
+			<p class="block text-center text-xl md:text-left">{t($language, 'landing.hello')}</p>
+			<h2 class="block text-center text-6xl font-semibold md:text-left md:text-6xl">
 				{t($language, 'landing.intro')}
 				<span class="text-[#dbefec] text-shadow-lg/60 text-shadow-[#dbefec]/60">Vin</span>
 			</h2>
-			<p class="text-medium block md:text-xl">{t($language, 'landing.role')}</p>
-			<p></p>
+			<p class="block text-center text-xl md:text-left">{t($language, 'landing.role')}</p>
 		</div>
 	</div>
 	{#if !isMdUp}
