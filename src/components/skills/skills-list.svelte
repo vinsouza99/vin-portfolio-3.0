@@ -26,7 +26,7 @@
 	};
 </script>
 
-<div class="flex flex-col gap-5 overflow-visible md:h-[110vh]">
+<div class="flex w-full flex-col gap-5 overflow-visible md:h-[110vh]">
 	<!--Filter by tags -->
 	<div class="flex flex-wrap gap-1 overflow-visible md:gap-3">
 		{#each tags as tag (tag)}
@@ -61,7 +61,7 @@
 		</Input>
 	</div>
 
-	<div class="glass-container glowing-shadow min-h-[55vh] rounded-2xl p-5 md:p-10">
+	<div class="glass-container glowing-shadow min-h-[55vh] w-full rounded-2xl p-5 md:p-10">
 		{#if filteredSkills.length === 0}
 			<p
 				class="block h-full w-full content-center self-center text-center text-lg font-thin text-text/50"

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { setContext } from 'svelte';
 	import { Footer, FooterCopyright, FooterIcon, ButtonGroup, Button } from 'flowbite-svelte';
 	import { GithubSolid, LinkedinSolid } from 'flowbite-svelte-icons';
 	import { getLanguageContext, type Locale } from '$lib/i18n';
@@ -8,6 +9,7 @@
 
 	const setLocale = async (locale: Locale) => {
 		language.set(locale);
+		setContext('language', locale);
 		await fetch('/api/locale', {
 			method: 'POST',
 			headers: { 'content-type': 'application/json' },

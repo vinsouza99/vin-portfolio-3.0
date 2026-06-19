@@ -50,11 +50,11 @@
 	<!--Filter by tags -->
 	<div class=" w-full overflow-scroll">
 		<ul
-			class=" m-0 flex w-full list-none flex-row flex-nowrap items-end gap-5 overflow-visible p-5 md:flex-col md:p-0"
+			class=" m-0 flex w-full list-none flex-row flex-nowrap items-end justify-start gap-1 overflow-visible p-5 md:flex-col md:gap-5 md:p-0"
 		>
 			{#each visibleWorks as work (work.id)}
 				<li
-					class="m-1 w-full min-w-[70%] flex-1 justify-self-end overflow-visible p-0 transition-all ease-in-out md:max-w-[95%] md:hover:translate-x-[-1%] {selectedItem?.id ===
+					class="m-1 h-full! w-full flex-1 self-stretch justify-self-end overflow-visible p-0 transition-all ease-in-out md:max-w-[95%] md:hover:translate-x-[-1%] {selectedItem?.id ===
 						work.id && 'translate-x-[-1%]'}"
 				>
 					<PortfolioItem

@@ -20,7 +20,6 @@ export const jobs: Job[] = [
 			'React Native',
 			'Python',
 			'Azure',
-			'ROS',
 			'Git',
 			'Agile',
 			'System Design',

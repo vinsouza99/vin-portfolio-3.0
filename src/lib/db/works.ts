@@ -6,16 +6,7 @@ export const works: Work[] = [
 		title: 'CURRENT AI',
 		url: 'https://current-ai.com/',
 		coverPath: '/images/cai.png',
-		tags: [
-			'React',
-			'Python',
-			'ROS',
-			'Tailwind',
-			'TypeScript',
-			'React Native',
-			'System Design',
-			'Docker'
-		],
+		tags: ['React', 'Python', 'Tailwind', 'TypeScript', 'React Native', 'System Design', 'Docker'],
 		startYear: 2025,
 		endYear: 2026,
 		shortDescription:
