@@ -81,7 +81,61 @@
 	let sectionEl: HTMLElement | null = null;
 	let leftWrapperEl: HTMLDivElement | null = null; // sticky wrapper (md+)
 	let leftSwapEl: HTMLDivElement | null = null; // fades on content replacement
+	let headingEl = $state<HTMLHeadingElement | null>(null);
+	let summaryEl = $state<HTMLParagraphElement | null>(null);
 	let isFixedReady = $state(false);
+
+	const SCRAMBLE_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+	const randomScrambleChar = () =>
+		SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
+
+	const scrambleIn = (element: HTMLElement | null, targetText: string, duration = 0.75) => {
+		if (!element) return null;
+		const length = targetText.length;
+		const state = { progress: 0 };
+		return gsap.to(state, {
+			progress: 1,
+			duration,
+			ease: 'none',
+			onUpdate: () => {
+				const progress = state.progress;
+				const revealCount = Math.floor(progress * length);
+				let output = '';
+				for (let i = 0; i < length; i += 1) {
+					if (i < revealCount) {
+						output += targetText[i];
+					} else {
+						output += targetText[i] === ' ' ? ' ' : randomScrambleChar();
+					}
+				}
+				element.textContent = output;
+			},
+			onComplete: () => {
+				element.textContent = targetText;
+			}
+		});
+	};
+
+	const scrambleOut = (element: HTMLElement | null, duration = 0.5) => {
+		if (!element) return null;
+		const length = (element.textContent ?? '').length;
+		const state = { progress: 0 };
+		return gsap.to(state, {
+			progress: 1,
+			duration,
+			ease: 'none',
+			onUpdate: () => {
+				let output = '';
+				for (let i = 0; i < length; i += 1) {
+					output += Math.random() < state.progress ? ' ' : randomScrambleChar();
+				}
+				element.textContent = output;
+			},
+			onComplete: () => {
+				element.textContent = '';
+			}
+		});
+	};
 
 	// Ensure only one fixed summary wrapper can receive pointer events at a time
 	const enforceSingleActive = (active: HTMLElement | null) => {
@@ -183,6 +237,13 @@
 						duration: 0.75,
 						ease: 'power2.out'
 					});
+					if (renderedLeftKind === 'default') {
+						gsap.killTweensOf([headingEl, summaryEl]);
+						scrambleIn(headingEl, header, 0.6);
+						if (summary) {
+							scrambleIn(summaryEl, summary, 0.6);
+						}
+					}
 				},
 				onEnterBack: () => {
 					enforceSingleActive(leftWrapperEl);
@@ -193,11 +254,25 @@
 						duration: 0.75,
 						ease: 'power2.out'
 					});
+					if (renderedLeftKind === 'default') {
+						gsap.killTweensOf([headingEl, summaryEl]);
+						scrambleIn(headingEl, header, 0.6);
+						if (summary) {
+							scrambleIn(summaryEl, summary, 0.6);
+						}
+					}
 				},
 				// If we're past the section enough that the sticky would have to move, fade out immediately.
 				onLeave: () => {
 					// hide this wrapper and ensure others are disabled as well
 					enforceSingleActive(null);
+					gsap.killTweensOf([headingEl, summaryEl]);
+					if (renderedLeftKind === 'default') {
+						scrambleOut(headingEl, 0.4);
+						if (summary) {
+							scrambleOut(summaryEl, 0.5);
+						}
+					}
 					gsap.to(leftWrapperEl, {
 						autoAlpha: 0,
 						zIndex: -1,
@@ -212,6 +287,13 @@
 				onLeaveBack: () => {
 					// hide this wrapper and ensure others are disabled as well
 					enforceSingleActive(null);
+					gsap.killTweensOf([headingEl, summaryEl]);
+					if (renderedLeftKind === 'default') {
+						scrambleOut(headingEl, 0.4);
+						if (summary) {
+							scrambleOut(summaryEl, 0.5);
+						}
+					}
 					gsap.to(leftWrapperEl, {
 						autoAlpha: 0,
 						zIndex: -1,
@@ -288,12 +370,14 @@
 					<SummaryComponent {...renderedLeftProps as any} />
 				{:else}
 					<h2
+						bind:this={headingEl}
 						class="mb-5 block text-center font-mono text-4xl font-semibold text-wrap wrap-break-word text-primary-500 text-shadow-lg/60 text-shadow-primary-800/60 md:text-left md:text-6xl"
 					>
 						{header}
 					</h2>
 					{#if summary}
 						<p
+							bind:this={summaryEl}
 							class="block px-1 text-center text-lg font-thin text-text md:px-0 md:text-left md:text-xl"
 						>
 							{summary}

@@ -39,9 +39,9 @@ export const works: Work[] = [
 		title: "Seb's Portfolio",
 		coverPath: '/images/seb-richardson.png',
 		url: 'https://sebrichardson.ca/',
-		tags: ['Svelte', 'Tailwind CSS', 'GSAP', 'JavaScript'],
+		tags: ['HTML', 'CSS', 'JavaScript', 'Svelte', 'Tailwind CSS', 'GSAP'],
 		startYear: 2025,
-		shortDescription: `A freelance project for a talented UI/UX designer.`,
+		shortDescription: `A freelance project for a talented UI/UX designer. Beautifully designed in Figma, I was hired to bring this portfolio to life. I took the opportunity to deepen my knowledge of Svelte, TailwindCSS, and GSAP.`,
 		longDescription: `I was hired to do one of my favourite things ever: bring a Figma mockup to life. I took the opportunity to deepen my knowledge of <strong>Svelte</strong>, <strong>TailwindCSS</strong>, and <strong>GSAP</strong>. <br/><br/>As any developer that has implemented a design of a talented UI/UX designer before might imagine, it was a challenge to make a fully functional yet pixel-perfect version of this portfolio (but that just added to the fun!).`
 	}
 ];

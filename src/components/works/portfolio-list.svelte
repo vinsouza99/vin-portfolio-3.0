@@ -3,15 +3,16 @@
 	import type { Work } from '$lib/models/work';
 	import { works } from '$lib/db/works';
 	import type { ContentProps } from '$lib/models/content-section-content-props';
-	import { tick } from 'svelte';
+	import { onMount, tick } from 'svelte';
 
 	let { selectedItem = null, onSelect, onDeselect }: ContentProps<Work> = $props();
 
-	const INITIAL_VISIBLE_COUNT = 3;
+	const INITIAL_VISIBLE_COUNT = 10;
 	const visibleWorks = $derived(works.slice(0, INITIAL_VISIBLE_COUNT));
 	const remainingWorks = $derived(works.slice(INITIAL_VISIBLE_COUNT));
 
-	let isExpanded = $state(false);
+	let isMdUp = $state(false);
+	let isExpanded = $state(true);
 	let remainingContainer = $state<HTMLDivElement | null>(null);
 	let remainingHeight = $state('0px');
 
@@ -44,6 +45,26 @@
 		if (!remainingContainer) return;
 		if (isExpanded) remainingHeight = 'auto';
 	};
+
+	onMount(() => {
+		const mq = window.matchMedia('(min-width: 768px)');
+		const updateMq = () => {
+			isMdUp = mq.matches;
+
+			if (isMdUp) {
+				isExpanded = false;
+				remainingHeight = '0px';
+			} else {
+				isExpanded = true;
+				remainingHeight = 'auto';
+			}
+		};
+		updateMq();
+		mq.addEventListener('change', updateMq);
+		return () => {
+			mq.removeEventListener('change', updateMq);
+		};
+	});
 </script>
 
 <div class="relative flex w-full overflow-hidden">
@@ -52,6 +73,11 @@
 		<ul
 			class=" m-0 flex w-full list-none flex-row flex-nowrap items-end justify-start gap-1 overflow-visible p-5 md:flex-col md:gap-5 md:p-0"
 		>
+			{#if !isMdUp}
+				<li
+					class="m-1 h-full! w-[25vw] flex-1 self-stretch justify-self-end overflow-visible p-0"
+				></li>
+			{/if}
 			{#each visibleWorks as work (work.id)}
 				<li
 					class="m-1 h-full! w-full flex-1 self-stretch justify-self-end overflow-visible p-0 transition-all ease-in-out md:max-w-[95%] md:hover:translate-x-[-1%] {selectedItem?.id ===
@@ -79,7 +105,7 @@
 						>
 							{#each remainingWorks as work (work.id)}
 								<li
-									class="w-full min-w-[70%] flex-1 justify-self-end overflow-visible p-0 transition-all ease-in-out md:max-w-[95%] md:hover:translate-x-[-1%] {selectedItem?.id ===
+									class="m-1 h-full! w-full flex-1 self-stretch justify-self-end overflow-visible p-0 transition-all ease-in-out md:max-w-[95%] md:hover:translate-x-[-1%] {selectedItem?.id ===
 										work.id && 'translate-x-[-1%]'}"
 								>
 									<PortfolioItem
@@ -89,6 +115,11 @@
 									/>
 								</li>
 							{/each}
+							{#if !isMdUp}
+								<li
+									class="m-1 h-full! w-[25vw] flex-1 self-stretch justify-self-end overflow-visible p-0"
+								></li>
+							{/if}
 						</ul>
 					</div>
 					{#if !isExpanded}

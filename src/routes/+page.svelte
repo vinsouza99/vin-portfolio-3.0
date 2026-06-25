@@ -7,9 +7,13 @@
 	import Contact from '../sections/contact.svelte';
 </script>
 
-<Landing endTrigger="#skills" />
-<Skills endTrigger="#works" />
-<Works endTrigger="#career" />
-<Career endTrigger="#education" />
-<Education endTrigger="#contact" />
-<Contact />
+<div id="smooth-wrapper" class="m-0 p-0">
+	<div id="smooth-content" class="m-0 p-0">
+		<Landing endTrigger="#skills" />
+		<Skills endTrigger="#works" />
+		<Works endTrigger="#career" />
+		<Career endTrigger="#education" />
+		<Education endTrigger="#contact" />
+		<Contact />
+	</div>
+</div>
