@@ -43,7 +43,10 @@
 		<div
 			class="pointer-events-none flex flex-1 grow-2 flex-col justify-start gap-5 px-3 py-3 @md:gap-1 @md:px-2 @md:py-5"
 		>
-			<h3 class="flex text-left font-mono text-lg text-primary-600">{work.title}</h3>
+			<div class="flex justify-between">
+				<h3 class="flex text-left font-mono text-lg text-primary-600">{work.title}</h3>
+				<span class="text-sm font-thin text-text/50! italic">{work.platforms?.join(', ')}</span>
+			</div>
 			<p
 				class="truncate-text flex h-full max-h-20 grow overflow-hidden text-left text-sm font-thin text-secondary-300/80 @md:max-h-full"
 			>

@@ -209,7 +209,7 @@
 			if (!sectionEl || !leftWrapperEl) return;
 			if (!isMdUp) {
 				isFixedReady = false;
-				gsap.set(leftWrapperEl, { clearProps: 'all' });
+				gsap.set(leftWrapperEl, { clearProps: 'all', autoAlpha: 1, pointerEvents: 'auto' });
 				return;
 			}
 
@@ -378,7 +378,7 @@
 					{#if summary}
 						<p
 							bind:this={summaryEl}
-							class="block px-1 text-center text-lg font-thin text-text md:px-0 md:text-left md:text-xl"
+							class="mx-auto block max-w-[75%] px-1 text-center text-lg font-thin text-text md:px-0 md:text-left md:text-xl lg:max-w-full"
 						>
 							{summary}
 						</p>

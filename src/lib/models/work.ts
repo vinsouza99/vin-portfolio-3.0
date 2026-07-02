@@ -6,6 +6,7 @@ export interface Work extends Milestone {
 	shortDescription: string;
 	longDescription?: string;
 	endYear?: number;
+	platforms?: string[];
 	tags?: string[]; // Optional tags for categorization
 	category?: string; // Optional category for filtering
 }

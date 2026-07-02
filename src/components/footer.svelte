@@ -9,12 +9,13 @@
 
 	const setLocale = async (locale: Locale) => {
 		language.set(locale);
-		setContext('language', locale);
 		await fetch('/api/locale', {
 			method: 'POST',
 			headers: { 'content-type': 'application/json' },
 			body: JSON.stringify({ locale })
 		});
+		setContext('language', locale);
+		window.location.reload();
 	};
 </script>
 

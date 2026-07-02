@@ -26,7 +26,7 @@
 	};
 </script>
 
-<div class="flex w-full flex-col gap-5 overflow-visible md:h-[110vh]">
+<div class=" flex w-full flex-col gap-5 overflow-visible md:h-[110vh]">
 	<!--Filter by tags -->
 	<div class="flex flex-wrap gap-1 overflow-visible md:gap-3">
 		{#each tags as tag (tag)}

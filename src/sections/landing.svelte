@@ -4,6 +4,8 @@
 	import gsap from 'gsap';
 	import ScrollTrigger from 'gsap/ScrollTrigger';
 
+	const yearsOfExperience = new Date().getFullYear() - 2021;
+
 	const language = getLanguageContext();
 	interface Props {
 		/**
@@ -290,12 +292,14 @@
 		></div>
 	{:else}
 		<div
-			class="section-content col-start-2 float-right h-full w-125 content-center items-center justify-center gap-5 text-left align-middle text-xl/8 font-thin text-text/90 md:flex-col"
+			class="section-content col-start-2 float-right h-full content-center items-center justify-center gap-5 overflow-hidden text-left align-middle text-xl/8 font-thin text-text/90 md:flex-col"
 		>
-			I bring about 5 years of experience building thoughtful web and mobile experiences using
-			modern languages, frameworks, and cloud tooling. I love how web development balances technical
-			precision with creative play, and as an amateur artist I enjoy turning smart architecture and
-			polished UI into projects that feel both professional and fun
+			<p class="w-full max-w-125">
+				I bring about {yearsOfExperience} years of experience building thoughtful web and mobile experiences
+				using modern languages, frameworks, and cloud tooling. I love how web development balances technical
+				precision with creative play, and as an amateur artist I enjoy turning smart architecture and
+				polished UI into projects that feel both professional and fun
+			</p>
 		</div>
 	{/if}
 </section>

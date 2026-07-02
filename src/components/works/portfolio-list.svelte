@@ -68,7 +68,6 @@
 </script>
 
 <div class="relative flex w-full overflow-hidden">
-	<!--Filter by tags -->
 	<div class=" w-full overflow-scroll">
 		<ul
 			class=" m-0 flex w-full list-none flex-row flex-nowrap items-end justify-start gap-1 overflow-visible p-5 md:flex-col md:gap-5 md:p-0"
@@ -80,8 +79,8 @@
 			{/if}
 			{#each visibleWorks as work (work.id)}
 				<li
-					class="m-1 h-full! w-full flex-1 self-stretch justify-self-end overflow-visible p-0 transition-all ease-in-out md:max-w-[95%] md:hover:translate-x-[-1%] {selectedItem?.id ===
-						work.id && 'translate-x-[-1%]'}"
+					class="m-1 h-full! w-full flex-1 self-stretch justify-self-end overflow-visible p-0 transition-all ease-in-out md:max-w-[95%] lg:hover:translate-x-[-1%] {selectedItem?.id ===
+						work.id && 'lg:translate-x-[-1%]'}"
 				>
 					<PortfolioItem
 						{work}
@@ -105,8 +104,8 @@
 						>
 							{#each remainingWorks as work (work.id)}
 								<li
-									class="m-1 h-full! w-full flex-1 self-stretch justify-self-end overflow-visible p-0 transition-all ease-in-out md:max-w-[95%] md:hover:translate-x-[-1%] {selectedItem?.id ===
-										work.id && 'translate-x-[-1%]'}"
+									class="m-1 h-full! w-full flex-1 self-stretch justify-self-end overflow-visible p-0 transition-all ease-in-out md:max-w-[95%] lg:hover:translate-x-[-1%] {selectedItem?.id ===
+										work.id && 'lg:translate-x-[-1%]'}"
 								>
 									<PortfolioItem
 										{work}

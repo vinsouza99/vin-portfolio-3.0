@@ -113,24 +113,25 @@ body {
 	padding: 2rem;
 	padding-left: 0;
 }
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
 	.section-summary {
 		padding: 2rem;
 	}
 	.section-content {
 		padding: 1rem 0.5rem;
 	}
-	#works .section-content {
-		padding: 0;
-		overflow: scroll;
-	}
 }
-@media (max-width: 1024px) {
+@media screen and (max-width: 1024px) {
 	.section-summary {
 		padding: 0rem;
 	}
 	#contact .section-content {
 		padding: 0;
+		overflow: scroll;
+	}
+	#works .section-content {
+		padding: 2rem;
+		padding-right: 0;
 		overflow: scroll;
 	}
 }
