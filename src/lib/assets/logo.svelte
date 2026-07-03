@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+
 	interface Props {
 		// Optional explicit sizing. If omitted, the SVG will size itself to its container
 		// (contain-like) via CSS in this component.
@@ -8,7 +10,11 @@
 		glow?: boolean;
 	}
 	let { width, height, fill = '#6afff5', glow = false }: Props = $props();
-	const useContainSizing = width == null && height == null;
+	let useContainSizing: boolean = $state(false);
+	onMount(() => {
+		useContainSizing = width == null && height == null;
+	});
+	// const useContainSizing = width == null && height == null;
 </script>
 
 <svg
