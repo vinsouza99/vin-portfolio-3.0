@@ -74,15 +74,15 @@
 	});
 
 	// Form State
-	let name = '';
-	let email = '';
-	let subject = '';
-	let message = '';
+	let name = $state('');
+	let email = $state('');
+	let subject = $state('');
+	let message = $state('');
 
 	// Submission State
-	let isSubmitting = false;
-	let formStatus: 'idle' | 'success' | 'error' = 'idle';
-	let errorMessage = '';
+	let isSubmitting = $state(false);
+	let formStatus: 'idle' | 'success' | 'error' = $state('idle');
+	let errorMessage = $state('');
 
 	const submitForm = async (event: Event) => {
 		// Prevent the default HTML form submission behavior
@@ -97,27 +97,30 @@
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({ name, email, subject, message })
 			});
+			console.log('Response:', response);
 
 			const result = await response.json();
 
-			if (result.success) {
+			if (result.ok) {
 				formStatus = 'success';
 				// Clear the form fields upon success
 				name = '';
 				email = '';
 				subject = '';
 				message = '';
+				addToast('success', t($language, 'sections.contact.form.success'));
 			} else {
 				formStatus = 'error';
 				errorMessage = result.error || 'Failed to send the message.';
+				addToast('error', t($language, 'sections.contact.form.error'));
 			}
 		} catch (error) {
 			console.error(error);
 			formStatus = 'error';
 			errorMessage = 'A network error occurred. Please try again later.';
+			addToast('error', t($language, 'sections.contact.form.error'));
 		} finally {
 			isSubmitting = false;
-			addToast('success', t($language, 'sections.contact.form.success'));
 		}
 	};
 	const copyEmail = async () => {
@@ -220,7 +223,7 @@
 		<Button
 			type="submit"
 			disabled={isSubmitting}
-			class="justify-self-start-safe hover:border-px w-fit cursor-pointer text-center"
+			class="justify-self-start-safe hover:border-px w-fit cursor-pointer text-center text-text"
 			color="secondary"
 			outline
 		>

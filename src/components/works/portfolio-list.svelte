@@ -68,7 +68,7 @@
 </script>
 
 <div class="relative flex w-full overflow-hidden">
-	<div class=" w-full overflow-x-auto">
+	<div class=" custom-scrollbar w-full overflow-x-auto">
 		<ul
 			class=" fade-scroll-x-mask m-0 flex w-full list-none flex-row flex-nowrap items-end justify-start gap-1 overflow-visible p-5 md:flex-col md:gap-5 md:p-0"
 		>

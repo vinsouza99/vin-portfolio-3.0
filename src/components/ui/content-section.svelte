@@ -378,7 +378,7 @@
 					{#if summary}
 						<p
 							bind:this={summaryEl}
-							class="mx-auto block max-w-[75%] px-1 text-center text-lg font-thin text-text md:px-0 md:text-left md:text-xl lg:max-w-full"
+							class="mx-auto block max-w-[75%] px-1 text-center text-lg font-thin text-text md:mx-0 md:px-0 md:text-left md:text-xl lg:max-w-full"
 						>
 							{summary}
 						</p>

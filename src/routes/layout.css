@@ -89,6 +89,15 @@ body {
 	backdrop-filter: url(#glass);
 	box-shadow: 0 1px 15px rgba(102, 192, 255, 0.3);
 }
+.hover-bg-glow {
+	backdrop-filter: url(#glass);
+	transition: all 0.1s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+	box-shadow: 0 1px 15px rgba(102, 192, 255, 0);
+}
+.hover-bg-glow:hover {
+	backdrop-filter: url(#glass);
+	box-shadow: 0 1px 15px rgba(102, 192, 255, 0.3);
+}
 .footer-mask {
 	background: linear-gradient(to top, var(--color-bg) 50%, transparent);
 }
@@ -157,6 +166,11 @@ Retrieved 2026-07-02, License - CC BY-SA 4.0
 	.section-content {
 		padding: 1rem 0.5rem;
 	}
+
+	#works.section-content,
+	#works .section-content {
+		padding: 1rem 0rem;
+	}
 }
 @media screen and (max-width: 1024px) {
 	.section-summary {
@@ -175,32 +189,7 @@ Retrieved 2026-07-02, License - CC BY-SA 4.0
 #contact .content-component-wrapper {
 	flex-direction: row;
 }
-.holographic-button {
-	position: relative;
-	overflow: hidden;
-}
-.holographic-button::before {
-	content: '';
-	position: absolute;
-	top: -50%;
-	left: -50%;
-	width: 200%;
-	height: 200%;
-	background: linear-gradient(0deg, transparent, transparent 30%, rgba(0, 255, 255, 0.3));
-	transform: rotate(-45deg);
-	transition: all 0.5s ease;
-	opacity: 0;
-}
 
-.holographic-button:hover {
-	transform: scale(1.05);
-	box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
-}
-
-.holographic-button:hover::before {
-	opacity: 1;
-	transform: rotate(-45deg) translateY(100%);
-}
 .external_link {
 	@apply text-primary-700 transition-colors duration-75 ease-in-out;
 }

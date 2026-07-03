@@ -83,19 +83,20 @@
 				href={t($language, 'nav.resume.link')}
 				target="_blank"
 				rel="noopener noreferrer"
-				class={`holographic-button glass-button hover:bg-glow-sm cursor-pointer rounded-md border-2 bg-transparent px-4 py-1 text-xl font-thin! text-primary-800 hover:border-primary-700/50  hover:text-white ${isMenuOpen ? 'border-secondary-500 text-secondary-500' : 'border-primary-500/50'}`}
+				class={`glass-button hover-bg-glow cursor-pointer rounded-lg border-2 bg-transparent px-4 py-1 text-xl font-thin! text-primary-800  ease-in-out  hover:border-primary-700/50 hover:bg-primary-700/40  hover:text-primary-600 ${isMenuOpen ? 'border-secondary-500 text-secondary-500' : 'border-primary-500/50'}`}
 			>
 				{t($language, 'nav.resume')}
 			</a>
 
 			<button
 				type="button"
-				class="inline-flex h-9 w-9 items-center justify-center rounded-sm border border-secondary-300/10 bg-transparent text-secondary-300/50 hover:bg-secondary-500/10 hover:text-secondary-100 focus:ring-2 focus:ring-secondary-500 focus:outline-none md:hidden"
+				class={"glass-button hover-bg-glow ${isMenuOpen ? 'border-secondary-500 text-secondary-500' : 'border-primary-500/50'}` inline-flex h-10 w-10 items-center justify-center rounded-md  border-2 bg-transparent p-2 text-primary-800 hover:border-primary-700/50 hover:bg-primary-700/40 hover:text-primary-600 focus:ring-2 focus:ring-secondary-500 focus:outline-none md:hidden"}
 				aria-controls="navbar-menu"
 				aria-expanded={isMenuOpen}
 				onclick={toggleMenu}
+				title={t($language, 'nav.hamburgerLabel')}
 			>
-				<span class="sr-only">Open main menu</span>
+				<span class="sr-only">{t($language, 'nav.hamburgerLabel')}</span>
 				{#if isMenuOpen}
 					<svg
 						class="h-6 w-6"
