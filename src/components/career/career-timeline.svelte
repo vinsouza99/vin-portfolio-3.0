@@ -7,6 +7,9 @@
 	import type { ContentProps } from '$lib/models/content-section-content-props';
 	import { jobs } from '$lib/db/jobs';
 	import { isSmallScreen } from '$lib/hooks/is-small-screen';
+	import { getLanguageContext, t } from '$lib/i18n';
+
+	const language = getLanguageContext();
 
 	gsap.registerPlugin(ScrollTrigger);
 
@@ -245,7 +248,7 @@
 				<div class="col-start-2 flex flex-col items-start gap-3" style="grid-row: {i + 1};">
 					<span class="career-timeline__years font-mono text-3xl" bind:this={yearsEls[i]}
 						>{item.startYear}{item.endYear
-							? ` - ${item.endYear == Infinity ? 'present' : item.endYear}`
+							? ` - ${item.endYear == Infinity ? t($language, 'present') : item.endYear}`
 							: ''}</span
 					>
 					<div class="career-timeline__item-content" bind:this={itemEls[i]}>

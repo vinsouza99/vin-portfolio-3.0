@@ -2,12 +2,24 @@
 	import { Input, Label } from 'flowbite-svelte';
 	import { SearchOutline } from 'flowbite-svelte-icons';
 	import { skills } from '$lib/db/skills';
+	import { getLanguageContext, t } from '$lib/i18n';
 
-	// Props for the skills list
-	const tags = ['all', 'frontend', 'backend', 'devops', 'languages'];
-	let selectedTag = $state('all');
+	const language = getLanguageContext();
 
-	let filteredSkills = $state(skills); // This will hold the filtered list of skills based on search input
+	// Tag keys (used for filtering) and localized labels
+	const tagKeys = ['all', 'frontend', 'backend', 'devops', 'languages'];
+	const enTags = ['all', 'frontend', 'backend', 'devops', 'languages'];
+	const ptTags = ['todas', 'frontend', 'backend', 'devops', 'linguagens'];
+
+	// Reactive labels array based on current language
+	$: tags = $language === 'pt-BR' ? ptTags : enTags;
+
+	// Keep the selected tag as a key (language-independent)
+	let selectedTagKey = 'all';
+
+	// Filtered skills list
+	let filteredSkills = skills;
+
 	const filterSkills = (query: string) => {
 		const lowerQuery = query.toLowerCase();
 		return skills.filter(
@@ -16,28 +28,29 @@
 				skill.tags?.some((tag) => tag.toLowerCase().includes(lowerQuery))
 		);
 	};
-	const filterByTag = (tag: string) => {
-		if (tag === 'all') {
+
+	const filterByTag = (key: string) => {
+		if (key === 'all') {
 			filteredSkills = skills;
 		} else {
-			filteredSkills = skills.filter((skill) => skill.tags?.includes(tag));
+			filteredSkills = skills.filter((skill) => skill.tags?.includes(key));
 		}
-		selectedTag = tag;
+		selectedTagKey = key;
 	};
 </script>
 
 <div class=" flex w-full flex-col gap-5 overflow-visible md:h-[110vh]">
 	<!--Filter by tags -->
 	<div class="flex flex-wrap gap-1 overflow-visible md:gap-3">
-		{#each tags as tag (tag)}
+		{#each tagKeys as key, i (key)}
 			<button
 				class="cursor-pointer rounded-xl border px-5 py-2 text-sm font-thin tracking-widest transition-colors duration-200 focus:ring-2 focus:ring-secondary-500 focus:ring-offset-2 focus:outline-none
-        {selectedTag === tag
+		{selectedTagKey === key
 					? 'border border-secondary-500/50 bg-secondary-800/50 font-semibold text-white'
 					: 'border-secondary-300/10 bg-transparent text-secondary-300/50 hover:bg-secondary-500/10 hover:text-secondary-100'}"
-				onclick={() => filterByTag(tag)}
+				onclick={() => filterByTag(key)}
 			>
-				<span class="select-none">{tag}</span>
+				<span class="select-none">{tags[i]}</span>
 			</button>
 		{/each}
 	</div>
@@ -66,7 +79,7 @@
 			<p
 				class="block h-full w-full content-center self-center text-center text-lg font-thin text-text/50"
 			>
-				I haven't learned that yet!
+				{t($language, 'skills.notFound')}
 			</p>
 		{:else}
 			<ul

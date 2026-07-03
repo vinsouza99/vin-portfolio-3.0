@@ -96,12 +96,48 @@ body {
 	background: linear-gradient(to bottom, var(--color-bg) 25%, transparent);
 }
 .fade-scroll-mask {
-	background: linear-gradient(
+	/* background: linear-gradient(
 		to bottom,
 		var(--color-bg) 0%,
 		transparent 25%,
 		transparent 75%,
 		var(--color-bg) 100%
+	); */
+	/*
+Source - https://stackoverflow.com/a/9670876
+Posted by Adrian van Vliet, modified by community. See post 'Timeline' for change history
+Retrieved 2026-07-02, License - CC BY-SA 4.0
+*/
+
+	-webkit-mask-image: -webkit-gradient(
+		linear,
+		left 80%,
+		left bottom,
+		from(rgba(0, 0, 0, 1)),
+		to(rgba(0, 0, 0, 0))
+	);
+	mask-image: -webkit-gradient(
+		linear,
+		left 80%,
+		left bottom,
+		from(rgba(0, 0, 0, 1)),
+		to(rgba(0, 0, 0, 0))
+	);
+}
+.fade-scroll-x-mask {
+	-webkit-mask-image: -webkit-gradient(
+		linear,
+		left 50%,
+		left right,
+		from(rgba(0, 0, 0, 1)),
+		to(rgba(0, 0, 0, 0))
+	);
+	mask-image: -webkit-gradient(
+		linear,
+		left 50%,
+		left right,
+		from(rgba(0, 0, 0, 1)),
+		to(rgba(0, 0, 0, 0))
 	);
 }
 
@@ -112,6 +148,7 @@ body {
 .section-content {
 	padding: 2rem;
 	padding-left: 0;
+	margin-top: 2rem;
 }
 @media screen and (max-width: 768px) {
 	.section-summary {
@@ -127,12 +164,12 @@ body {
 	}
 	#contact .section-content {
 		padding: 0;
-		overflow: scroll;
+		overflow: auto;
 	}
 	#works .section-content {
-		padding: 2rem;
+		/* padding: 2rem; */
 		padding-right: 0;
-		overflow: scroll;
+		overflow: auto;
 	}
 }
 #contact .content-component-wrapper {
@@ -169,6 +206,20 @@ body {
 }
 .external_link:hover {
 	@apply text-primary-500 underline;
+}
+.custom-scrollbar {
+	scrollbar-width: thin;
+	scrollbar-color: var(--color-text) var(--color-secondary-900);
+}
+.custom-scrollbar::-webkit-scrollbar {
+	width: 8px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+	background: var(--color-secondary-900);
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+	background-color: var(--color-text);
+	border-radius: 4px;
 }
 
 :global(input:-webkit-autofill),

@@ -150,7 +150,7 @@
 </ToastContainer>
 <form
 	on:submit={submitForm}
-	class="glass-container w-full max-w-xl flex-col space-y-1 divide-y divide-secondary-200/10 rounded-2xl p-5"
+	class="glass-container h-fit w-full max-w-xl flex-col space-y-1 divide-y divide-secondary-200/10 rounded-2xl p-5"
 >
 	{#if formStatus === 'success'}
 		<Toast>

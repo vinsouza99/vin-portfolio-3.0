@@ -1,6 +1,9 @@
 <script lang="ts">
 	import type { Edu } from '$lib/models/edu';
 	import Detail from '../ui/detail.svelte';
+	import { getLanguageContext } from '$lib/i18n';
+
+	let language = getLanguageContext();
 
 	interface Props {
 		selectedItem: Edu;
@@ -10,13 +13,15 @@
 </script>
 
 <Detail
-	title={selectedItem.title}
+	title={$language === 'en' ? selectedItem.title.en : selectedItem.title.pt}
 	subtitleParts={[
 		selectedItem.institution,
 		selectedItem.location,
 		`${selectedItem.startYear}${selectedItem.endYear ? `-${selectedItem.endYear}` : ''}`
 	]}
-	description={selectedItem.longDescription}
+	description={$language === 'en'
+		? selectedItem.longDescription?.en
+		: selectedItem.longDescription?.pt}
 	tags={selectedItem.tags}
 	url={selectedItem.url}
 	urlLabel={selectedItem.urlLabel}

@@ -83,7 +83,7 @@
 				href={t($language, 'nav.resume.link')}
 				target="_blank"
 				rel="noopener noreferrer"
-				class={`holographic-button glass-button hover:bg-glow-sm cursor-pointer rounded-md border bg-transparent px-4 py-1 text-xl font-thin! text-primary-900 hover:border-primary-700/50  hover:text-white ${isMenuOpen ? 'border-secondary-500 text-secondary-500' : 'border-primary-500/10'}`}
+				class={`holographic-button glass-button hover:bg-glow-sm cursor-pointer rounded-md border-2 bg-transparent px-4 py-1 text-xl font-thin! text-primary-800 hover:border-primary-700/50  hover:text-white ${isMenuOpen ? 'border-secondary-500 text-secondary-500' : 'border-primary-500/50'}`}
 			>
 				{t($language, 'nav.resume')}
 			</a>
@@ -134,7 +134,7 @@
 						<a
 							href={`/#${link.key}`}
 							onclick={closeMenu}
-							class="block px-1 py-1 text-xl font-thin! text-primary-900 transition text-shadow-md text-shadow-secondary-800/0 hover:text-primary-500 hover:text-shadow-primary-800/20 active:text-primary-500 md:text-xl"
+							class="letter-spacing block px-1 py-1 text-lg font-thin! text-primary-800 transition text-shadow-md text-shadow-secondary-800/0 hover:text-primary-500 hover:text-shadow-primary-800/20 active:text-primary-500 md:text-xl"
 							>{link.label}</a
 						>
 					</li>

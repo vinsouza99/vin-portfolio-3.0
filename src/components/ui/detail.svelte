@@ -53,7 +53,7 @@
 	<div class="relative h-full min-h-0 flex-1 lg:max-h-[25vh]">
 		<div class="fade-scroll-mask pointer-events-none! absolute inset-0 select-none!"></div>
 		<div
-			class="my-auto h-full flex-1 overflow-scroll pt-6 pb-15 text-left text-lg font-thin text-text md:text-lg"
+			class="fade-scroll-mask custom-scrollbar my-auto h-full flex-1 overflow-auto pt-6 pr-2 pb-15 text-left text-lg font-thin text-text md:text-lg"
 		>
 			<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 			{@html description}

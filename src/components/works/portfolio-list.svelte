@@ -68,9 +68,9 @@
 </script>
 
 <div class="relative flex w-full overflow-hidden">
-	<div class=" w-full overflow-scroll">
+	<div class=" w-full overflow-x-auto">
 		<ul
-			class=" m-0 flex w-full list-none flex-row flex-nowrap items-end justify-start gap-1 overflow-visible p-5 md:flex-col md:gap-5 md:p-0"
+			class=" fade-scroll-x-mask m-0 flex w-full list-none flex-row flex-nowrap items-end justify-start gap-1 overflow-visible p-5 md:flex-col md:gap-5 md:p-0"
 		>
 			{#if !isMdUp}
 				<li
@@ -137,7 +137,7 @@
 			{/if}
 		</ul>
 	</div>
-	<div
+	<!-- <div
 		class="pointer-events-none absolute top-0 right-0 bottom-0 w-50 bg-linear-to-r from-transparent to-bg md:hidden"
-	></div>
+	></div> -->
 </div>

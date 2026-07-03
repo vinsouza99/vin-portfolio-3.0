@@ -30,3 +30,4 @@ export const skills: Skill[] = [
 	{ name: 'AWS', iconPath: '/images/aws.svg', tags: ['backend'] },
 	{ name: 'Firebase', iconPath: '/images/firebase.svg', tags: ['backend'] }
 ];
+

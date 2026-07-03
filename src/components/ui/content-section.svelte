@@ -345,7 +345,7 @@
 <section
 	id={resolvedSectionId}
 	bind:this={sectionEl}
-	class="content-width section-content mx-auto mt-50 grid grid-cols-1 overflow-visible p-5 sm:gap-2 md:mt-0 md:grid-cols-2 md:gap-5 md:p-10 lg:gap-10"
+	class="content-width section-content mx-auto grid grid-cols-1 overflow-visible p-5 sm:gap-2 md:mt-0 md:grid-cols-2 md:gap-5 md:p-10 lg:gap-10"
 >
 	<!-- Left column: summary (default) or detail (when item selected) -->
 	<!-- <div

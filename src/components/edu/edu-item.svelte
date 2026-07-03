@@ -3,6 +3,9 @@
 	import type { Edu } from '$lib/models/edu';
 	import { BookCheck, GraduationCap } from 'lucide-svelte';
 	import Tag from '../ui/tag.svelte';
+	import { getLanguageContext } from '$lib/i18n';
+
+	let language = getLanguageContext();
 
 	interface Props {
 		edu: Edu;
@@ -31,7 +34,7 @@
 
 <button
 	bind:this={rootButton}
-	title={edu.title}
+	title={$language === 'en' ? edu.title.en : edu.title.pt}
 	class="glass-container flex h-fit w-full flex-row gap-0 overflow-hidden rounded-2xl! bg-bg/0 p-0 transition-colors duration-300 ease-in-out hover:cursor-pointer! hover:bg-bg/50! focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-secondary-700/50 focus:outline-none data-[selected=true]:border-secondary-700/50 data-[selected=true]:bg-secondary-500/20 data-[selected=true]:text-secondary-100
         {isSelected
 		? 'border-secondary-700/50 bg-secondary-500/20 text-secondary-100'
@@ -57,14 +60,18 @@
 		</div>
 	{/if}
 	<div class="pointer-events-none flex flex-1 grow-2 flex-col justify-start gap-1 p-5 md:gap-2">
-		<h3 class="text-medium text-left font-mono text-primary-600 md:text-lg">{edu.title}</h3>
+		<h3 class="text-medium text-left font-mono text-primary-600 md:text-lg">
+			{$language === 'en' ? edu.title.en : edu.title.pt}
+		</h3>
 		<div
 			class="flex items-center gap-1 divide-x divide-secondary-700/50 tracking-wide text-secondary-400 uppercase"
 		>
 			<span class="flex pr-3 text-left text-xs font-thin md:text-xs">{edu.institution}</span>
 			<span class="flex pl-3 text-left text-xs font-thin md:text-xs">{edu.location}</span>
 		</div>
-		<p class="text-left text-xs font-thin text-secondary-300 md:text-sm">{edu.shortDescription}</p>
+		<p class="text-left text-xs font-thin text-secondary-300 md:text-sm">
+			{$language === 'en' ? edu.shortDescription?.en : edu.shortDescription?.pt}
+		</p>
 		<div class="mt-2 flex flex-wrap gap-2 text-left">
 			{#each edu.tags as tag, i (i)}
 				<Tag text={tag} />

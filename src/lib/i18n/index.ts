@@ -12,6 +12,10 @@ export const normalizeLocale = (value: string | null | undefined): Locale => {
 
 export const messages = {
 	en: {
+		landing: `I bring more than 5 years of experience building thoughtful web and mobile experiences
+				using modern languages, frameworks, and cloud tooling. I love how web development balances technical
+				precision with creative play, and as an amateur artist I enjoy turning smart architecture and
+				polished UI into projects that feel both professional and fun`,
 		'nav.skills': 'skills',
 		'nav.works': 'works',
 		'nav.career': 'career',
@@ -46,9 +50,16 @@ export const messages = {
 		'sections.contact.form.submitting': 'Sending...',
 		'sections.contact.form.success': 'Message sent successfully!',
 		'sections.contact.form.error':
-			'An error occurred while sending the message. Please try again later.'
+			'An error occurred while sending the message. Please try again later.',
+		'skills.notFound': "I haven't learned that yet!",
+		'skills.tag.all': 'all',
+		'skills.tag.frontend': 'frontend',
+		'skills.tag.backend': 'backend',
+		'skills.tag.languages': 'languages',
+		present: 'present'
 	},
 	'pt-BR': {
+		landing: `Tenho mais de 5 anos de experiência construindo experiências web e móveis bem pensadas usando linguagens, frameworks e ferramentas modernas. Adoro como o desenvolvimento web equilibra precisão técnica com criatividade, e como artista amador, gosto de transformar arquitetura inteligente e UI polida em projetos que parecem profissionais e divertidos`,
 		'nav.skills': 'habilidades',
 		'nav.works': 'projetos',
 		'nav.career': 'carreira',
@@ -83,7 +94,13 @@ export const messages = {
 		'sections.contact.form.submitting': 'Enviando...',
 		'sections.contact.form.success': 'Mensagem enviada com sucesso!',
 		'sections.contact.form.error':
-			'Um erro ocorreu ao enviar a mensagem. Por favor, tente novamente mais tarde.'
+			'Um erro ocorreu ao enviar a mensagem. Por favor, tente novamente mais tarde.',
+		'skills.notFound': 'Ainda não aprendi isso!',
+		'skills.tag.all': 'todas',
+		'skills.tag.frontend': 'frontend',
+		'skills.tag.backend': 'backend',
+		'skills.tag.languages': 'linguagens',
+		present: 'presente'
 	}
 } as const;
 

@@ -1,6 +1,9 @@
 <script lang="ts">
 	import type { Job } from '$lib/models/job';
 	import Tag from '../ui/tag.svelte';
+	import { getLanguageContext } from '$lib/i18n';
+
+	let language = getLanguageContext();
 
 	interface Props {
 		job: Job;
@@ -12,7 +15,7 @@
 </script>
 
 <button
-	title={job.title}
+	title={$language === 'en' ? job.title.en : job.title.pt}
 	onclick={onClick}
 	class="glass-container flex flex-1 grow-2 cursor-pointer flex-col justify-start gap-1 rounded-2xl p-5 {isSelected
 		? 'border-secondary-700/50 bg-secondary-500/20 text-secondary-100 outline-1 outline-primary-500'
@@ -25,14 +28,14 @@
 		class="flex flex-wrap items-center gap-1 tracking-wide text-secondary-400 uppercase md:divide-x md:divide-secondary-700/50"
 	>
 		<span class="pr-3 text-left text-xs font-thin md:text-xs">
-			{job.title}
+			{$language === 'en' ? job.title.en : job.title.pt}
 		</span>
 		<span class="text-left text-xs font-thin md:pl-3 md:text-xs">
 			{job.location}
 		</span>
 	</div>
 	<p class="text-left text-xs font-thin text-secondary-300/80 md:text-sm">
-		{job.shortDescription}
+		{$language === 'en' ? job.shortDescription?.en : job.shortDescription?.pt}
 	</p>
 
 	<div class="mt-2 flex flex-wrap gap-2 text-left">
