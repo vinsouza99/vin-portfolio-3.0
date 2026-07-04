@@ -7,6 +7,9 @@
 	import { resolve } from '$app/paths';
 	import { isSmallScreen } from '$lib/hooks/is-small-screen';
 	import { setLanguageContext, t, type Locale } from '$lib/i18n';
+	import { onMount } from 'svelte';
+	import { Footer as FbFooter, FooterIcon } from 'flowbite-svelte';
+	import { GithubSolid, LinkedinSolid } from 'flowbite-svelte-icons';
 
 	let { children, data } = $props<{
 		children: import('svelte').Snippet;
@@ -15,6 +18,7 @@
 	const language = setLanguageContext('en');
 	const currentLocale = $derived(data.locale);
 	const navkeys = ['skills', 'works', 'career', 'education', 'contact'] as const;
+	let isMdDown = $state(false);
 
 	let isMenuOpen = $state(false);
 
@@ -36,6 +40,19 @@
 
 	$effect(() => {
 		language.set(currentLocale);
+	});
+
+	onMount(() => {
+		const mq = window.matchMedia('(max-width: 767px)');
+		const updateMq = () => {
+			isMdDown = mq.matches;
+		};
+		updateMq();
+		mq.addEventListener('change', updateMq);
+
+		return () => {
+			mq.removeEventListener('change', updateMq);
+		};
 	});
 </script>
 
@@ -84,7 +101,7 @@
 				target="_blank"
 				rel="noopener noreferrer"
 				title={$language === 'en' ? 'Open my resume' : 'Meu currículo'}
-				class={`glass-button hover-bg-glow cursor-pointer rounded-lg border-2 bg-transparent px-4 py-1 text-xl font-thin! text-primary-800  ease-in-out  hover:border-primary-700 hover:bg-primary-700/40  hover:text-primary-600 ${isMenuOpen ? 'border-secondary-500 text-secondary-500 hover:border-secondary-700 hover:bg-secondary-700/40 hover:text-secondary-700' : 'border-primary-500/50'}`}
+				class={`glass-button hover-bg-glow cursor-pointer rounded-lg border-2 bg-transparent px-4 py-1 text-lg font-thin! text-primary-800 ease-in-out  hover:border-primary-700 hover:bg-primary-700/40  hover:text-primary-600 ${isMenuOpen && isMdDown ? 'border-secondary-500 text-secondary-500 hover:border-secondary-700 hover:bg-secondary-700/40 hover:text-secondary-700' : 'border-primary-500/50'}`}
 			>
 				{t($language, 'nav.resume')}
 			</a>
@@ -130,19 +147,45 @@
 				? 'fixed inset-0 z-40 flex flex-col items-center justify-center bg-white/95 backdrop-blur-sm dark:bg-gray-900/95'
 				: 'hidden'} pointer-events-auto w-full md:static md:order-1 md:flex md:w-auto md:bg-transparent md:dark:bg-transparent"
 		>
-			<ul class="flex flex-col items-start gap-8 p-4 md:mt-0 md:flex-row md:gap-4 md:p-0">
+			<ul
+				class="flex w-full flex-col items-start divide-y divide-secondary-700/20 p-0 md:mt-0 md:w-fit md:flex-row md:gap-4 md:divide-y-0"
+			>
 				{#each navlinks as link (link.key)}
-					<li>
+					<li class="h-25 w-full align-middle md:h-fit">
 						<a
 							href={`/#${link.key}`}
 							onclick={closeMenu}
 							title={link.label}
-							class={`letter-spacing block px-1 py-1 text-lg font-thin text-primary-800 transition text-shadow-md text-shadow-secondary-800/0 hover:text-primary-500 hover:text-shadow-primary-800/20 active:text-primary-500  ${isMenuOpen ? 'text-6xl text-secondary-500 text-shadow-secondary-800/20 hover:text-secondary-500 active:text-secondary-500 md:text-lg' : 'text-lg text-primary-800 text-shadow-secondary-800/0 md:text-xl'}`}
+							class={`letter-spacing block content-center font-thin text-primary-800 transition text-shadow-md text-shadow-secondary-800/0 hover:text-primary-500  active:text-primary-500 ${isMdDown ? 'h-full w-full p-5 text-2xl hover:bg-secondary-500/10' : 'px-1 text-lg md:text-xl'} ${isMenuOpen && isMdDown ? 'text-secondary-500 text-shadow-secondary-800/0 hover:text-secondary-500 hover:text-shadow-primary-800/0 active:text-secondary-500' : ' text-primary-800 text-shadow-secondary-800/0'}`}
 							>{link.label}</a
 						>
 					</li>
 				{/each}
 			</ul>
+			<FbFooter
+				class="align-center z-20 flex w-full content-center items-center gap-5 bg-transparent p-4 text-text shadow-none md:hidden"
+			>
+				<div class="flex items-center space-x-3 sm:mt-0 sm:justify-center rtl:space-x-reverse">
+					<FooterIcon
+						href="https://github.com/vinsouza99"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<GithubSolid
+							class="aspect-square h-10 w-10 text-secondary-500 hover:text-secondary-300"
+						/>
+					</FooterIcon>
+					<FooterIcon
+						href="https://www.linkedin.com/in/vinicius-abner"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<LinkedinSolid
+							class="aspect-square h-11 w-11 text-secondary-500 hover:text-secondary-300"
+						/>
+					</FooterIcon>
+				</div>
+			</FbFooter>
 		</div>
 	</div>
 </nav>
