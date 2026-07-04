@@ -83,14 +83,15 @@
 				href={t($language, 'nav.resume.link')}
 				target="_blank"
 				rel="noopener noreferrer"
-				class={`glass-button hover-bg-glow cursor-pointer rounded-lg border-2 bg-transparent px-4 py-1 text-xl font-thin! text-primary-800  ease-in-out  hover:border-primary-700/50 hover:bg-primary-700/40  hover:text-primary-600 ${isMenuOpen ? 'border-secondary-500 text-secondary-500' : 'border-primary-500/50'}`}
+				title={$language === 'en' ? 'Open my resume' : 'Meu currículo'}
+				class={`glass-button hover-bg-glow cursor-pointer rounded-lg border-2 bg-transparent px-4 py-1 text-xl font-thin! text-primary-800  ease-in-out  hover:border-primary-700 hover:bg-primary-700/40  hover:text-primary-600 ${isMenuOpen ? 'border-secondary-500 text-secondary-500 hover:border-secondary-700 hover:bg-secondary-700/40 hover:text-secondary-700' : 'border-primary-500/50'}`}
 			>
 				{t($language, 'nav.resume')}
 			</a>
 
 			<button
 				type="button"
-				class={"glass-button hover-bg-glow ${isMenuOpen ? 'border-secondary-500 text-secondary-500' : 'border-primary-500/50'}` inline-flex h-10 w-10 items-center justify-center rounded-md  border-2 bg-transparent p-2 text-primary-800 hover:border-primary-700/50 hover:bg-primary-700/40 hover:text-primary-600 focus:ring-2 focus:ring-secondary-500 focus:outline-none md:hidden"}
+				class={`glass-button hover-bg-glow ${isMenuOpen ? 'border-secondary-500 text-secondary-500 hover:border-secondary-700 hover:bg-secondary-700/40 hover:text-secondary-700' : 'border-primary-500/50'} inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-md  border-2 bg-transparent p-2 text-primary-800 hover:border-primary-700 hover:bg-primary-700/40 hover:text-primary-600 focus:ring-2 focus:ring-secondary-500 focus:outline-none md:hidden`}
 				aria-controls="navbar-menu"
 				aria-expanded={isMenuOpen}
 				onclick={toggleMenu}
@@ -103,7 +104,7 @@
 						xmlns="http://www.w3.org/2000/svg"
 						fill="none"
 						viewBox="0 0 24 24"
-						stroke="fill-secondary-300"
+						stroke="currentColor"
 						stroke-width="2"
 					>
 						<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -112,7 +113,7 @@
 					<svg
 						class="h-6 w-6"
 						xmlns="http://www.w3.org/2000/svg"
-						fill="none"
+						fill="red"
 						viewBox="0 0 24 24"
 						stroke="currentColor"
 						stroke-width="2"
@@ -135,7 +136,8 @@
 						<a
 							href={`/#${link.key}`}
 							onclick={closeMenu}
-							class="letter-spacing block px-1 py-1 text-lg font-thin! text-primary-800 transition text-shadow-md text-shadow-secondary-800/0 hover:text-primary-500 hover:text-shadow-primary-800/20 active:text-primary-500 md:text-xl"
+							title={link.label}
+							class={`letter-spacing block px-1 py-1 text-lg font-thin text-primary-800 transition text-shadow-md text-shadow-secondary-800/0 hover:text-primary-500 hover:text-shadow-primary-800/20 active:text-primary-500  ${isMenuOpen ? 'text-6xl text-secondary-500 text-shadow-secondary-800/20 hover:text-secondary-500 active:text-secondary-500 md:text-lg' : 'text-lg text-primary-800 text-shadow-secondary-800/0 md:text-xl'}`}
 							>{link.label}</a
 						>
 					</li>

@@ -47,7 +47,7 @@
 				class="cursor-pointer rounded-xl border px-5 py-2 text-sm font-thin tracking-widest transition-colors duration-200 focus:ring-2 focus:ring-secondary-500 focus:ring-offset-2 focus:outline-none
 		{selectedTagKey === key
 					? 'border border-secondary-500/50 bg-secondary-800/50 font-semibold text-white'
-					: 'border-secondary-300/10 bg-transparent text-secondary-300/50 hover:bg-secondary-500/10 hover:text-secondary-100'}"
+					: 'border-secondary-300/40 bg-transparent text-secondary-300/50 hover:bg-secondary-500/10 hover:text-secondary-100'}"
 				onclick={() => filterByTag(key)}
 			>
 				<span class="select-none">{tags[i]}</span>
@@ -60,7 +60,7 @@
 			id="search"
 			type="text"
 			placeholder="filter"
-			class="m-0! ml-2 rounded-2xl border border-secondary-300/10 bg-secondary-700/10 px-10 py-3 text-sm text-text placeholder:font-thin placeholder:text-secondary-200/50 focus:border-secondary-500 focus:outline-none"
+			class="m-0! ml-2 rounded-2xl border border-secondary-300/30 bg-secondary-700/10 px-10 py-3 text-sm text-text placeholder:font-thin placeholder:text-secondary-200/50 focus:border-secondary-500 focus:outline-none"
 			oninput={(e) => {
 				if (e && e.target instanceof HTMLInputElement) {
 					const query = e.target.value;
