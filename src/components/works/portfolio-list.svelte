@@ -67,19 +67,19 @@
 	});
 </script>
 
-<div class="relative flex w-full overflow-hidden">
-	<div class=" custom-scrollbar w-full overflow-x-auto">
+<div class="relative flex w-full overflow-auto">
+	<div class=" custom-scrollbar h-full w-full overflow-x-auto">
 		<ul
-			class=" fade-scroll-x-mask m-0 flex w-full list-none flex-row flex-nowrap items-end justify-start gap-1 overflow-visible p-5 md:flex-col md:gap-5 md:p-0"
+			class="m-0 flex h-full w-full list-none flex-row flex-nowrap items-end justify-start gap-1 overflow-visible p-5 md:flex-col md:gap-5 md:p-0"
 		>
 			{#if !isMdUp}
 				<li
-					class="m-1 h-full! w-[25vw] flex-1 self-stretch justify-self-end overflow-visible p-0"
+					class="h-full! w-[25vw] flex-1 self-stretch justify-self-end overflow-visible p-0 md:m-2"
 				></li>
 			{/if}
 			{#each visibleWorks as work (work.id)}
 				<li
-					class="m-1 h-full! w-full flex-1 self-stretch justify-self-end overflow-visible p-0 transition-all ease-in-out md:max-w-[95%] lg:hover:translate-x-[-1%] {selectedItem?.id ===
+					class="ml-2 h-full! w-full flex-1 self-stretch justify-self-end overflow-visible p-0 transition-all ease-in-out md:max-w-[95%] lg:hover:translate-x-[-1%] {selectedItem?.id ===
 						work.id && 'lg:translate-x-[-1%]'}"
 				>
 					<PortfolioItem
@@ -104,7 +104,7 @@
 						>
 							{#each remainingWorks as work (work.id)}
 								<li
-									class="m-1 h-full! w-full flex-1 self-stretch justify-self-end overflow-visible p-0 transition-all ease-in-out md:max-w-[95%] lg:hover:translate-x-[-1%] {selectedItem?.id ===
+									class="ml-2 h-full! w-full flex-1 self-stretch justify-self-end overflow-visible p-0 transition-all ease-in-out md:max-w-[95%] lg:hover:translate-x-[-1%] {selectedItem?.id ===
 										work.id && 'lg:translate-x-[-1%]'}"
 								>
 									<PortfolioItem
@@ -116,7 +116,7 @@
 							{/each}
 							{#if !isMdUp}
 								<li
-									class="m-1 h-full! w-[25vw] flex-1 self-stretch justify-self-end overflow-visible p-0"
+									class="ml-2 h-full! w-[25vw] flex-1 self-stretch justify-self-end overflow-visible p-0"
 								></li>
 							{/if}
 						</ul>

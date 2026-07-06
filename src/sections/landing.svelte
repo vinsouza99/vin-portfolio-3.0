@@ -261,13 +261,15 @@
 	class="content-section content-width mx-auto grid h-full min-h-screen grid-cols-1 p-5 sm:gap-2 md:grid-cols-2 md:gap-5 md:p-10 md:pl-0 lg:gap-10"
 >
 	<div
-		class={isFixedReady
-			? 'section-summary relative flex h-full w-full justify-center self-center md:fixed md:top-0 md:bottom-0 md:left-0 md:ml-8 md:h-full md:max-w-[48vw] md:justify-start'
-			: 'section-summary relative flex  h-full w-full justify-center self-center md:ml-8 md:h-full md:max-w-[48vw] md:justify-start'}
+		class={`section-summary relative flex h-full min-h-[50vh] w-full justify-center self-center ${
+			isFixedReady
+				? ' md:fixed md:top-0 md:bottom-0 md:left-0 md:ml-8 md:h-full md:max-w-[48vw] md:justify-start'
+				: 'md:ml-8 md:h-full md:max-w-[48vw] md:justify-start'
+		}`}
 	>
 		<div
 			bind:this={leftWrapperEl}
-			class="flex flex-col content-center justify-center gap-5 text-left font-mono text-primary-500 text-shadow-lg/60 text-shadow-primary-800/60 md:sticky md:top-80 md:gap-8"
+			class="flex flex-col content-center justify-center gap-5 text-left font-mono text-primary-500 text-shadow-lg/60 text-shadow-primary-800/60 md:sticky md:top-80 md:justify-center md:gap-8"
 		>
 			<p bind:this={helloEl} class="block text-center text-xl md:text-left">
 				{t($language, 'landing.hello')}
@@ -283,17 +285,14 @@
 			</p>
 		</div>
 	</div>
-	{#if !isMdUp}
-		<div
-			class="section-content hidden h-full w-full items-center justify-center gap-5 text-left text-white md:flex-col"
-		></div>
-	{:else}
-		<div
-			class="section-content col-start-2 float-right h-full content-center items-center justify-center gap-5 overflow-hidden text-left align-middle text-xl/8 font-thin text-text/90 md:flex-col"
+
+	<!-- <div
+		class="section-content col-start-1 flex h-full flex-1 content-center gap-5 overflow-hidden text-left align-middle md:col-start-2 md:flex-col md:items-end md:justify-center"
+	>
+		<p
+			class="block w-full max-w-full text-center text-lg font-thin text-text/90 md:max-w-110 md:text-2xl md:leading-loose"
 		>
-			<p class="w-full max-w-125">
-				{t($language, 'landing')}
-			</p>
-		</div>
-	{/if}
+			{t($language, 'landing')}
+		</p>
+	</div> -->
 </section>

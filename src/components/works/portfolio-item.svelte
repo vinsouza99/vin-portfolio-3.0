@@ -11,11 +11,11 @@
 	let { work, isSelected = false, onClick }: Props = $props();
 </script>
 
-<div class="@container h-full w-full min-w-75!">
+<div class="@container h-full w-full min-w-75! overflow-hidden">
 	<button
-		title={work.title}
+		title={work.title.en}
 		onclick={onClick}
-		class="glass-container flex h-fit min-h-50 w-full max-w-[65vw] flex-col gap-0 overflow-hidden rounded-2xl! bg-bg/0 p-0 transition-colors duration-300 ease-in-out hover:cursor-pointer! hover:bg-bg/50! focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-secondary-700/50 focus:outline-none sm:max-w-[55vw]
+		class="glass-container flex h-fit min-h-50 w-full max-w-[75vw] flex-col gap-0 overflow-hidden rounded-2xl! bg-bg/0 p-0 transition-colors duration-300 ease-in-out hover:cursor-pointer! hover:bg-bg/50! focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-secondary-700/50 focus:outline-none sm:max-w-[55vw]
         @lg:max-w-screen @lg:flex-row @lg:gap-1
         {isSelected
 			? 'border-secondary-700/50 bg-secondary-500/20 text-secondary-100'
@@ -27,14 +27,14 @@
 			{#if work.coverPath}
 				<img
 					src={work.coverPath}
-					alt=""
+					alt={work.title.en}
 					aria-hidden="true"
-					class="absolute inset-0 h-full w-full object-cover blur-2xl"
+					class="absolute inset-0 h-full w-full object-contain object-center blur-2xl"
 				/>
 
 				<img
 					src={work.coverPath}
-					alt={work.title}
+					alt={work.title.en}
 					class="relative z-1 w-full object-contain object-center"
 				/>
 			{/if}

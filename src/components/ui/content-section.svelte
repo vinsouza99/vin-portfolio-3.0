@@ -394,7 +394,7 @@
 	>
 		{#if ContentComponent}
 			<div
-				class="content-component-wrapper m-0 flex min-h-0 w-full flex-1 justify-center overflow-visible p-0"
+				class="content-component-wrapper m-0 flex h-full min-h-120 w-full flex-1 justify-center overflow-clip overflow-y-hidden p-0 md:min-h-0"
 			>
 				{#if isInteractive}
 					<ContentComponent
@@ -410,7 +410,7 @@
 				{/if}
 			</div>
 		{:else}
-			<div class="glass-container m-0 flex h-full w-full flex-col justify-center p-0"></div>
+			<div class="m-0 flex h-full w-full flex-col justify-center p-0"></div>
 		{/if}
 	</div>
 </section>

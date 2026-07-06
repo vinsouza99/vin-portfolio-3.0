@@ -13,9 +13,7 @@ export const normalizeLocale = (value: string | null | undefined): Locale => {
 export const messages = {
 	en: {
 		landing: `I bring more than 5 years of experience building thoughtful web and mobile experiences
-				using modern languages, frameworks, and cloud tooling. I love how web development balances technical
-				precision with creative play, and as an amateur artist I enjoy turning smart architecture and
-				polished UI into projects that feel both professional and fun`,
+				using modern languages, frameworks, and cloud tooling.`,
 		'nav.skills': 'skills',
 		'nav.works': 'works',
 		'nav.career': 'career',
@@ -60,7 +58,7 @@ export const messages = {
 		present: 'present'
 	},
 	'pt-BR': {
-		landing: `Tenho mais de 5 anos de experiência construindo experiências web e móveis bem pensadas usando linguagens, frameworks e ferramentas modernas. Adoro como o desenvolvimento web equilibra precisão técnica com criatividade, e como artista amador, gosto de transformar arquitetura inteligente e UI polida em projetos que parecem profissionais e divertidos`,
+		landing: `Tenho mais de 5 anos de experiência construindo experiências web e móveis bem pensadas usando linguagens, frameworks e ferramentas modernas.`,
 		'nav.skills': 'habilidades',
 		'nav.works': 'projetos',
 		'nav.career': 'carreira',

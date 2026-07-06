@@ -87,8 +87,11 @@
 			class="pointer-events-auto relative z-50 flex items-center"
 			onclick={closeMenu}
 		>
-			<div class="me-3 flex h-6 w-11 shrink-0 items-center sm:h-9 sm:w-16">
-				<Logo glow={isMenuOpen} fill={isMenuOpen && $isSmallScreen ? '#0074bd' : '#6afff5'} />
+			<div class="me-3 flex h-9 w-16 shrink-0 items-center">
+				<Logo
+					glow={!isMenuOpen || !$isSmallScreen}
+					fill={isMenuOpen && $isSmallScreen ? '#0074bd' : '#6afff5'}
+				/>
 			</div>
 			<span class="sr-only">Vin Souza</span>
 		</a>
@@ -145,7 +148,7 @@
 			id="navbar-menu"
 			class="{isMenuOpen
 				? 'fixed inset-0 z-40 flex flex-col items-center justify-center bg-white/95 backdrop-blur-sm dark:bg-gray-900/95'
-				: 'hidden'} pointer-events-auto w-full md:static md:order-1 md:flex md:w-auto md:bg-transparent md:dark:bg-transparent"
+				: 'hidden'} pointer-events-auto w-full md:static md:order-1 md:my-auto md:flex md:w-auto md:bg-transparent md:dark:bg-transparent"
 		>
 			<ul
 				class="flex w-full flex-col items-start divide-y divide-secondary-700/20 p-0 md:mt-0 md:w-fit md:flex-row md:gap-4 md:divide-y-0"
