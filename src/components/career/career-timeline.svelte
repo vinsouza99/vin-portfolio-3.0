@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import gsap from 'gsap';
-	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+	import gsap from 'gsap/dist/gsap.js';
+	import { ScrollTrigger } from 'gsap/dist/ScrollTrigger.js';
 	import { type Job } from '$lib/models/job';
 	import JobItem from './job-item.svelte';
 	import type { ContentProps } from '$lib/models/content-section-content-props';

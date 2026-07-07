@@ -1,6 +1,6 @@
 // src/lib/actions/scroll-reveal.ts
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { gsap } from 'gsap/dist/gsap.js';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger.js';
 
 gsap.registerPlugin(ScrollTrigger);
 

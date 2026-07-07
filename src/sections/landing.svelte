@@ -1,8 +1,6 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { browser } from '$app/environment';
+	import { onDestroy, onMount } from 'svelte';
 	import { getLanguageContext, t, type Locale } from '$lib/i18n';
-	import gsap from 'gsap/dist/gsap.js';
 	import ScrollTrigger from 'gsap/dist/ScrollTrigger.js';
 	const language = getLanguageContext();
 	interface Props {
@@ -76,11 +74,11 @@
 			}
 		});
 	};
+	let gsap: any;
 
-	onMount(() => {
-		if (browser) {
-			gsap.registerPlugin(ScrollTrigger);
-		}
+	onMount(async () => {
+		({ gsap } = await import('gsap'));
+		gsap.registerPlugin(ScrollTrigger);
 
 		const mq = window.matchMedia('(min-width: 768px)');
 		const updateMq = () => {
@@ -256,6 +254,11 @@
 			scrollTrigger = null;
 			ctx?.revert();
 		};
+	});
+
+	onDestroy(() => {
+		scrollTrigger?.kill();
+		scrollTrigger = null;
 	});
 </script>
 
