@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { browser } from '$app/environment';
 	import { getLanguageContext, t, type Locale } from '$lib/i18n';
 	import gsap from 'gsap';
 	import ScrollTrigger from 'gsap/ScrollTrigger';
@@ -77,7 +78,9 @@
 	};
 
 	onMount(() => {
-		gsap.registerPlugin(ScrollTrigger);
+		if (browser) {
+			gsap.registerPlugin(ScrollTrigger);
+		}
 
 		const mq = window.matchMedia('(min-width: 768px)');
 		const updateMq = () => {
@@ -194,7 +197,7 @@
 			}
 		};
 
-		setupScroll();
+		let ctx = gsap.context(setupScroll);
 
 		// Keep ScrollTrigger state consistent if viewport crosses md breakpoint
 		mq.addEventListener('change', setupScroll);
@@ -251,6 +254,7 @@
 			unsubscribeLang();
 			scrollTrigger?.kill();
 			scrollTrigger = null;
+			ctx?.revert();
 		};
 	});
 </script>
