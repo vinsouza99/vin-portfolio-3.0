@@ -6,8 +6,8 @@
 	import type { ContentSectionSelectionContext } from '$lib/models/content-section-context';
 	import type { Component } from 'svelte';
 	import { onMount, tick } from 'svelte';
-	import gsap from 'gsap';
-	import ScrollTrigger from 'gsap/ScrollTrigger';
+	import gsap from 'gsap/dist/gsap.js';
+	import ScrollTrigger from 'gsap/dist/ScrollTrigger.js';
 
 	interface Props<P, DP> {
 		/** Section id is derived from header (lowercase, spaces to hyphens) */
