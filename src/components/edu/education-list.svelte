@@ -21,7 +21,9 @@
 </script>
 
 <div class="flex">
-	<ul class=" m-0 flex w-full list-none flex-col flex-nowrap items-end gap-5 overflow-auto p-0">
+	<ul
+		class=" m-0 flex w-full list-none flex-col flex-nowrap items-end gap-1 overflow-auto p-0 pt-2"
+	>
 		{#each education as edu (edu.id)}
 			<li
 				class=" w-full justify-self-end overflow-visible p-0 transition-all ease-in-out md:max-w-[95%] md:min-w-[70%] md:hover:translate-x-[-1%] {selectedItem?.id ===

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { getLanguageContext } from '$lib/i18n';
 	import type { Work } from '$lib/models/work';
 	import Tag from '../ui/tag.svelte';
 
@@ -9,13 +10,15 @@
 	}
 
 	let { work, isSelected = false, onClick }: Props = $props();
+
+	let language = getLanguageContext();
 </script>
 
-<div class="@container h-full w-full min-w-75! overflow-hidden">
+<div class="@container h-full w-full min-w-75! overflow-visible">
 	<button
-		title={work.title.en}
+		title={$language === 'en' ? work.title.en : work.title.pt}
 		onclick={onClick}
-		class="glass-container flex h-fit min-h-50 w-full max-w-[75vw] flex-col gap-0 overflow-hidden rounded-2xl! bg-bg/0 p-0 transition-colors duration-300 ease-in-out hover:cursor-pointer! hover:bg-bg/50! focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-secondary-700/50 focus:outline-none sm:max-w-[55vw]
+		class="glass-container flex h-fit min-h-50 w-full max-w-[75vw] flex-col gap-0 overflow-visible rounded-2xl! bg-bg/0 p-0 transition-colors duration-300 ease-in-out hover:cursor-pointer! hover:bg-bg/50! focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-secondary-700/50 focus:outline-none sm:max-w-[55vw]
         @lg:max-w-screen @lg:flex-row @lg:gap-1
         {isSelected
 			? 'border-secondary-700/50 bg-secondary-500/20 text-secondary-100'
@@ -27,14 +30,14 @@
 			{#if work.coverPath}
 				<img
 					src={work.coverPath}
-					alt={work.title.en}
+					alt={$language === 'en' ? work.title.en : work.title.pt}
 					aria-hidden="true"
 					class="absolute inset-0 h-full w-full object-contain object-center blur-2xl"
 				/>
 
 				<img
 					src={work.coverPath}
-					alt={work.title.en}
+					alt={$language === 'en' ? work.title.en : work.title.pt}
 					class="relative z-1 w-full object-contain object-center"
 				/>
 			{/if}
@@ -44,13 +47,15 @@
 			class="pointer-events-none flex flex-1 grow-2 flex-col justify-start gap-5 px-3 py-3 @md:gap-1 @md:px-2 @md:py-5"
 		>
 			<div class="flex justify-between">
-				<h3 class="flex text-left font-mono text-lg text-primary-600">{work.title}</h3>
+				<h3 class="flex text-left font-mono text-lg text-primary-600">
+					{$language === 'en' ? work.title.en : work.title.pt}
+				</h3>
 				<span class="text-sm font-thin text-text/50! italic">{work.platforms?.join(', ')}</span>
 			</div>
 			<p
 				class="truncate-text flex h-full max-h-20 grow overflow-hidden text-left text-sm font-thin text-secondary-300/80 @md:max-h-full"
 			>
-				{work.shortDescription}
+				{$language === 'en' ? work.shortDescription?.en : work.shortDescription?.pt}
 			</p>
 			<!-- <p
 				class="block truncate overflow-hidden text-left text-sm font-thin whitespace-nowrap text-secondary-300/80"

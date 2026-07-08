@@ -70,7 +70,7 @@
 <div class="relative flex w-full overflow-auto">
 	<div class=" custom-scrollbar h-full w-full overflow-x-auto">
 		<ul
-			class="m-0 flex h-full w-full list-none flex-row flex-nowrap items-end justify-start gap-1 overflow-visible p-5 md:flex-col md:gap-5 md:p-0"
+			class="m-0 flex h-full w-full list-none flex-row flex-nowrap items-end justify-start gap-1 overflow-visible p-5 md:flex-col md:p-2"
 		>
 			{#if !isMdUp}
 				<li
@@ -100,7 +100,7 @@
 						aria-hidden={!isExpanded}
 					>
 						<ul
-							class="m-0 flex w-full list-none flex-row flex-nowrap items-end gap-5 overflow-visible md:flex-col"
+							class="m-0 flex w-full list-none flex-row flex-nowrap items-end gap-1 overflow-visible md:flex-col"
 						>
 							{#each remainingWorks as work (work.id)}
 								<li

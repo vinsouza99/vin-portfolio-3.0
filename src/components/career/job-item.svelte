@@ -17,8 +17,10 @@
 <button
 	title={$language === 'en' ? job.title.en : job.title.pt}
 	onclick={onClick}
-	class="glass-container flex flex-1 grow-2 cursor-pointer flex-col justify-start gap-1 rounded-2xl p-5 {isSelected
-		? 'border-secondary-700/50 bg-secondary-500/20 text-secondary-100 outline-1 outline-primary-500'
+	class="glass-container flex h-fit min-h-50 w-full max-w-[75vw] flex-col gap-0 overflow-visible rounded-2xl! bg-bg/0 p-5 transition-colors duration-300 ease-in-out hover:cursor-pointer! hover:bg-bg/50! focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-secondary-700/50 focus:outline-none sm:max-w-[55vw]
+        @lg:max-w-screen @lg:flex-row @lg:gap-1
+        {isSelected
+		? 'border-secondary-700/50 bg-secondary-500/20 text-secondary-100'
 		: 'border-secondary-300/10 bg-transparent text-secondary-300/50 hover:bg-secondary-500/10 hover:text-secondary-100'}"
 >
 	<h3 class="text-medium text-left font-mono text-primary-600 md:text-lg">
