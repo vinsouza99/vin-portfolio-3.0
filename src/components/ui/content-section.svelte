@@ -6,6 +6,7 @@
 	import type { ContentSectionSelectionContext } from '$lib/models/content-section-context';
 	import type { Component } from 'svelte';
 	import { onMount, tick } from 'svelte';
+	import { getScrollContext } from '$lib/contexts/scroll-context';
 
 	interface Props<P, DP> {
 		/** Section id is derived from header (lowercase, spaces to hyphens) */
@@ -43,6 +44,8 @@
 		contentProps = {} as Omit<P, keyof ContentSectionSelectionContext<T>>,
 		endTrigger = null
 	}: Props<P, DP> = $props(); // Use the interface directly here
+
+	const section = getScrollContext();
 
 	let selectedItem = $state<T | unknown | null>(null);
 	const onSelect = (item: unknown) => {
@@ -189,7 +192,7 @@
 	};
 	let gsap: typeof import('gsap').gsap;
 
-	onMount(async () => {
+	const onMountCb = async () => {
 		({ gsap } = await import('gsap'));
 		const { ScrollTrigger } = await import('gsap/ScrollTrigger');
 		setRenderedLeft(targetLeft);
@@ -230,6 +233,7 @@
 				// top crosses 10px above the viewport bottom.
 				end: endTrigger ? 'top bottom-=40%' : 'bottom center-=10%',
 				onEnter: () => {
+					section.set(sectionId ?? '');
 					enforceSingleActive(leftWrapperEl);
 					gsap.to(leftWrapperEl, {
 						autoAlpha: 1,
@@ -247,6 +251,7 @@
 					}
 				},
 				onEnterBack: () => {
+					section.set(sectionId ?? '');
 					enforceSingleActive(leftWrapperEl);
 					gsap.to(leftWrapperEl, {
 						autoAlpha: 1,
@@ -265,6 +270,7 @@
 				},
 				// If we're past the section enough that the sticky would have to move, fade out immediately.
 				onLeave: () => {
+					section.set('');
 					// hide this wrapper and ensure others are disabled as well
 					enforceSingleActive(null);
 					gsap.killTweensOf([headingEl, summaryEl]);
@@ -286,6 +292,7 @@
 					}, 750);
 				},
 				onLeaveBack: () => {
+					section.set('');
 					// hide this wrapper and ensure others are disabled as well
 					enforceSingleActive(null);
 					gsap.killTweensOf([headingEl, summaryEl]);
@@ -333,6 +340,10 @@
 			replaceTl?.kill();
 			replaceTl = null;
 		};
+	};
+
+	onMount(() => {
+		onMountCb();
 	});
 
 	// fixed wrapper visibility/z-index is handled in ScrollTrigger callbacks

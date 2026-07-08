@@ -1,14 +1,16 @@
 import { getContext, setContext } from 'svelte';
 import { writable, type Writable } from 'svelte/store';
 
-export const supportedLocales = ['en', 'pt-BR'] as const;
-export type Locale = supportedLocales[number];
+export enum Section {
+	LANDING = 'landing',
+	SKILLS = 'skills',
+	WORKS = 'works',
+	CAREER = 'career',
+	EDUCATION = 'education',
+	CONTACT = 'contact'
+}
 
-const languageContextKey = Symbol('language');
-
-export const normalizeLocale = (value: string | null | undefined): Locale => {
-	return value === 'pt-BR' ? 'pt-BR' : 'en';
-};
+const scrollContextKey = Symbol('section');
 
 export const messages = {
 	en: {
@@ -106,20 +108,16 @@ export const messages = {
 
 export type MessageKey = keyof (typeof messages)['en'];
 
-export const t = (locale: Locale, key: MessageKey) => messages[locale][key];
-
-export const setLanguageContext = (initialLocale: string | null | undefined) => {
-	const language = writable<Locale>(normalizeLocale(initialLocale));
-	setContext(languageContextKey, language);
-	return language;
+export const setScrollContext = (sectionId?: string) => {
+	const wsection = writable<string>(sectionId);
+	setContext(scrollContextKey, wsection);
+	return wsection;
 };
 
-export const getLanguageContext = (): Writable<Locale> => {
-	const context = getContext<Writable<Locale> | undefined>(languageContextKey);
+export const getScrollContext = (): Writable<string> => {
+	const context = getContext<Writable<string> | undefined>(scrollContextKey);
 	if (!context) {
-		throw new Error(
-			'Language context was not initialized. Call setLanguageContext in +layout.svelte.'
-		);
+		throw new Error('Scroll context was not initialized. Call setScrollContext in +layout.svelte.');
 	}
 	return context;
 };

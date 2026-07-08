@@ -3,8 +3,75 @@
 	import { Copy } from 'lucide-svelte';
 	import { getLanguageContext, t } from '$lib/i18n';
 	import { fly } from 'svelte/transition';
-	import { onDestroy } from 'svelte';
+	import { onMount, onDestroy } from 'svelte';
 	import { CheckCircleSolid } from 'flowbite-svelte-icons';
+	import { json } from '@sveltejs/kit';
+	import {
+		PUBLIC_EMAILJS_API_KEY as EMAILJS_API_KEY,
+		PUBLIC_EMAILJS_SERVICE_ID as EMAILJS_SERVICE_ID,
+		PUBLIC_EMAILJS_TEMPLATE_ID as EMAILJS_TEMPLATE_ID
+	} from '$env/static/public';
+	import emailjs from '@emailjs/browser';
+
+	// Initialize Resend with the secret key from your .env file
+	onMount(() => {
+		emailjs.init({
+			publicKey: EMAILJS_API_KEY,
+			// Do not allow headless browsers
+			blockHeadless: true,
+			blockList: {
+				// Block the suspended emails
+				list: ['foo@emailjs.com', 'bar@emailjs.com'],
+				// The variable contains the email address
+				watchVariable: 'userEmail'
+			},
+			limitRate: {
+				// Set the limit rate for the application
+				id: 'vinsouza-portfolio',
+				// Allow 1 request per 10s
+				throttle: 10000
+			}
+		});
+	});
+
+	const sendEmail = async (email: string, subject: string, message: string) => {
+		try {
+			// Parse the incoming JSON payload from your frontend client
+			//const { email, subject, message } = await request.json();
+
+			// Basic validation
+			if (!subject || !email || !message) {
+				return json({ success: false, error: 'All fields are required.' }, { status: 400 });
+			} // Use the official EmailJS REST API endpoint for server-side environments
+
+			const emailjsResponse = await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+				email: email,
+
+				subject: subject ? subject : `New message from ${email}`,
+
+				message: message
+			});
+
+			console.log(emailjsResponse);
+
+			if (emailjsResponse.status) {
+				const text = emailjsResponse.text;
+				console.log('Email sent successfully:', text);
+				// CRITICAL: Explicitly returning the SvelteKit response at the root of the function
+				return json({ success: true, message: 'Email sent successfully!' }, { status: 200 });
+			} else {
+				const errorText = emailjsResponse.text;
+				console.error('EmailJS REST API failed:', errorText);
+				return json(
+					{ success: false, error: 'Failed to send email via EmailJS.' },
+					{ status: 500 }
+				);
+			}
+		} catch (error) {
+			console.error('Email sending route crashed:', error);
+			return json({ success: false, error: 'Internal server error.' }, { status: 500 });
+		}
+	};
 
 	const language = getLanguageContext();
 
@@ -17,7 +84,7 @@
 	interface ToastItem {
 		id: number;
 		message: string;
-		color: 'green' | 'red';
+		color: string;
 		timeoutId?: ReturnType<typeof setTimeout>;
 		visible: boolean;
 	}
@@ -74,7 +141,6 @@
 	});
 
 	// Form State
-	let name = $state('');
 	let email = $state('');
 	let subject = $state('');
 	let message = $state('');
@@ -92,11 +158,7 @@
 		formStatus = 'idle';
 
 		try {
-			const response = await fetch('/api/send-message', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ name, email, subject, message })
-			});
+			const response = await sendEmail(email, subject, message);
 			console.log('Response:', response);
 
 			const result = await response.json();
@@ -104,7 +166,6 @@
 			if (result.ok) {
 				formStatus = 'success';
 				// Clear the form fields upon success
-				name = '';
 				email = '';
 				subject = '';
 				message = '';

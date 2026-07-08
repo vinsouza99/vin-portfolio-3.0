@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onDestroy, onMount } from 'svelte';
 	import { getLanguageContext, t, type Locale } from '$lib/i18n';
+	import { getScrollContext } from '$lib/contexts/scroll-context';
 	const language = getLanguageContext();
 	interface Props {
 		/**
@@ -21,6 +22,11 @@
 	let nameEl: HTMLSpanElement | null = null;
 	let roleEl: HTMLParagraphElement | null = null;
 	let scrollTrigger: ScrollTrigger | null = null;
+
+	let helloText = $state(t($language, 'landing.hello'));
+	let introText = $state(t($language, 'landing.intro'));
+	let nameText = $state('Vin');
+	let roleText = $state(t($language, 'landing.role'));
 
 	const SCRAMBLE_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 	const randomScrambleChar = () =>
@@ -75,8 +81,9 @@
 	};
 
 	let gsap: typeof import('gsap').gsap;
+	const section = getScrollContext();
 
-	onMount(async () => {
+	const onMountCb = async () => {
 		({ gsap } = await import('gsap'));
 		const { ScrollTrigger } = await import('gsap/ScrollTrigger');
 		gsap.registerPlugin(ScrollTrigger);
@@ -114,6 +121,7 @@
 				end: endTrigger ? 'top bottom-=40%' : 'bottom center-=10%',
 				onEnter: () => {
 					// Make visible when entering
+					section.set('landing');
 					gsap.set(leftWrapperEl, { autoAlpha: 1, zIndex: 1000, pointerEvents: 'auto' });
 					gsap.killTweensOf([helloEl, introEl, nameEl, roleEl]);
 					const enterTl = gsap.timeline();
@@ -128,6 +136,7 @@
 				},
 				onEnterBack: () => {
 					// Make visible when entering back
+					section.set('landing');
 					gsap.set(leftWrapperEl, { autoAlpha: 1, zIndex: 1000, pointerEvents: 'auto' });
 					gsap.killTweensOf([helloEl, introEl, nameEl, roleEl]);
 					const enterBackTl = gsap.timeline();
@@ -141,6 +150,7 @@
 					if (roleBackTween) enterBackTl.add(roleBackTween, 0.1);
 				},
 				onLeave: () => {
+					section.set('');
 					const leaveTl = gsap.timeline({
 						onComplete: () => {
 							if (leftWrapperEl) {
@@ -159,6 +169,7 @@
 					if (roleOutTween) leaveTl.add(roleOutTween, 0);
 				},
 				onLeaveBack: () => {
+					section.set('');
 					const leaveBackTl = gsap.timeline({
 						onComplete: () => {
 							if (leftWrapperEl) {
@@ -238,10 +249,10 @@
 			} else {
 				// Not visible — update immediately without animation.
 				gsap.killTweensOf([helloEl, introEl, nameEl, roleEl]);
-				helloEl.textContent = t(locale, 'landing.hello');
-				introEl.textContent = t(locale, 'landing.intro');
-				nameEl.textContent = 'Vin';
-				roleEl.textContent = t(locale, 'landing.role');
+				helloText = t(locale, 'landing.hello');
+				introText = t(locale, 'landing.intro');
+				nameText = 'Vin';
+				roleText = t(locale, 'landing.role');
 			}
 		};
 
@@ -255,6 +266,10 @@
 			scrollTrigger = null;
 			ctx?.revert();
 		};
+	};
+
+	onMount(() => {
+		onMountCb();
 	});
 
 	onDestroy(() => {
@@ -280,16 +295,16 @@
 			class="flex flex-col content-center justify-center gap-5 text-left font-mono text-primary-500 text-shadow-lg/60 text-shadow-primary-800/60 md:sticky md:top-80 md:justify-center md:gap-8"
 		>
 			<p bind:this={helloEl} class="block text-center text-xl md:text-left">
-				{t($language, 'landing.hello')}
+				{helloText}
 			</p>
 			<h2 class="block text-center text-6xl font-semibold md:text-left md:text-6xl">
-				<span bind:this={introEl}>{t($language, 'landing.intro')}</span>
+				<span bind:this={introEl}>{introText}</span>
 				<span bind:this={nameEl} class="text-[#dbefec] text-shadow-lg/60 text-shadow-[#dbefec]/60"
-					>Vin</span
+					>{nameText}</span
 				>
 			</h2>
 			<p bind:this={roleEl} class="block text-center text-xl md:text-left">
-				{t($language, 'landing.role')}
+				{roleText}
 			</p>
 		</div>
 	</div>

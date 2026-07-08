@@ -7,6 +7,7 @@
 	import { resolve } from '$app/paths';
 	import { isSmallScreen } from '$lib/hooks/is-small-screen';
 	import { setLanguageContext, t, type Locale } from '$lib/i18n';
+	import { getScrollContext, setScrollContext } from '$lib/contexts/scroll-context';
 	import { onMount } from 'svelte';
 	import { Footer as FbFooter, FooterIcon } from 'flowbite-svelte';
 	import { GithubSolid, LinkedinSolid } from 'flowbite-svelte-icons';
@@ -16,6 +17,8 @@
 		data: { locale: Locale };
 	}>();
 	const language = setLanguageContext('en');
+	setScrollContext('landing');
+	const currentSection = getScrollContext();
 	const currentLocale = $derived(data.locale);
 	const navkeys = ['skills', 'works', 'career', 'education', 'contact'] as const;
 	let isMdDown = $state(false);
@@ -89,8 +92,12 @@
 		>
 			<div class="me-3 flex h-9 w-16 shrink-0 items-center">
 				<Logo
-					glow={!isMenuOpen || !$isSmallScreen}
-					fill={isMenuOpen && $isSmallScreen ? '#0074bd' : '#6afff5'}
+					glow={$currentSection === 'landing' && (!isMenuOpen || !$isSmallScreen)}
+					fill={isMenuOpen && $isSmallScreen
+						? '#0074bd'
+						: $currentSection === 'landing'
+							? '#6afff5'
+							: '#008c82'}
 				/>
 			</div>
 			<span class="sr-only">Vin Souza</span>
@@ -159,8 +166,13 @@
 							href={`/#${link.key}`}
 							onclick={closeMenu}
 							title={link.label}
-							class={`letter-spacing block content-center font-thin text-primary-800 transition text-shadow-md text-shadow-secondary-800/0 hover:text-primary-500  active:text-primary-500 ${isMdDown ? 'h-full w-full p-5 text-2xl hover:bg-secondary-500/10' : 'px-1 text-lg md:text-xl'} ${isMenuOpen && isMdDown ? 'text-secondary-500 text-shadow-secondary-800/0 hover:text-secondary-500 hover:text-shadow-primary-800/0 active:text-secondary-500' : ' text-primary-800 text-shadow-secondary-800/0'}`}
-							>{link.label}</a
+							class={`letter-spacing block content-center font-thin transition-colors duration-200 ease-in-out text-shadow-md text-shadow-secondary-800/0 hover:text-primary-500  active:text-primary-500 ${isMdDown ? 'h-full w-full p-5 text-2xl hover:bg-secondary-500/10' : 'px-1 text-lg md:text-xl'} ${
+								isMenuOpen && isMdDown
+									? 'text-secondary-500 hover:text-secondary-500 hover:text-shadow-primary-800/0 active:text-secondary-500'
+									: $currentSection === link.key
+										? ' text-primary-500 text-shadow-secondary-800/50' /* ACTIVE STATE HIGHLIGHT */
+										: 'text-primary-800 text-shadow-secondary-800/0' /* DEFAULT STATE */
+							}`}>{link.label}</a
 						>
 					</li>
 				{/each}

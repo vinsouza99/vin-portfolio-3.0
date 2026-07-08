@@ -24,7 +24,7 @@
 	let maxProgress = 0;
 
 	let gsap: typeof import('gsap').gsap;
-	onMount(async () => {
+	const onMountCb = async () => {
 		({ gsap } = await import('gsap'));
 		const { ScrollTrigger } = await import('gsap/ScrollTrigger');
 
@@ -49,6 +49,7 @@
 			start: 'top bottom',
 			end: 'bottom center-=55%',
 			onUpdate: () => {
+				if (!containerEl) return;
 				const rect = containerEl.getBoundingClientRect();
 				const viewportCenter = window.innerHeight / 2;
 				const timelineHeight = rect.height;
@@ -203,6 +204,10 @@
 			mm.revert();
 			ScrollTrigger.getAll().forEach((t) => t.kill());
 		};
+	};
+
+	onMount(() => {
+		onMountCb();
 	});
 	const handleClick = (job: Job) => {
 		if (selectedItem?.id === job.id) {
