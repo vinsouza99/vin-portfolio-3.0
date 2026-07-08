@@ -186,7 +186,7 @@
 	};
 	const copyEmail = async () => {
 		try {
-			await navigator.clipboard.writeText('vinsouza1039@gmail.com');
+			await navigator.clipboard.writeText('contact@vinsouza.com');
 		} catch (err) {
 			console.error('Failed to copy email: ', err);
 		}
