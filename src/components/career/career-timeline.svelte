@@ -9,8 +9,6 @@
 
 	const language = getLanguageContext();
 
-	gsap.registerPlugin(ScrollTrigger);
-
 	let { selectedItem = null, onSelect, onDeselect }: ContentProps<Job> = $props();
 
 	const PRIMARY_500 = '#6afff5';
@@ -28,6 +26,8 @@
 	onMount(async () => {
 		const { gsap } = await import('gsap');
 		const { ScrollTrigger } = await import('gsap/ScrollTrigger');
+
+		gsap.registerPlugin(ScrollTrigger);
 		if (!containerEl || !lineProgressEl || !lineSkeletonEl) return;
 
 		// Progress line: fill height = how far the viewport center has moved through the timeline.
