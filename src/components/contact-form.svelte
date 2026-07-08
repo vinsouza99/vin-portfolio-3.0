@@ -253,7 +253,7 @@
 			onclick={copyEmail}
 			class="group my-1 flex w-fit cursor-pointer rounded-sm border-0! bg-transparent py-1 text-sm font-thin! tracking-wide text-text outline-0! transition-colors duration-75 ease-in-out hover:bg-secondary-100/10 md:px-2"
 		>
-			<span>vinsouza1039@gmail.com</span>
+			<span>contact@vinsouza.com</span>
 			<Copy class="hover:group:text-text h-5 w-5 border-0 bg-transparent p-1! text-text/50" />
 		</button>
 	</div>
