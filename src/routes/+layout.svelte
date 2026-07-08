@@ -24,6 +24,7 @@
 	let isMdDown = $state(false);
 
 	let isMenuOpen = $state(false);
+	const section = getScrollContext();
 
 	function toggleMenu() {
 		isMenuOpen = !isMenuOpen;
@@ -88,7 +89,10 @@
 		<a
 			href={resolve('/')}
 			class="pointer-events-auto relative z-50 flex items-center"
-			onclick={closeMenu}
+			onclick={() => {
+				closeMenu();
+				section.set('landing');
+			}}
 		>
 			<div class="me-3 flex h-9 w-16 shrink-0 items-center">
 				<Logo

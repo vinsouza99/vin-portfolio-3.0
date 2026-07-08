@@ -213,7 +213,7 @@
 	{/each}
 </ToastContainer>
 <form
-	on:submit={submitForm}
+	onsubmit={submitForm}
 	class="glass-container h-fit w-full max-w-xl flex-col space-y-1 divide-y divide-secondary-200/10 rounded-2xl p-5"
 >
 	{#if formStatus === 'success'}
@@ -250,7 +250,7 @@
 		<button
 			id="my-email"
 			type="button"
-			on:click={copyEmail}
+			onclick={copyEmail}
 			class="group my-1 flex w-fit cursor-pointer rounded-sm border-0! bg-transparent py-1 text-sm font-thin! tracking-wide text-text outline-0! transition-colors duration-75 ease-in-out hover:bg-secondary-100/10 md:px-2"
 		>
 			<span>vinsouza1039@gmail.com</span>

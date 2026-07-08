@@ -22,7 +22,7 @@
 
 <div class="flex">
 	<ul
-		class=" m-0 flex w-full list-none flex-col flex-nowrap items-end gap-1 overflow-auto p-0 pt-2"
+		class=" m-0 flex w-full list-none flex-col flex-nowrap items-end gap-1 overflow-auto p-0 pt-2 md:gap-5"
 	>
 		{#each education as edu (edu.id)}
 			<li
