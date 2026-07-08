@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onDestroy, onMount } from 'svelte';
 	import { getLanguageContext, t, type Locale } from '$lib/i18n';
-	import ScrollTrigger from 'gsap/dist/ScrollTrigger.js';
 	const language = getLanguageContext();
 	interface Props {
 		/**
@@ -74,10 +73,10 @@
 			}
 		});
 	};
-	let gsap: any;
 
 	onMount(async () => {
-		({ gsap } = await import('gsap'));
+		const { gsap } = await import('gsap');
+		const { ScrollTrigger } = await import('gsap/ScrollTrigger');
 		gsap.registerPlugin(ScrollTrigger);
 
 		const mq = window.matchMedia('(min-width: 768px)');

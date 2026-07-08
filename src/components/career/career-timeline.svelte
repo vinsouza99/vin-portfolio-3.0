@@ -1,7 +1,5 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import gsap from 'gsap/dist/gsap.js';
-	import { ScrollTrigger } from 'gsap/dist/ScrollTrigger.js';
 	import { type Job } from '$lib/models/job';
 	import JobItem from './job-item.svelte';
 	import type { ContentProps } from '$lib/models/content-section-content-props';
@@ -27,7 +25,9 @@
 
 	let maxProgress = 0;
 
-	onMount(() => {
+	onMount(async () => {
+		const { gsap } = await import('gsap');
+		const { ScrollTrigger } = await import('gsap/ScrollTrigger');
 		if (!containerEl || !lineProgressEl || !lineSkeletonEl) return;
 
 		// Progress line: fill height = how far the viewport center has moved through the timeline.
