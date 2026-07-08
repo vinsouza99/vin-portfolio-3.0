@@ -187,9 +187,10 @@
 		replaceTl = gsap.timeline({ defaults: { ease: 'power2.out' } });
 		replaceTl.to(leftSwapEl, { opacity: 1, duration: 0.18 });
 	};
+	let gsap: typeof import('gsap').gsap;
 
 	onMount(async () => {
-		const { gsap } = await import('gsap');
+		({ gsap } = await import('gsap'));
 		const { ScrollTrigger } = await import('gsap/ScrollTrigger');
 		setRenderedLeft(targetLeft);
 		gsap.registerPlugin(ScrollTrigger);

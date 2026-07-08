@@ -74,8 +74,10 @@
 		});
 	};
 
+	let gsap: typeof import('gsap').gsap;
+
 	onMount(async () => {
-		const { gsap } = await import('gsap');
+		({ gsap } = await import('gsap'));
 		const { ScrollTrigger } = await import('gsap/ScrollTrigger');
 		gsap.registerPlugin(ScrollTrigger);
 
