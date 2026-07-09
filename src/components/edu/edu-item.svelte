@@ -43,7 +43,7 @@
 >
 	{#if showIcon}
 		<div
-			class="rounded-0 pointer-events-none hidden w-fit content-center overflow-hidden p-1 md:m-3 md:mr-0 md:block md:h-auto md:rounded-md"
+			class="pointer-events-none hidden w-fit content-center overflow-hidden rounded-md p-1 md:m-3 md:mr-0 md:block md:h-auto md:rounded-md"
 		>
 			<div class="flex content-center items-center rounded-full border-5 border-primary-500 p-4">
 				{#if edu.type === 'degree'}

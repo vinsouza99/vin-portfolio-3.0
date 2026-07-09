@@ -41,7 +41,7 @@
 
 <div class=" flex w-full flex-col gap-5 overflow-visible md:h-[110vh]">
 	<!--Filter by tags -->
-	<div class="flex flex-wrap gap-1 overflow-visible md:gap-3">
+	<div class="flex flex-wrap justify-center gap-1 overflow-visible pt-2 md:justify-normal md:gap-3">
 		{#each tagKeys as key, i (key)}
 			<button
 				class="cursor-pointer rounded-xl border px-5 py-2 text-sm font-thin tracking-widest transition-colors duration-200 focus:ring-2 focus:ring-secondary-500 focus:ring-offset-2 focus:outline-none

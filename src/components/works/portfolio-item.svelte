@@ -25,7 +25,7 @@
 			: 'border-secondary-300/10 bg-transparent text-secondary-300/50 hover:bg-secondary-500/10 hover:text-secondary-100'}"
 	>
 		<div
-			class="rounded-0 pointer-events-none relative flex h-55 items-center justify-center overflow-hidden bg-bg @md:m-3 @md:h-55 @md:flex-1 @md:rounded-md"
+			class="pointer-events-none relative flex h-55 items-center justify-center overflow-hidden rounded-md bg-bg @md:m-3 @md:h-55 @md:flex-1 @md:rounded-md"
 		>
 			{#if work.coverPath}
 				<img

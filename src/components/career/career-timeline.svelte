@@ -13,6 +13,7 @@
 
 	const PRIMARY_500 = '#6afff5';
 	const SECONDARY_900 = '#003052';
+	let section = $state<HTMLElement | null>(null);
 
 	let containerEl: HTMLDivElement;
 	let lineSkeletonEl: HTMLDivElement;
@@ -207,6 +208,7 @@
 	};
 
 	onMount(() => {
+		section = document.getElementById('career');
 		onMountCb();
 	});
 	const handleClick = (job: Job) => {
@@ -214,7 +216,9 @@
 			onDeselect?.();
 		} else {
 			onSelect?.(job);
-			window.location.hash = `#career`;
+		}
+		if (section && $isSmallScreen) {
+			section.scrollIntoView({ behavior: 'smooth' });
 		}
 	};
 </script>

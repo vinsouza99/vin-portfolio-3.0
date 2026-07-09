@@ -4,6 +4,7 @@
 	import { works } from '$lib/db/works';
 	import type { ContentProps } from '$lib/models/content-section-content-props';
 	import { onMount, tick } from 'svelte';
+	import { isSmallScreen } from '$lib/hooks/is-small-screen';
 
 	let { selectedItem = null, onSelect, onDeselect }: ContentProps<Work> = $props();
 
@@ -15,12 +16,16 @@
 	let isExpanded = $state(true);
 	let remainingContainer = $state<HTMLDivElement | null>(null);
 	let remainingHeight = $state('0px');
+	let section = $state<HTMLElement | null>(null);
 
 	const handleClick = (work: Work) => {
 		if (selectedItem?.id === work.id) {
 			onDeselect?.();
 		} else {
 			onSelect?.(work);
+		}
+		if (section && $isSmallScreen) {
+			section.scrollIntoView({ behavior: 'smooth' });
 		}
 	};
 
@@ -47,6 +52,7 @@
 	};
 
 	onMount(() => {
+		section = document.getElementById('works');
 		const mq = window.matchMedia('(min-width: 768px)');
 		const updateMq = () => {
 			isMdUp = mq.matches;
@@ -70,7 +76,7 @@
 <div class="relative flex w-full overflow-auto">
 	<div class=" custom-scrollbar h-full w-full overflow-x-auto">
 		<ul
-			class="m-0 flex h-full w-full list-none flex-row flex-nowrap items-end justify-start gap-1 overflow-visible p-5 md:flex-col md:p-2"
+			class="m-0 flex h-full w-full list-none flex-row flex-nowrap items-end justify-start gap-1 overflow-visible p-5 md:flex-col md:gap-5 md:p-2 xl:gap-0"
 		>
 			{#if !isMdUp}
 				<li

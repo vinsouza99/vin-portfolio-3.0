@@ -2,6 +2,8 @@
 	import EduItem from './edu-item.svelte';
 	import { education } from '$lib/db/edu';
 	import type { Edu } from '$lib/models/edu';
+	import { onMount } from 'svelte';
+	import { isSmallScreen } from '$lib/hooks/is-small-screen';
 
 	interface Props {
 		selectedItem?: Edu | null;
@@ -10,6 +12,7 @@
 	}
 
 	let { selectedItem = null, onSelect, onDeselect }: Props = $props();
+	let section = $state<HTMLElement | null>(null);
 
 	const handleClick = (edu: Edu) => {
 		if (selectedItem?.id === edu.id) {
@@ -17,12 +20,19 @@
 		} else {
 			onSelect?.(edu);
 		}
+		if (section && $isSmallScreen) {
+			section.scrollIntoView({ behavior: 'smooth' });
+		}
 	};
+
+	onMount(() => {
+		section = document.getElementById('education');
+	});
 </script>
 
 <div class="flex">
 	<ul
-		class=" m-0 flex w-full list-none flex-col flex-nowrap items-end gap-1 overflow-auto p-0 pt-2 md:gap-5"
+		class=" m-0 flex w-full list-none flex-col flex-nowrap items-end gap-3 overflow-auto p-2 md:gap-5"
 	>
 		{#each education as edu (edu.id)}
 			<li
