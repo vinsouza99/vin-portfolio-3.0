@@ -383,7 +383,7 @@
 				{:else}
 					<h2
 						bind:this={headingEl}
-						class="mb-5 block text-center font-mono text-4xl font-semibold text-wrap wrap-break-word text-primary-500 text-shadow-lg/60 text-shadow-primary-800/60 md:text-left md:text-6xl"
+						class="mb-5 block text-center font-mono text-4xl font-semibold text-wrap wrap-break-word text-primary-500 text-shadow-lg/60 text-shadow-primary-800/60 md:text-left lg:text-6xl"
 					>
 						{header}
 					</h2>
@@ -402,7 +402,7 @@
 
 	<!-- Right column: content (optionally with selection context) -->
 	<div
-		class="section-content col-span-1 col-start-1 flex h-full min-h-0 w-full flex-col items-center justify-center gap-5 overflow-visible text-left text-white md:col-span-1 md:col-start-2 md:w-full md:gap-8"
+		class="section-content col-span-1 col-start-1 flex h-full min-h-0 w-full flex-col items-center justify-center gap-5 overflow-visible text-left text-white md:col-span-1 md:col-start-2 md:w-full md:gap-8 md:pl-2 lg:pl-0"
 	>
 		{#if ContentComponent}
 			<div

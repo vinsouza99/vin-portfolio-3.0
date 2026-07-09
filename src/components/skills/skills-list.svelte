@@ -74,7 +74,9 @@
 		</Input>
 	</div>
 
-	<div class="glass-container glowing-shadow min-h-[55vh] w-full rounded-2xl p-5 md:p-10">
+	<div
+		class="glass-container glowing-shadow min-h-[55vh] w-full overflow-auto rounded-2xl p-5 md:p-10"
+	>
 		{#if filteredSkills.length === 0}
 			<p
 				class="block h-full w-full content-center self-center text-center text-lg font-thin text-text/50"

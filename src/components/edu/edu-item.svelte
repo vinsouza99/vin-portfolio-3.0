@@ -67,7 +67,10 @@
 			class="flex items-center gap-1 divide-x divide-secondary-700/50 tracking-wide text-secondary-400 uppercase"
 		>
 			<span class="flex pr-3 text-left text-xs font-thin md:text-xs">{edu.institution}</span>
-			<span class="flex pl-3 text-left text-xs font-thin md:text-xs">{edu.location}</span>
+			<span class="flex px-3 text-left text-xs font-thin md:text-xs">{edu.location}</span>
+			<span class="flex pl-3 text-left text-xs font-thin md:text-xs"
+				>{`${edu.startYear} ${edu.endYear ? ` - ${edu.endYear}` : ''}`}</span
+			>
 		</div>
 		<p class="text-left text-xs font-thin text-secondary-300 md:text-sm">
 			{$language === 'en' ? edu.shortDescription?.en : edu.shortDescription?.pt}
