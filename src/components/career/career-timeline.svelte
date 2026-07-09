@@ -81,6 +81,8 @@
 						{
 							borderColor: PRIMARY_500,
 							backgroundColor: '#001221',
+							boxShadow:
+								'inset 0 0 5px 1px rgba(106, 255, 245, 0.5), 0 0 5px 1px rgba(106, 255, 245, 1)',
 							scale: 1,
 							opacity: 1,
 							duration: 0.5,
@@ -235,13 +237,13 @@
 			<!-- Full-height skeleton line (column 1, all rows) -->
 			<div
 				class="career-timeline__line-skeleton col-start-1 w-2 justify-self-center rounded-full md:mb-10 md:justify-self-center"
-				style="background-color: {SECONDARY_900}; grid-row: 1 / -2;"
+				style="background-color: {SECONDARY_900}; grid-row: 1 / -2; "
 				bind:this={lineSkeletonEl}
 				aria-hidden="true"
 			></div>
 			<!-- Full-height progress line (same span, scales on scroll) -->
 			<div
-				class="career-timeline__line-progress col-start-1 mt-1 h-full w-1 origin-top justify-self-center rounded-full md:mb-10 md:w-2.5 md:justify-self-center"
+				class="career-timeline__line-progress col-start-1 mt-1 h-full w-1 origin-top justify-self-center rounded-full shadow-md shadow-primary-100 md:mb-10 md:w-2.5 md:justify-self-center"
 				style="background-color: {PRIMARY_500}; grid-row: 1 / -2;"
 				bind:this={lineProgressEl}
 				aria-hidden="true"

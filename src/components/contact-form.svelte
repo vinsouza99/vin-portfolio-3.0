@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Label, Input, Button, Alert, Toast, ToastContainer } from 'flowbite-svelte';
+	import { Label, Input, Button, Toast, ToastContainer } from 'flowbite-svelte';
 	import { Copy } from 'lucide-svelte';
 	import { getLanguageContext, t } from '$lib/i18n';
 	import { fly } from 'svelte/transition';
@@ -36,9 +36,6 @@
 
 	const sendEmail = async (email: string, subject: string, message: string) => {
 		try {
-			// Parse the incoming JSON payload from your frontend client
-			//const { email, subject, message } = await request.json();
-
 			// Basic validation
 			if (!subject || !email || !message) {
 				return json({ success: false, error: 'All fields are required.' }, { status: 400 });
@@ -57,15 +54,11 @@
 			if (emailjsResponse.status) {
 				const text = emailjsResponse.text;
 				console.log('Email sent successfully:', text);
-				// CRITICAL: Explicitly returning the SvelteKit response at the root of the function
 				return json({ success: true, message: 'Email sent successfully!' }, { status: 200 });
 			} else {
 				const errorText = emailjsResponse.text;
 				console.error('EmailJS REST API failed:', errorText);
-				return json(
-					{ success: false, error: 'Failed to send email via EmailJS.' },
-					{ status: 500 }
-				);
+				return json({ success: false, error: 'Failed to send email.' }, { status: 500 });
 			}
 		} catch (error) {
 			console.error('Email sending route crashed:', error);
@@ -148,7 +141,6 @@
 	// Submission State
 	let isSubmitting = $state(false);
 	let formStatus: 'idle' | 'success' | 'error' = $state('idle');
-	let errorMessage = $state('');
 
 	const submitForm = async (event: Event) => {
 		// Prevent the default HTML form submission behavior
@@ -163,7 +155,7 @@
 
 			const result = await response.json();
 
-			if (result.ok) {
+			if (result.success) {
 				formStatus = 'success';
 				// Clear the form fields upon success
 				email = '';
@@ -172,13 +164,13 @@
 				addToast('success', t($language, 'sections.contact.form.success'));
 			} else {
 				formStatus = 'error';
-				errorMessage = result.error || 'Failed to send the message.';
+				console.log(result.error || 'Failed to send the message.');
 				addToast('error', t($language, 'sections.contact.form.error'));
 			}
 		} catch (error) {
 			console.error(error);
 			formStatus = 'error';
-			errorMessage = 'A network error occurred. Please try again later.';
+			console.log('A network error occurred. Please try again later.');
 			addToast('error', t($language, 'sections.contact.form.error'));
 		} finally {
 			isSubmitting = false;
@@ -212,6 +204,7 @@
 		</Toast>
 	{/each}
 </ToastContainer>
+
 <form
 	onsubmit={submitForm}
 	class="glass-container h-fit w-full max-w-xl flex-col space-y-1 divide-y divide-secondary-200/10 rounded-2xl p-5"
@@ -221,15 +214,10 @@
 			{t($language, 'sections.contact.form.success')}
 		</Toast>
 		<!-- <Alert color="green" class="mb-4" border={false}>
-			{t($language, 'sections.contact.form.success')}
-		</Alert> -->
+				{t($language, 'sections.contact.form.success')}
+			</Alert> -->
 	{/if}
 
-	{#if formStatus === 'error'}
-		<Alert color="red" class="mb-4">
-			{errorMessage}
-		</Alert>
-	{/if}
 	<div class="flex w-full flex-col items-baseline font-thin md:flex-row">
 		<Label for="email" class="text-md w-15 font-thin text-secondary-500 md:mb-2"
 			>{t($language, 'sections.contact.form.from')} *</Label
