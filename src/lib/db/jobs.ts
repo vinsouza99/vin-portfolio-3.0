@@ -10,7 +10,7 @@ export const jobs: Job[] = [
 		company: 'Current Scientific Corporation',
 		location: 'Port Coquitlam, Canada',
 		shortDescription: {
-			en: 'As part of the AI division, developed the user interface for an iPad remote controller of AI-powered EO/IR camera systems used in the maritime industry worldwide. Collaborated with the ROS software running on the cameras.',
+			en: 'Developed a remote controller app for AI-powered EO/IR camera systems used in the maritime industry worldwide and collaborated with the ROS software running on the cameras.',
 			pt: 'Como parte da divisão de IA, desenvolvi a interface do usuário para um controlador remoto de iPad de sistemas de câmeras EO/IR com tecnologia de IA usados na indústria marítima em todo o mundo. Colaborei com o software ROS que roda nas câmeras.'
 		},
 
@@ -18,8 +18,8 @@ export const jobs: Job[] = [
 		startYear: 2025,
 		endYear: Infinity,
 		longDescription: {
-			en: 'As part of the AI division, developed the user interface for an iPad remote controller of AI-powered EO/IR camera systems used in the maritime industry worldwide. Collaborated with the ROS software running on the cameras.',
-			pt: 'Como parte da divisão de IA, desenvolvi a interface do usuário para um controlador remoto de iPad de sistemas de câmeras EO/IR com tecnologia de IA usados na indústria marítima em todo o mundo. Colaborei com o software ROS que roda nas câmeras.'
+			en: `As part of the AI division, I developed the user interface for an iPad remote controller of AI-powered EO/IR camera systems with React Native and TypeScript. The project intends to turn the cameras sold by Current Scientific into automated lookouts that understands it surroundings, classify and track vessels, and alert for dangers. Initially hired as a frontend developer for the camera controller, I gradually started to collaborate with the ROS software running on the cameras. Now, I am responsible for a couple of complicated core features, such as a custom autofocus algorithm for the thermal camera and the algorithm for having the camera lock on a target of interest and follow it. It's by far the hardest project I have worked on as it involves advanced distributed system design, mathematics, and physics.`,
+			pt: 'Como parte da divisão de IA, desenvolvi a interface de usuário para um controle remoto via iPad de sistemas de câmeras EO/IR (eletro-ópticas/infravermelhas) com tecnologia de IA, utilizando React Native e TypeScript. O projeto visa transformar as câmeras comercializadas pela Current Scientific em sistemas de vigilância automatizados capazes de compreender o ambiente, classificar e rastrear embarcações e emitir alertas de perigo. Inicialmente contratado como desenvolvedor frontend para o controle da câmera, passei a colaborar gradualmente com o software ROS que opera nos equipamentos. Atualmente, sou responsável por funcionalidades centrais complexas, como um algoritmo de foco automático personalizado para a câmera térmica e o algoritmo que permite à câmera travar em um alvo de interesse e acompanhá-lo. Este é, de longe, o projeto mais desafiador em que já trabalhei, pois envolve conceitos avançados de design de sistemas distribuídos, matemática e física.'
 		},
 		tags: [
 			'TypeScript',
@@ -31,7 +31,7 @@ export const jobs: Job[] = [
 			'Agile',
 			'System Design',
 			'Svelte',
-			'GSAP'
+			'Docker'
 		]
 	},
 	{
