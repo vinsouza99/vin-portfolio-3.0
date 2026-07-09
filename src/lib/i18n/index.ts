@@ -75,7 +75,7 @@ export const messages = {
 			'Estudei e trabalhei com algumas das linguagens, frameworks, ferramentas e bibliotecas mais populares do mercado.',
 		'sections.works.title': 'projetos',
 		'sections.works.summary':
-			'O que me atraiu para o desenvolvimento web, em primeiro lugar, foi o próprio processo. E divertido apesar de todo o trabalho necessaário para construir algo legal. Durante minhas experiências de trabalho e estudos, formais e autodidatas, criei várias coisas das quais me orgulho. Aqui estão algumas delas!',
+			'O que me atraiu para o desenvolvimento web, em primeiro lugar, foi o próprio processo. E divertido apesar de todo o trabalho necessário para construir algo legal. Durante minhas experiências de trabalho e estudos, formais e autodidatas, criei várias coisas das quais me orgulho. Aqui estão algumas delas!',
 		'sections.career.title': 'carreira',
 		'sections.career.summary':
 			'Embora minha história com desenvolvimento web e programação seja curta e movida principalmente por autoaprendizado e projetos solo, existem marcos que me trouxeram expêriencias significativas de crescimento pessoal e profissional nessa jornada.',

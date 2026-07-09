@@ -55,6 +55,23 @@ export const works: Work[] = [
 	},
 	{
 		id: 4,
+		title: { en: 'Favr', pt: 'Favr' },
+		url: 'https://favr.onrender.com/',
+		coverPath: '/images/favr.png',
+		tags: ['HTML', 'CSS', 'JavaScript', 'Firebase', 'NoSQL'],
+		startYear: 2024,
+		shortDescription: {
+			en: `Favr is a PWA that improves the life quality of senior citizens by connecting them with volunteer students. This project is part of Langara's Post-Degree Diploma in Web and Mobile App Design and Development program and it demanded that our team of 8 people (4 designers and 4 developers) built a MVP of our idea in less than 12 weeks.`,
+			pt: `Favr é um PWA que melhora a qualidade de vida dos cidadãos mais velhos conectando-os com estudantes voluntários. Este projeto faz parte do diploma pós-graduação em Design e Desenvolvimento de Aplicativos Web e Móveis da Langara e exigiu que nossa equipe de 8 pessoas (4 designers e 4 desenvolvedores) construísse um MVP da nossa ideia em menos de 12 semanas.`
+		},
+		longDescription: {
+			en: `Favr is a PWA that improves the life quality of senior citizens by connecting them with volunteer students. This project is part of Langara's Post-Degree Diploma in Web and Mobile App Design and Development program and it demanded that our team of 8 people (4 designers and 4 developers) built a MVP of our idea in less than 12 weeks. Even though the tech stack wasn't new to me, the experience of working so closely with designers and having to ship an entire application in roughly 3 months surely was. We weren't allowed to use libraries or frameworks, so proper project planning and organization was crucial for shipping the app in time. My role there was mainly backend development with JavaScript and management with Firebase platform. It was my first experience with a NoSQL database as well. Besides sharpening my technical programming skills, this project taught me a lot about project management, organization, planning, and strengthened my interpersonal skills.`,
+			pt: `Favr é um PWA que melhora a qualidade de vida dos cidadãos mais velhos conectando-os com estudantes voluntários. Este projeto faz parte do diploma pós-graduação em Design e Desenvolvimento de Aplicativos Web e Móveis da Langara e exigiu que nossa equipe de 8 pessoas (4 designers e 4 desenvolvedores) construísse um MVP da nossa ideia em menos de 12 semanas. Embora a *stack* tecnológica não fosse novidade para mim, a experiência de trabalhar tão próximo de designers e de ter que entregar uma aplicação completa em cerca de três meses certamente foi. Não podíamos utilizar bibliotecas ou *frameworks*, por isso o planejamento e a organização adequados do projeto foram fundamentais para entregarmos o aplicativo no prazo. Minha atuação concentrou-se principalmente no desenvolvimento *backend* com JavaScript e no gerenciamento utilizando a plataforma Firebase. Foi também minha primeira experiência com um banco de dados NoSQL. Além de aprimorar minhas habilidades técnicas de programação, esse projeto me ensinou muito sobre gestão de projetos, organização e planejamento, e fortaleceu minhas habilidades interpessoais.`
+		},
+		platforms: ['Web']
+	},
+	{
+		id: 5,
 		title: { en: "Seb's Portfolio", pt: 'Portfólio de Seb' },
 		coverPath: '/images/seb-richardson.png',
 		url: 'https://sebrichardson.ca/',
@@ -71,7 +88,7 @@ export const works: Work[] = [
 		platforms: ['Web']
 	},
 	{
-		id: 5,
+		id: 6,
 		title: { en: 'Langara Fine Arts Gradshow', pt: 'Exposição Virtual de Artes Finas' },
 		coverPath: '/images/langara-fine-arts-gradshow.png',
 		url: 'https://langarafinagradshow.com/',

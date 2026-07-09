@@ -11,8 +11,9 @@ export const skills: Skill[] = [
 	},
 	{ name: 'C#', iconPath: '/images/csharp.svg', tags: ['languages'] },
 	{ name: 'Python', iconPath: '/images/python.svg', tags: ['backend', 'languages'] },
+	{ name: 'Bash', iconPath: '/images/bash.svg', tags: ['languages'] },
 	{
-		name: 'Tailwind',
+		name: 'TailwindCSS',
 		iconPath: '/images/tailwind.svg',
 		tags: ['frontend']
 	},
@@ -20,6 +21,7 @@ export const skills: Skill[] = [
 	{ name: 'Svelte', iconPath: '/images/svelte.svg', tags: ['frontend'] },
 	{ name: 'WordPress', iconPath: '/images/wordpress.svg', tags: ['frontend', 'backend'] },
 	{ name: 'Next.js', iconPath: '/images/nextjs.svg', tags: ['frontend'] },
+	{ name: 'Expo', iconPath: '/images/expo.svg', tags: ['frontend'] },
 	{ name: 'Node.js', iconPath: '/images/node.svg', tags: ['backend'] },
 	{ name: 'Express', iconPath: '/images/express.svg', tags: ['backend'] },
 	{ name: '.NET', iconPath: '/images/dotnet.svg', tags: ['frontend', 'backend'] },
@@ -27,7 +29,7 @@ export const skills: Skill[] = [
 	{ name: 'NoSQL', iconPath: '/images/nosql.svg', tags: ['backend'] },
 	{ name: 'Docker', iconPath: '/images/docker.svg', tags: ['devops'] },
 	{ name: 'Git', iconPath: '/images/git.svg', tags: ['devops'] },
+	{ name: 'Azure', iconPath: '/images/azure.svg', tags: ['backend'] },
 	{ name: 'AWS', iconPath: '/images/aws.svg', tags: ['backend'] },
 	{ name: 'Firebase', iconPath: '/images/firebase.svg', tags: ['backend'] }
 ];
-

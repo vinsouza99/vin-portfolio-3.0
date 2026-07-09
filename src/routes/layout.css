@@ -58,6 +58,18 @@ body {
 	scroll-behavior: smooth;
 	box-sizing: border-box;
 	overscroll-behavior: none;
+	scrollbar-width: thin;
+	scrollbar-color: var(--color-text) var(--color-secondary-900);
+}
+body::-webkit-scrollbar {
+	width: 8px;
+}
+body::-webkit-scrollbar-track {
+	background: var(--color-secondary-900);
+}
+body::-webkit-scrollbar-thumb {
+	background-color: var(--color-text);
+	border-radius: 4px;
 }
 .content-width {
 	max-width: 1700px;
