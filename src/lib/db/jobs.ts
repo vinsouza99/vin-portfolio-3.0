@@ -10,16 +10,16 @@ export const jobs: Job[] = [
 		company: 'Current Scientific Corporation',
 		location: 'Port Coquitlam, Canada',
 		shortDescription: {
-			en: 'Developed a remote controller app for AI-powered EO/IR camera systems used in the maritime industry worldwide and collaborated with the ROS software running on the cameras.',
-			pt: 'Como parte da divisão de IA, desenvolvi a interface do usuário para um controlador remoto de iPad de sistemas de câmeras EO/IR com tecnologia de IA usados na indústria marítima em todo o mundo. Colaborei com o software ROS que roda nas câmeras.'
+			en: 'Developed a controller interface for AI-powered EO/IR camera systems for the maritime industry.',
+			pt: 'Desenvolvi a interface do usuário para um controlador remoto de iPad de sistemas de câmeras EO/IR com tecnologia de IA usados na indústria marítima.'
 		},
 
 		url: 'https://current-ai.com',
 		startYear: 2025,
 		endYear: Infinity,
 		longDescription: {
-			en: `As part of the AI division, I developed the user interface for an iPad remote controller of AI-powered EO/IR camera systems with React Native and TypeScript. The project intends to turn the cameras sold by Current Scientific into automated lookouts that understands it surroundings, classify and track vessels, and alert for dangers. Initially hired as a frontend developer for the camera controller, I gradually started to collaborate with the ROS software running on the cameras. Now, I am responsible for a couple of complicated core features, such as a custom autofocus algorithm for the thermal camera and the algorithm for having the camera lock on a target of interest and follow it. It's by far the hardest project I have worked on as it involves advanced distributed system design, mathematics, and physics.`,
-			pt: 'Como parte da divisão de IA, desenvolvi a interface de usuário para um controle remoto via iPad de sistemas de câmeras EO/IR (eletro-ópticas/infravermelhas) com tecnologia de IA, utilizando React Native e TypeScript. O projeto visa transformar as câmeras comercializadas pela Current Scientific em sistemas de vigilância automatizados capazes de compreender o ambiente, classificar e rastrear embarcações e emitir alertas de perigo. Inicialmente contratado como desenvolvedor frontend para o controle da câmera, passei a colaborar gradualmente com o software ROS que opera nos equipamentos. Atualmente, sou responsável por funcionalidades centrais complexas, como um algoritmo de foco automático personalizado para a câmera térmica e o algoritmo que permite à câmera travar em um alvo de interesse e acompanhá-lo. Este é, de longe, o projeto mais desafiador em que já trabalhei, pois envolve conceitos avançados de design de sistemas distribuídos, matemática e física.'
+			en: `As part of the AI division, I develop and maintain a distributed system that empowers EO/IR cameras with computer vision and object detection. Initially brought on as a frontend developer for our camera controller interface, I progressively took on more complex architecture challenges, eventually collaborating directly with the ROS software running on the hardware. On the frontend, I build with TypeScript and modern frameworks like React, React Native, and Svelte. On the backend, I develop with Python and design and maintain PostgreSQL databases, while managing our DevOps lifecycle via GitHub CI/CD pipelines and Docker images in Azure. I thrive in our Agile environment, actively participating in daily stand-ups and sprint retrospectives to ensure continuous delivery.`,
+			pt: 'Como parte da divisão de IA, desenvolvo e mantenho um sistema distribuído que dota câmeras EO/IR de recursos de visão computacional e detecção de objetos. Inicialmente contratado como desenvolvedor frontend para a interface de controle das câmeras, assumi progressivamente desafios de arquitetura mais complexos, passando a colaborar diretamente com o software ROS em execução no hardware. No frontend, trabalho com TypeScript e frameworks modernos como React, React Native e Svelte. No backend, desenvolvo com Python e projeto e mantenho bancos de dados PostgreSQL, ao mesmo tempo em que gerencio nosso ciclo de vida DevOps por meio de pipelines de CI/CD no GitHub e imagens Docker no Azure. Atuo com sucesso em nosso ambiente ágil, participando ativamente de reuniões diárias e retrospectivas de sprint para garantir a entrega contínua.'
 		},
 		tags: [
 			'TypeScript',
@@ -43,8 +43,8 @@ export const jobs: Job[] = [
 		company: 'Langara College',
 		location: 'Vancouver, Canada',
 		shortDescription: {
-			en: 'Maintained a headless CMS built with Next.js, WordPress, and GraphQL/Apollo that serves as a platform for graduates of the Fine Arts program to publish their work.',
-			pt: 'Mantive um CMS headless construído com Next.js, WordPress, e GraphQL/Apollo que serve como uma plataforma para graduados do programa de Artes Visuais publicarem seu trabalho.'
+			en: 'Maintained a headless CMS built that serves as a platform for graduates of the Fine Arts program to publish their work.',
+			pt: 'Mantive um CMS headless que serve como uma plataforma para graduados do programa de Artes Visuais publicarem seu trabalho.'
 		},
 		url: 'https://langara.ca/',
 		startYear: 2025,
@@ -77,15 +77,15 @@ export const jobs: Job[] = [
 		location: 'Recife, Brazil',
 		url: 'https://www.wipro.com/en-BR/',
 		shortDescription: {
-			en: 'Worked on web-based control systems for the  Transit Department built with ASP.NET. User base  include used both internally by the department officers and by the general public for booking services, registering and controlling vehicles, and generating reports',
-			pt: 'Trabalhei em sistemas de controle baseados na web para o Departamento de Trânsito construídos com ASP.NET. A base de usuários inclui tanto os funcionários do departamento quanto o público em geral para agendar serviços, registrar e controlar veículos, e gerar relatórios'
+			en: 'Worked on web-based control systems for the  Transit Department built with ASP.NET.',
+			pt: 'Trabalhei em sistemas de controle baseados na web para o DETRAN de Pernambuco com ASP.NET.'
 		},
 		startYear: 2023,
 		longDescription: {
 			en: 'I worked with a team of developers and designers on web apps for the Transit Department of my homestate in Brazil, which were to be used by millions of drivers and officers. The app I was responsible for most of the time was a vehicle control system that allowed services scheduling, vehicle registration and updating, and reports generation. Other responsabilities involved code versioning with Tortoise SVN and project planning with Agile (SCRUM).',
 			pt: 'Trabalhei com uma equipe de desenvolvedores e designers em aplicações web para o Departamento de Trânsito do meu estado natal no Brasil, que deveriam ser usadas por milhões de motoristas e agentes. O app pelo qual fui responsável na maior parte do tempo era um sistema de controle de veículos que permitia agendamento de serviços, registro e atualização de veículos, e geração de relatórios. Outras responsabilidades envolviam versionamento de código com Tortoise SVN e planejamento de projetos com Agile (SCRUM).'
 		},
-		tags: ['C#', 'MySQL', '.NET', 'TortoiseSVN', 'SCRUM']
+		tags: ['C#', 'MySQL', '.NET', 'TortoiseSVN', 'Agile']
 	},
 	{
 		id: 4,

@@ -10,11 +10,11 @@ export const works: Work[] = [
 		startYear: 2025,
 		endYear: 2026,
 		shortDescription: {
-			en: 'I developed the user interface for an iPad remote controller of AI-powered EO/IR camera systems used in the maritime industry worldwide and collaborated with the ROS software running on the cameras.',
+			en: 'I developed the controller of AI-powered EO/IR camera systems used in the maritime industry worldwide and collaborated with the ROS software running on the cameras.',
 			pt: 'Desenvolvi a interface do usuário para um controlador remoto do iPad de sistemas de câmeras EO/IR impulsionados por IA usados na indústria marítima em todo o mundo e colaborei com o software ROS em execução nas câmeras.'
 		},
 		longDescription: {
-			en: `As part of the AI division, developed the user interface for an iPad remote controller of AI-powered EO/IR camera systems used in the maritime industry worldwide. Collaborated with the ROS software running on the cameras.`,
+			en: `As part of the AI division, developed the user interface for an iPad remote controller of AI-powered EO/IR camera systems used in the maritime industry worldwide. The project intends to turn the cameras sold by Current Scientific into automated lookouts that understands it surroundings, classify and track vessels, and alert for dangers. Initially hired as a frontend developer for the controller interface, I gradually started to collaborate with the ROS software running on the cameras. Now, I am responsible for a couple of complicated core features, such as a custom autofocus algorithm for the thermal camera and the algorithm for having the camera lock on a target of interest and follow it. It's by far the hardest project I have worked on as it involves advanced distributed system design, mathematics, and physics.`,
 			pt: `Como parte da divisão de IA, desenvolvi a interface do usuário para um controlador remoto do iPad de sistemas de câmeras EO/IR impulsionados por IA usados na indústria marítima em todo o mundo. Colaborei com o software ROS em execução nas câmeras.`
 		},
 		platforms: ['iOS', 'Web']
