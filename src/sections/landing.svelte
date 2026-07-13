@@ -15,6 +15,8 @@
 	let { endTrigger = null }: Props = $props(); // Use the interface directly here
 	let isMdUp = $state(false);
 	let isFixedReady = $state(false);
+	let isFirstLoad = $state(true); // Track first load for typewriter effect
+
 	let sectionEl: HTMLElement | null = null;
 	let leftWrapperEl: HTMLElement | null = null;
 	let helloEl: HTMLParagraphElement | null = null;
@@ -31,6 +33,43 @@
 	const SCRAMBLE_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 	const randomScrambleChar = () =>
 		SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
+
+	const typewriterIn = (
+		element: HTMLElement | null,
+		targetText: string,
+		duration = 1.5,
+		delay = 0,
+		keepCaret = false
+	) => {
+		if (!element) return null;
+		const length = targetText.length;
+		const state = { progress: 0 };
+
+		// Clear text immediately so it doesn't flash before typing starts
+		element.textContent = '';
+
+		return gsap.to(state, {
+			progress: 1,
+			duration,
+			delay: delay,
+			ease: 'none',
+			onStart: () => {
+				element.classList.add('blinking-caret');
+			},
+			onUpdate: () => {
+				const revealCount = Math.floor(state.progress * length);
+				element.textContent = targetText.slice(0, revealCount);
+			},
+			onComplete: () => {
+				element.textContent = targetText;
+				if (!keepCaret) {
+					element.classList.remove('blinking-caret');
+				} else {
+					element.classList.add('animated-blink');
+				}
+			}
+		});
+	};
 
 	const scrambleIn = (element: HTMLElement | null, targetText: string, duration = 0.75) => {
 		if (!element) return null;
@@ -103,6 +142,11 @@
 			if (!isMdUp) {
 				isFixedReady = false;
 				gsap.set(leftWrapperEl, { clearProps: 'all' });
+				// Fallback to ensure text isn't left empty if user resized while animating
+				if (helloEl) helloText = t($language, 'landing.hello');
+				if (introEl) introText = t($language, 'landing.intro');
+				if (nameEl) nameText = 'Vin';
+				if (roleEl) roleText = t($language, 'landing.role');
 				return;
 			}
 
@@ -125,14 +169,31 @@
 					gsap.set(leftWrapperEl, { autoAlpha: 1, zIndex: 1000, pointerEvents: 'auto' });
 					gsap.killTweensOf([helloEl, introEl, nameEl, roleEl]);
 					const enterTl = gsap.timeline();
-					const helloTween = scrambleIn(helloEl, t($language, 'landing.hello'), 0.5);
-					const introTween = scrambleIn(introEl, t($language, 'landing.intro'), 0.75);
-					const nameTween = scrambleIn(nameEl, 'Vin', 0.75);
-					const roleTween = scrambleIn(roleEl, t($language, 'landing.role'), 0.5);
-					if (helloTween) enterTl.add(helloTween, 0);
-					if (introTween) enterTl.add(introTween, 0);
-					if (nameTween) enterTl.add(nameTween, 0.2);
-					if (roleTween) enterTl.add(roleTween, 0.1);
+					if (isFirstLoad) {
+						isFirstLoad = false;
+						// 1. Typewriting on first load
+						const helloTw = typewriterIn(helloEl, t($language, 'landing.hello'), 1.5);
+						const introTw = typewriterIn(introEl, t($language, 'landing.intro'), 1, 1.5);
+						const nameTw = typewriterIn(nameEl, 'Vin', 0.5, 2);
+						const roleTw = typewriterIn(roleEl, t($language, 'landing.role'), 2.5, 2.5, true);
+
+						// Staggering the typewriter effect slightly looks more natural
+						if (helloTw) enterTl.add(helloTw, 0);
+						if (introTw) enterTl.add(introTw, 0.3);
+						if (nameTw) enterTl.add(nameTw, 0.8);
+						if (roleTw) enterTl.add(roleTw, 1.1);
+					} else {
+						// 2. Scramble in if navigating back later
+						const helloTween = scrambleIn(helloEl, t($language, 'landing.hello'), 0.5);
+						const introTween = scrambleIn(introEl, t($language, 'landing.intro'), 0.75);
+						const nameTween = scrambleIn(nameEl, 'Vin', 0.75);
+						const roleTween = scrambleIn(roleEl, t($language, 'landing.role'), 0.5);
+
+						if (helloTween) enterTl.add(helloTween, 0);
+						if (introTween) enterTl.add(introTween, 0);
+						if (nameTween) enterTl.add(nameTween, 0.2);
+						if (roleTween) enterTl.add(roleTween, 0.1);
+					}
 				},
 				onEnterBack: () => {
 					// Make visible when entering back
@@ -191,20 +252,6 @@
 
 			// Refresh ScrollTrigger to ensure trigger positions are accurate
 			ScrollTrigger.refresh();
-
-			// Set initial state: landing is already visible on page load, so show it immediately
-			if (scrollTrigger?.isActive) {
-				gsap.set(leftWrapperEl, { zIndex: 1000, pointerEvents: 'auto' });
-				const initialTl = gsap.timeline();
-				const helloInitTween = scrambleIn(helloEl, t($language, 'landing.hello'), 0.5);
-				const introInitTween = scrambleIn(introEl, t($language, 'landing.intro'), 0.75);
-				const nameInitTween = scrambleIn(nameEl, 'Vin', 0.75);
-				const roleInitTween = scrambleIn(roleEl, t($language, 'landing.role'), 0.5);
-				if (helloInitTween) initialTl.add(helloInitTween, 0);
-				if (introInitTween) initialTl.add(introInitTween, 0);
-				if (nameInitTween) initialTl.add(nameInitTween, 0.2);
-				if (roleInitTween) initialTl.add(roleInitTween, 0.1);
-			}
 		};
 
 		let ctx = gsap.context(setupScroll);
@@ -292,7 +339,7 @@
 	>
 		<div
 			bind:this={leftWrapperEl}
-			class="flex flex-col content-center justify-center gap-5 text-left font-mono text-primary-500 text-shadow-lg/60 text-shadow-primary-800/60 md:sticky md:top-80 md:justify-center md:gap-8"
+			class="flex flex-col content-center justify-center gap-5 text-left font-mono text-primary-500 opacity-100 text-shadow-lg/60 text-shadow-primary-800/60 md:sticky md:top-80 md:justify-center md:gap-8 md:opacity-0"
 		>
 			<p bind:this={helloEl} class="block text-center text-xl md:text-left">
 				{helloText}
@@ -303,19 +350,9 @@
 					>{nameText}</span
 				>
 			</h2>
-			<p bind:this={roleEl} class="block text-center text-xl md:text-left">
+			<p bind:this={roleEl} class="max-w-fit text-center text-xl md:text-left">
 				{roleText}
 			</p>
 		</div>
 	</div>
-
-	<!-- <div
-		class="section-content col-start-1 flex h-full flex-1 content-center gap-5 overflow-hidden text-left align-middle md:col-start-2 md:flex-col md:items-end md:justify-center"
-	>
-		<p
-			class="block w-full max-w-full text-center text-lg font-thin text-text/90 md:max-w-110 md:text-2xl md:leading-loose"
-		>
-			{t($language, 'landing')}
-		</p>
-	</div> -->
 </section>

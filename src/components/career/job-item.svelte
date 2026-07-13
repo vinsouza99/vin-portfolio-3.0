@@ -17,7 +17,7 @@
 <button
 	title={$language === 'en' ? job.title.en : job.title.pt}
 	onclick={onClick}
-	class="glass-container flex h-fit min-h-25 w-full max-w-[75vw] flex-col gap-1 overflow-visible rounded-2xl! bg-bg/0 p-5 transition-colors duration-300 ease-in-out hover:cursor-pointer! hover:bg-bg/50! focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-secondary-700/50 focus:outline-none sm:max-w-[55vw]
+	class="glass-container flex h-fit min-h-25 w-full flex-col gap-1 overflow-visible rounded-2xl! bg-bg/0 p-5 transition-colors duration-300 ease-in-out hover:cursor-pointer! hover:bg-bg/50! focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-secondary-700/50 focus:outline-none sm:max-w-[55vw] md:max-w-[75vw]
         @lg:max-w-screen @lg:flex-row @lg:gap-5
         {isSelected
 		? 'border-secondary-700/50 bg-secondary-500/20 text-secondary-100'

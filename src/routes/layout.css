@@ -222,6 +222,32 @@ Retrieved 2026-07-02, License - CC BY-SA 4.0
 	background-color: var(--color-text);
 	border-radius: 4px;
 }
+@keyframes blink-caret {
+	from,
+	to {
+		background-color: transparent;
+	}
+	50% {
+		background-color: #00e8d8;
+	}
+}
+.blinking-caret {
+	position: relative;
+	display: inline-block;
+}
+.blinking-caret::after {
+	content: '';
+	width: 10px;
+	position: absolute;
+	top: 0;
+	right: -15px;
+	bottom: 0;
+	height: 100%;
+	background-color: #00e8d8;
+}
+.animated-blink::after {
+	animation: blink-caret 1s step-end infinite;
+}
 
 :global(input:-webkit-autofill),
 :global(textarea:-webkit-autofill),
