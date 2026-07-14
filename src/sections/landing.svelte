@@ -2,7 +2,6 @@
 	import { onDestroy, onMount } from 'svelte';
 	import { getLanguageContext, t, type Locale } from '$lib/i18n';
 	import { getScrollContext } from '$lib/contexts/scroll-context';
-	const language = getLanguageContext();
 	interface Props {
 		/**
 		 * Optional GSAP ScrollTrigger `endTrigger`.
@@ -11,6 +10,8 @@
 		 */
 		endTrigger?: HTMLElement | string | null;
 	}
+	let getLang = getLanguageContext();
+	let language = $derived(getLang());
 
 	let { endTrigger = null }: Props = $props(); // Use the interface directly here
 	let isMdUp = $state(false);
@@ -23,10 +24,11 @@
 	let roleEl: HTMLParagraphElement | null = null;
 	let scrollTrigger: ScrollTrigger | null = null;
 
-	let helloText = $state(t($language, 'landing.hello'));
-	let introText = $state(t($language, 'landing.intro'));
-	let nameText = $state('Vin');
-	let roleText = $state(t($language, 'landing.role'));
+	let helloText = $derived(t(language, 'landing.hello'));
+	let introText = $derived(t(language, 'landing.intro'));
+	let roleText = $derived(t(language, 'landing.role'));
+
+	const nameText = 'Vin';
 
 	const SCRAMBLE_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 	const randomScrambleChar = () =>
@@ -212,7 +214,7 @@
 		// Keep ScrollTrigger state consistent if viewport crosses md breakpoint
 		mq.addEventListener('change', setupScroll);
 
-		// Subscribe to language changes and animate or update immediately.
+		// Subscribe to $language changes and animate or update immediately.
 		let localeInitialized = false;
 		let prevLocale: Locale | null = null;
 		const handleLocaleChange = (locale: Locale) => {
@@ -251,12 +253,11 @@
 				gsap.killTweensOf([helloEl, introEl, nameEl, roleEl]);
 				helloText = t(locale, 'landing.hello');
 				introText = t(locale, 'landing.intro');
-				nameText = 'Vin';
 				roleText = t(locale, 'landing.role');
 			}
 		};
 
-		const unsubscribeLang = language.subscribe(handleLocaleChange);
+		const unsubscribeLang = $language.subscribe(handleLocaleChange);
 
 		return () => {
 			mq.removeEventListener('change', updateMq);

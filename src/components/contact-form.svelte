@@ -66,7 +66,8 @@
 		}
 	};
 
-	const language = getLanguageContext();
+	let getLang = getLanguageContext();
+	let language = $derived(getLang());
 
 	type ToastType = 'success' | 'error';
 	const ToastColor = {
@@ -161,17 +162,17 @@
 				email = '';
 				subject = '';
 				message = '';
-				addToast('success', t($language, 'sections.contact.form.success'));
+				addToast('success', t(language, 'sections.contact.form.success'));
 			} else {
 				formStatus = 'error';
 				console.log(result.error || 'Failed to send the message.');
-				addToast('error', t($language, 'sections.contact.form.error'));
+				addToast('error', t(language, 'sections.contact.form.error'));
 			}
 		} catch (error) {
 			console.error(error);
 			formStatus = 'error';
 			console.log('A network error occurred. Please try again later.');
-			addToast('error', t($language, 'sections.contact.form.error'));
+			addToast('error', t(language, 'sections.contact.form.error'));
 		} finally {
 			isSubmitting = false;
 		}
@@ -211,21 +212,21 @@
 >
 	{#if formStatus === 'success'}
 		<Toast>
-			{t($language, 'sections.contact.form.success')}
+			{t(language, 'sections.contact.form.success')}
 		</Toast>
 		<!-- <Alert color="green" class="mb-4" border={false}>
-				{t($language, 'sections.contact.form.success')}
+				{t(language, 'sections.contact.form.success')}
 			</Alert> -->
 	{/if}
 
 	<div class="flex w-full flex-col items-baseline font-thin md:flex-row">
 		<Label for="email" class="text-md w-15 font-thin text-secondary-500 md:mb-2"
-			>{t($language, 'sections.contact.form.from')} *</Label
+			>{t(language, 'sections.contact.form.from')} *</Label
 		>
 		<Input
 			id="email"
 			type="email"
-			placeholder={t($language, 'sections.contact.form.email-placeholder')}
+			placeholder={t(language, 'sections.contact.form.email-placeholder')}
 			bind:value={email}
 			required
 			class="w-full border-0! bg-transparent px-0 text-text! outline-0! placeholder:text-text/50 md:ml-1 md:px-2.5 "
@@ -233,7 +234,7 @@
 	</div>
 	<div class="flex w-full flex-col items-baseline font-thin md:flex-row">
 		<label for="my-email" class="text-md w-15 font-thin text-secondary-500 md:mb-2"
-			>{t($language, 'sections.contact.form.to')}</label
+			>{t(language, 'sections.contact.form.to')}</label
 		>
 		<button
 			id="my-email"
@@ -247,13 +248,13 @@
 	</div>
 	<div class="flex w-full flex-col items-baseline font-thin md:flex-row">
 		<Label for="subject" class="text-md w-15 font-thin text-secondary-500 md:mb-2"
-			>{t($language, 'sections.contact.form.subject')}</Label
+			>{t(language, 'sections.contact.form.subject')}</Label
 		>
 		<Input
 			id="subject"
 			type="text"
 			class="border-0! bg-transparent px-0 text-text outline-0! placeholder:text-text/50 md:ml-1 md:px-2.5"
-			placeholder={t($language, 'sections.contact.form.subject-placeholder')}
+			placeholder={t(language, 'sections.contact.form.subject-placeholder')}
 			bind:value={subject}
 		></Input>
 	</div>
@@ -261,7 +262,7 @@
 	<div class="text-md flex w-full items-baseline font-thin">
 		<textarea
 			id="message"
-			placeholder={t($language, 'sections.contact.form.message-placeholder')}
+			placeholder={t(language, 'sections.contact.form.message-placeholder')}
 			rows={6}
 			bind:value={message}
 			required
@@ -277,10 +278,10 @@
 			outline
 		>
 			{#if isSubmitting}
-				{t($language, 'sections.contact.form.submitting')}
+				{t(language, 'sections.contact.form.submitting')}
 			{:else}
 				<!-- <Send class="h-6 w-6" /> -->
-				{t($language, 'sections.contact.form.submit-button')}
+				{t(language, 'sections.contact.form.submit-button')}
 			{/if}
 		</Button>
 	</div>

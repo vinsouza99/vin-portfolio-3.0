@@ -1,22 +1,14 @@
 <script lang="ts">
-	import { setContext } from 'svelte';
 	import { Footer, FooterCopyright, FooterIcon, ButtonGroup, Button } from 'flowbite-svelte';
 	import { GithubSolid, LinkedinSolid } from 'flowbite-svelte-icons';
-	import { getLanguageContext, type Locale } from '$lib/i18n';
+	import { getLanguageContext } from '$lib/i18n';
 
 	const currentYear = new Date().getFullYear();
-	const language = getLanguageContext();
+	let getLang = getLanguageContext();
+	let language = $derived(getLang());
 
-	const setLocale = async (locale: Locale) => {
-		language.set(locale);
-		await fetch('/api/locale', {
-			method: 'POST',
-			headers: { 'content-type': 'application/json' },
-			body: JSON.stringify({ locale })
-		});
-		setContext('language', locale);
-		window.location.reload();
-	};
+	// let otherLang = $derived(page.params.lang === 'en' ? 'pt-br' : 'en');
+	// let otherPath = $derived(page.url.pathname.replace(`/${page.params.lang}`, `/${otherLang}`));
 </script>
 
 <Footer
@@ -28,16 +20,16 @@
 		<Button
 			outline
 			title="English"
-			class={`cursor-pointer border-0 px-1 font-thin hover:text-primary-500 active:text-primary-500 ${$language === 'en' ? 'text-primary-500' : 'text-primary-800'}`}
-			onclick={() => void setLocale('en')}
+			href="/en"
+			class={`cursor-pointer border-0 px-1 font-thin hover:text-primary-500 active:text-primary-500 ${language === 'en' ? 'text-primary-500' : 'text-primary-800'}`}
 			><span aria-hidden="true" class="not-sr-only">EN</span><span class="sr-only">English</span
 			></Button
 		>
 		<Button
 			outline
 			title="Português (BR)"
-			class={`cursor-pointer border-0 px-1 font-thin hover:text-primary-500 active:text-primary-500 ${$language === 'pt-BR' ? 'text-primary-500' : 'text-primary-800'}`}
-			onclick={() => void setLocale('pt-BR')}
+			class={`cursor-pointer border-0 px-1 font-thin hover:text-primary-500 active:text-primary-500 ${language === 'pt-br' ? 'text-primary-500' : 'text-primary-800'}`}
+			href="/pt-br"
 			><span aria-hidden="true" class="not-sr-only">PT</span><span class="sr-only">Português</span
 			></Button
 		>

@@ -9,13 +9,17 @@
 
 	import { setScrollContext } from '$lib/contexts/scroll-context';
 	import Navbar from '../components/navbar.svelte';
-	import { setLanguageContext } from '$lib/i18n';
+	//import { setLanguageContext } from '$lib/i18n';
+	import { page } from '$app/state';
+	import { setContext } from 'svelte';
 
 	let { children } = $props<{
 		children: import('svelte').Snippet;
 	}>();
-	setLanguageContext('en');
+	let lang = $derived(page.params.lang);
+	//setLanguageContext('en');
 	setScrollContext('landing');
+	setContext('lang', () => lang);
 </script>
 
 <svelte:head><link rel="icon" href={favicon} /><title>Vin Souza</title></svelte:head>

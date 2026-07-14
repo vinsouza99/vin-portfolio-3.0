@@ -1,13 +1,13 @@
 import { getContext, setContext } from 'svelte';
-import { writable, type Writable } from 'svelte/store';
+import { writable } from 'svelte/store';
 
-export const supportedLocales = ['en', 'pt-BR'] as const;
+export const supportedLocales = ['en', 'pt-br'] as const;
 export type Locale = supportedLocales[number];
 
 const languageContextKey = Symbol('language');
 
 export const normalizeLocale = (value: string | null | undefined): Locale => {
-	return value === 'pt-BR' ? 'pt-BR' : 'en';
+	return value === 'pt-br' ? 'pt-br' : 'en';
 };
 
 export const messages = {
@@ -57,7 +57,7 @@ export const messages = {
 		'skills.tag.languages': 'languages',
 		present: 'present'
 	},
-	'pt-BR': {
+	'pt-br': {
 		landing: `Tenho mais de 5 anos de experiência construindo experiências web e móveis bem pensadas usando linguagens, frameworks e ferramentas modernas.`,
 		'nav.skills': 'habilidades',
 		'nav.works': 'projetos',
@@ -114,12 +114,16 @@ export const setLanguageContext = (initialLocale: string | null | undefined) => 
 	return language;
 };
 
-export const getLanguageContext = (): Writable<Locale> => {
-	const context = getContext<Writable<Locale> | undefined>(languageContextKey);
-	if (!context) {
-		throw new Error(
-			'Language context was not initialized. Call setLanguageContext in +layout.svelte.'
-		);
-	}
-	return context;
-};
+// export const getLanguageContext = (): Writable<Locale> => {
+// 	const context = getContext<Writable<Locale> | undefined>(languageContextKey);
+// 	if (!context) {
+// 		throw new Error(
+// 			'Language context was not initialized. Call setLanguageContext in +layout.svelte.'
+// 		);
+// 	}
+// 	return context;
+// };
+
+export function getLanguageContext(): () => Locale {
+	return getContext('lang');
+}

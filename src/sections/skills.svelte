@@ -4,13 +4,14 @@
 	import { getLanguageContext, t } from '$lib/i18n';
 
 	let { endTrigger }: { endTrigger?: string | null } = $props();
-	const language = getLanguageContext();
+	let getLang = getLanguageContext();
+	let language = $derived(getLang());
 </script>
 
 <ContentSection
 	sectionId="skills"
-	header={t($language, 'sections.skills.title')}
-	summary={t($language, 'sections.skills.summary')}
+	header={t(language, 'sections.skills.title')}
+	summary={t(language, 'sections.skills.summary')}
 	content={SkillsList}
 	{endTrigger}
 />

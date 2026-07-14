@@ -11,12 +11,13 @@
 
 	let { work, isSelected = false, onClick }: Props = $props();
 
-	let language = getLanguageContext();
+	let getLang = getLanguageContext();
+	let language = $derived(getLang());
 </script>
 
 <div class="@container h-full w-full min-w-75! overflow-visible">
 	<button
-		title={$language === 'en' ? work.title.en : work.title.pt}
+		title={language === 'en' ? work.title.en : work.title.pt}
 		onclick={onClick}
 		class="glass-container flex h-fit min-h-50 w-full max-w-[75vw] flex-col gap-0 overflow-visible rounded-2xl! bg-bg/0 p-0 transition-colors duration-300 ease-in-out hover:cursor-pointer! hover:bg-bg/50! focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-secondary-700/50 focus:outline-none sm:max-w-[55vw]
         @lg:max-w-screen @lg:flex-row @lg:gap-1
@@ -30,14 +31,14 @@
 			{#if work.coverPath}
 				<img
 					src={work.coverPath}
-					alt={$language === 'en' ? work.title.en : work.title.pt}
+					alt={language === 'en' ? work.title.en : work.title.pt}
 					aria-hidden="true"
 					class="absolute inset-0 h-full w-full object-contain object-center blur-2xl"
 				/>
 
 				<img
 					src={work.coverPath}
-					alt={$language === 'en' ? work.title.en : work.title.pt}
+					alt={language === 'en' ? work.title.en : work.title.pt}
 					class="relative z-1 w-full object-contain object-center"
 				/>
 			{/if}
@@ -48,14 +49,14 @@
 		>
 			<div class="flex justify-between">
 				<h3 class="flex text-left font-mono text-lg text-primary-600">
-					{$language === 'en' ? work.title.en : work.title.pt}
+					{language === 'en' ? work.title.en : work.title.pt}
 				</h3>
 				<span class="text-sm font-thin text-text/50! italic">{work.platforms?.join(', ')}</span>
 			</div>
 			<p
 				class="truncate-text flex h-full max-h-20 grow overflow-hidden text-left text-sm font-thin text-secondary-300/80 @md:max-h-full"
 			>
-				{$language === 'en' ? work.shortDescription?.en : work.shortDescription?.pt}
+				{language === 'en' ? work.shortDescription?.en : work.shortDescription?.pt}
 			</p>
 			<!-- <p
 				class="block truncate overflow-hidden text-left text-sm font-thin whitespace-nowrap text-secondary-300/80"

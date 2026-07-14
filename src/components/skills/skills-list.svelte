@@ -4,7 +4,8 @@
 	import { skills } from '$lib/db/skills';
 	import { getLanguageContext, t } from '$lib/i18n';
 
-	const language = getLanguageContext();
+	let getLang = getLanguageContext();
+	let language = $derived(getLang());
 
 	// Tag keys (used for filtering) and localized labels
 	const tagKeys = ['all', 'frontend', 'backend', 'devops', 'languages'];
@@ -12,7 +13,10 @@
 	const ptTags = ['todas', 'frontend', 'backend', 'devops', 'linguagens'];
 
 	// Reactive labels array based on current language
-	$: tags = $language === 'pt-BR' ? ptTags : enTags;
+	let tags = enTags;
+	$effect(() => {
+		tags = $language === 'pt-BR' ? ptTags : enTags;
+	});
 
 	// Keep the selected tag as a key (language-independent)
 	let selectedTagKey = 'all';
