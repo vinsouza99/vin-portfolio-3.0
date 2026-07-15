@@ -37,9 +37,15 @@
 		}))
 	);
 
-	// $effect(() => {
-	// 	language.set(currentLocale);
-	// });
+	function scrollToSection(e: MouseEvent, id: string) {
+		e.preventDefault();
+		const target = document.getElementById(id);
+		if (target) {
+			target.scrollIntoView();
+			history.replaceState(null, '', `#${id}`); // keeps URL in sync without navigation
+		}
+		closeMenu();
+	}
 
 	onMount(() => {
 		if (!browser) return;
@@ -163,7 +169,7 @@
 					<li class="h-25 w-full align-middle md:h-fit">
 						<a
 							href={`/#${link.key}`}
-							onclick={closeMenu}
+							onclick={(e) => scrollToSection(e, link.key)}
 							title={link.label}
 							class={`letter-spacing block content-center font-thin transition-colors duration-200 ease-in-out text-shadow-md text-shadow-secondary-800/0 hover:text-primary-500  active:text-primary-500 ${isMdDown ? 'h-full w-full p-5 text-2xl hover:bg-secondary-500/10' : 'px-1 text-lg md:text-xl'} ${
 								isMenuOpen && isMdDown
