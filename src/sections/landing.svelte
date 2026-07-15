@@ -1,7 +1,10 @@
 <script lang="ts">
 	import { onDestroy, onMount } from 'svelte';
-	import { getLanguageContext, t, type Locale } from '$lib/i18n';
+	import { getLanguageContext, t } from '$lib/i18n';
 	import { getScrollContext } from '$lib/contexts/scroll-context';
+	import { browser } from '$app/environment';
+	import { afterNavigate } from '$app/navigation';
+
 	interface Props {
 		/**
 		 * Optional GSAP ScrollTrigger `endTrigger`.
@@ -86,6 +89,7 @@
 	const section = getScrollContext();
 
 	const onMountCb = async () => {
+		if (!browser) return;
 		({ gsap } = await import('gsap'));
 		const { ScrollTrigger } = await import('gsap/ScrollTrigger');
 		gsap.registerPlugin(ScrollTrigger);
@@ -127,10 +131,10 @@
 					gsap.set(leftWrapperEl, { autoAlpha: 1, zIndex: 1000, pointerEvents: 'auto' });
 					gsap.killTweensOf([helloEl, introEl, nameEl, roleEl]);
 					const enterTl = gsap.timeline();
-					const helloTween = scrambleIn(helloEl, t($language, 'landing.hello'), 0.5);
-					const introTween = scrambleIn(introEl, t($language, 'landing.intro'), 0.75);
+					const helloTween = scrambleIn(helloEl, t(language, 'landing.hello'), 0.5);
+					const introTween = scrambleIn(introEl, t(language, 'landing.intro'), 0.75);
 					const nameTween = scrambleIn(nameEl, 'Vin', 0.75);
-					const roleTween = scrambleIn(roleEl, t($language, 'landing.role'), 0.5);
+					const roleTween = scrambleIn(roleEl, t(language, 'landing.role'), 0.5);
 					if (helloTween) enterTl.add(helloTween, 0);
 					if (introTween) enterTl.add(introTween, 0);
 					if (nameTween) enterTl.add(nameTween, 0.2);
@@ -142,10 +146,10 @@
 					gsap.set(leftWrapperEl, { autoAlpha: 1, zIndex: 1000, pointerEvents: 'auto' });
 					gsap.killTweensOf([helloEl, introEl, nameEl, roleEl]);
 					const enterBackTl = gsap.timeline();
-					const helloBackTween = scrambleIn(helloEl, t($language, 'landing.hello'), 0.5);
-					const introBackTween = scrambleIn(introEl, t($language, 'landing.intro'), 0.75);
+					const helloBackTween = scrambleIn(helloEl, t(language, 'landing.hello'), 0.5);
+					const introBackTween = scrambleIn(introEl, t(language, 'landing.intro'), 0.75);
 					const nameBackTween = scrambleIn(nameEl, 'Vin', 0.75);
-					const roleBackTween = scrambleIn(roleEl, t($language, 'landing.role'), 0.5);
+					const roleBackTween = scrambleIn(roleEl, t(language, 'landing.role'), 0.5);
 					if (helloBackTween) enterBackTl.add(helloBackTween, 0);
 					if (introBackTween) enterBackTl.add(introBackTween, 0);
 					if (nameBackTween) enterBackTl.add(nameBackTween, 0.2);
@@ -198,10 +202,10 @@
 			if (scrollTrigger?.isActive) {
 				gsap.set(leftWrapperEl, { zIndex: 1000, pointerEvents: 'auto' });
 				const initialTl = gsap.timeline();
-				const helloInitTween = scrambleIn(helloEl, t($language, 'landing.hello'), 0.5);
-				const introInitTween = scrambleIn(introEl, t($language, 'landing.intro'), 0.75);
+				const helloInitTween = scrambleIn(helloEl, t(language, 'landing.hello'), 0.5);
+				const introInitTween = scrambleIn(introEl, t(language, 'landing.intro'), 0.75);
 				const nameInitTween = scrambleIn(nameEl, 'Vin', 0.75);
-				const roleInitTween = scrambleIn(roleEl, t($language, 'landing.role'), 0.5);
+				const roleInitTween = scrambleIn(roleEl, t(language, 'landing.role'), 0.5);
 				if (helloInitTween) initialTl.add(helloInitTween, 0);
 				if (introInitTween) initialTl.add(introInitTween, 0);
 				if (nameInitTween) initialTl.add(nameInitTween, 0.2);
@@ -214,55 +218,9 @@
 		// Keep ScrollTrigger state consistent if viewport crosses md breakpoint
 		mq.addEventListener('change', setupScroll);
 
-		// Subscribe to $language changes and animate or update immediately.
-		let localeInitialized = false;
-		let prevLocale: Locale | null = null;
-		const handleLocaleChange = (locale: Locale) => {
-			if (!helloEl || !introEl || !nameEl || !roleEl) return;
-			if (!localeInitialized) {
-				localeInitialized = true;
-				prevLocale = locale;
-				return;
-			}
-			if (locale === prevLocale) return;
-			prevLocale = locale;
-
-			// If landing summary is currently active, play scramble out -> in.
-			if (scrollTrigger?.isActive) {
-				gsap.killTweensOf([helloEl, introEl, nameEl, roleEl]);
-				const tl = gsap.timeline();
-				const helloOut = scrambleOut(helloEl, 0.4);
-				const introOut = scrambleOut(introEl, 0.5);
-				const nameOut = scrambleOut(nameEl, 0.4);
-				const roleOut = scrambleOut(roleEl, 0.4);
-				if (helloOut) tl.add(helloOut, 0);
-				if (introOut) tl.add(introOut, 0);
-				if (nameOut) tl.add(nameOut, 0);
-				if (roleOut) tl.add(roleOut, 0);
-
-				const helloIn = scrambleIn(helloEl, t(locale, 'landing.hello'), 0.5);
-				const introIn = scrambleIn(introEl, t(locale, 'landing.intro'), 0.75);
-				const nameIn = scrambleIn(nameEl, 'Vin', 0.75);
-				const roleIn = scrambleIn(roleEl, t(locale, 'landing.role'), 0.5);
-				if (helloIn) tl.add(helloIn, 0.1);
-				if (introIn) tl.add(introIn, 0.1);
-				if (nameIn) tl.add(nameIn, 0.3);
-				if (roleIn) tl.add(roleIn, 0.2);
-			} else {
-				// Not visible — update immediately without animation.
-				gsap.killTweensOf([helloEl, introEl, nameEl, roleEl]);
-				helloText = t(locale, 'landing.hello');
-				introText = t(locale, 'landing.intro');
-				roleText = t(locale, 'landing.role');
-			}
-		};
-
-		const unsubscribeLang = $language.subscribe(handleLocaleChange);
-
 		return () => {
 			mq.removeEventListener('change', updateMq);
 			mq.removeEventListener('change', setupScroll);
-			unsubscribeLang();
 			scrollTrigger?.kill();
 			scrollTrigger = null;
 			ctx?.revert();
@@ -272,6 +230,8 @@
 	onMount(() => {
 		onMountCb();
 	});
+
+	afterNavigate(onMountCb);
 
 	onDestroy(() => {
 		scrollTrigger?.kill();

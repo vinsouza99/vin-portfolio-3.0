@@ -4,16 +4,17 @@
 	import Logo from '$lib/assets/logo.svelte';
 	import { resolve } from '$app/paths';
 	import { isSmallScreen } from '$lib/hooks/is-small-screen';
-	import { setLanguageContext, t, type Locale } from '$lib/i18n';
+	import { getLanguageContext, t } from '$lib/i18n';
 	import { getScrollContext, setScrollContext } from '$lib/contexts/scroll-context';
 	import { onMount } from 'svelte';
 	import { Footer as FbFooter, FooterIcon } from 'flowbite-svelte';
 	import { GithubSolid, LinkedinSolid } from 'flowbite-svelte-icons';
+	import { browser } from '$app/environment';
 
-	const language = setLanguageContext('en');
+	let getLang = getLanguageContext();
+	let language = $derived(getLang());
 	setScrollContext('landing');
 	const currentSection = getScrollContext();
-	const currentLocale = $derived('en');
 	const navkeys = ['skills', 'works', 'career', 'education', 'contact'] as const;
 	let isMdDown = $state(false);
 
@@ -32,15 +33,16 @@
 	const navlinks = $derived(
 		navkeys.map((key) => ({
 			key,
-			label: t($language, `nav.${key}`)
+			label: t(language, `nav.${key}`)
 		}))
 	);
 
-	$effect(() => {
-		language.set(currentLocale);
-	});
+	// $effect(() => {
+	// 	language.set(currentLocale);
+	// });
 
 	onMount(() => {
+		if (!browser) return;
 		const mq = window.matchMedia('(max-width: 767px)');
 		const updateMq = () => {
 			isMdDown = mq.matches;
@@ -80,7 +82,7 @@
 		class=" content-width mx-auto flex flex-wrap items-start justify-between gap-3 p-5 transition-all ease-in-out md:justify-start md:px-10 lg:px-15"
 	>
 		<a
-			href={resolve('/')}
+			href={resolve(`/${language}/#landing`)}
 			class="pointer-events-auto relative z-50 flex items-center"
 			onclick={() => {
 				closeMenu();
@@ -104,13 +106,13 @@
 			class="pointer-events-auto relative z-50 flex items-start space-x-3 md:order-2 md:space-x-4"
 		>
 			<a
-				href={t($language, 'nav.resume.link')}
+				href={resolve(t(language, 'nav.resume.link'))}
 				target="_blank"
 				rel="noopener noreferrer"
-				title={$language === 'en' ? 'Open my resume' : 'Meu currículo'}
+				title={language === 'en' ? 'Open my resume' : 'Meu currículo'}
 				class={`glass-button hover-bg-glow cursor-pointer rounded-lg border-2 bg-transparent px-4 py-1 text-lg font-thin! text-primary-800 ease-in-out  hover:border-primary-700 hover:bg-primary-700/40  hover:text-primary-600 ${isMenuOpen && isMdDown ? 'border-secondary-500 text-secondary-500 hover:border-secondary-700 hover:bg-secondary-700/40 hover:text-secondary-700' : 'border-primary-500/50'}`}
 			>
-				{t($language, 'nav.resume')}
+				{t(language, 'nav.resume')}
 			</a>
 
 			<button
@@ -119,9 +121,9 @@
 				aria-controls="navbar-menu"
 				aria-expanded={isMenuOpen}
 				onclick={toggleMenu}
-				title={t($language, 'nav.hamburgerLabel')}
+				title={t(language, 'nav.hamburgerLabel')}
 			>
-				<span class="sr-only">{t($language, 'nav.hamburgerLabel')}</span>
+				<span class="sr-only">{t(language, 'nav.hamburgerLabel')}</span>
 				{#if isMenuOpen}
 					<svg
 						class="h-6 w-6"

@@ -6,7 +6,8 @@
 	interface Props {
 		selectedItem: Job;
 	}
-	let language = getLanguageContext();
+	let getLang = getLanguageContext();
+	let language = $derived(getLang());
 
 	let { selectedItem }: Props = $props();
 </script>
@@ -14,11 +15,11 @@
 <Detail
 	title={selectedItem.company}
 	subtitleParts={[
-		$language === 'en' ? selectedItem.title.en : selectedItem.title.pt,
+		language === 'en' ? selectedItem.title.en : selectedItem.title.pt,
 		selectedItem.location,
-		`${selectedItem.startYear}${selectedItem.endYear ? `-${selectedItem.endYear == Infinity ? t($language, 'present') : selectedItem.endYear}` : ''}`
+		`${selectedItem.startYear}${selectedItem.endYear ? `-${selectedItem.endYear == Infinity ? t(language, 'present') : selectedItem.endYear}` : ''}`
 	]}
-	description={$language === 'en'
+	description={language === 'en'
 		? selectedItem.longDescription?.en
 		: selectedItem.longDescription?.pt}
 	tags={selectedItem.tags}

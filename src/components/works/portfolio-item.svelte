@@ -45,7 +45,7 @@
 		</div>
 
 		<div
-			class="pointer-events-none flex flex-1 grow-2 flex-col justify-start gap-5 px-3 py-3 @md:gap-1 @md:px-2 @md:py-5"
+			class="pointer-events-none flex flex-1 grow-2 flex-col justify-between gap-5 px-3 py-3 @md:gap-1 @md:px-2 @md:py-5"
 		>
 			<div class="flex justify-between">
 				<h3 class="flex text-left font-mono text-lg text-primary-600">
@@ -54,15 +54,10 @@
 				<span class="text-sm font-thin text-text/50! italic">{work.platforms?.join(', ')}</span>
 			</div>
 			<p
-				class="truncate-text flex h-full max-h-20 grow overflow-hidden text-left text-sm font-thin text-secondary-300/80 @md:max-h-full"
+				class="truncate-text flex h-full max-h-20 grow overflow-hidden text-left text-sm font-thin text-secondary-300/80"
 			>
 				{language === 'en' ? work.shortDescription?.en : work.shortDescription?.pt}
 			</p>
-			<!-- <p
-				class="block truncate overflow-hidden text-left text-sm font-thin whitespace-nowrap text-secondary-300/80"
-			>
-				{work.shortDescription}
-			</p> -->
 			<div class="flex flex-wrap gap-2 text-left @md:mt-2">
 				{#each work.tags as tag (tag)}
 					<Tag text={tag} />

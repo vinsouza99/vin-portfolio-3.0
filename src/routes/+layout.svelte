@@ -1,7 +1,3 @@
-<script module>
-	export const prerender = true;
-</script>
-
 <script lang="ts">
 	import './layout.css';
 	import favicon from '$lib/assets/favicon.png';
@@ -13,7 +9,7 @@
 	import { page } from '$app/state';
 	import { setContext } from 'svelte';
 
-	let { children } = $props<{
+	let { children, data } = $props<{
 		children: import('svelte').Snippet;
 	}>();
 	let lang = $derived(page.params.lang);
@@ -22,7 +18,19 @@
 	setContext('lang', () => lang);
 </script>
 
-<svelte:head><link rel="icon" href={favicon} /><title>Vin Souza</title></svelte:head>
+<svelte:head
+	><link rel="icon" href={favicon} /><title>Vin Souza</title><link
+		rel="alternate"
+		hreflang="en"
+		href="https://vinsouza.com/en"
+	/>
+	<link rel="alternate" hreflang="pt-BR" href="https://vinsouza.com/pt-br" />
+	<link rel="alternate" hreflang="x-default" href="https://vinsouza.com/en" />
+	<meta
+		name="description"
+		content={data.lang === 'en' ? 'Full-Stack Developer' : 'Desenvolvedor Full-Stack'}
+	/></svelte:head
+>
 
 <Navbar />
 {@render children()}

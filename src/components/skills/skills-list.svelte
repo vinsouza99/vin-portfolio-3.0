@@ -13,16 +13,16 @@
 	const ptTags = ['todas', 'frontend', 'backend', 'devops', 'linguagens'];
 
 	// Reactive labels array based on current language
-	let tags = enTags;
+	let tags = $derived(enTags);
 	$effect(() => {
-		tags = $language === 'pt-BR' ? ptTags : enTags;
+		tags = language === 'pt-BR' ? ptTags : enTags;
 	});
 
 	// Keep the selected tag as a key (language-independent)
-	let selectedTagKey = 'all';
+	let selectedTagKey = $state('all');
 
 	// Filtered skills list
-	let filteredSkills = skills;
+	let filteredSkills = $state(skills);
 
 	const filterSkills = (query: string) => {
 		const lowerQuery = query.toLowerCase();
@@ -85,7 +85,7 @@
 			<p
 				class="block h-full w-full content-center self-center text-center text-lg font-thin text-text/50"
 			>
-				{t($language, 'skills.notFound')}
+				{t(language, 'skills.notFound')}
 			</p>
 		{:else}
 			<ul

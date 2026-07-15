@@ -106,7 +106,7 @@ export const messages = {
 
 export type MessageKey = keyof (typeof messages)['en'];
 
-export const t = (locale: Locale, key: MessageKey) => messages[locale][key];
+export const t = (locale: Locale = 'en', key: MessageKey) => messages[locale][key];
 
 export const setLanguageContext = (initialLocale: string | null | undefined) => {
 	const language = writable<Locale>(normalizeLocale(initialLocale));
