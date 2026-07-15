@@ -15,7 +15,7 @@
 	// Reactive labels array based on current language
 	let tags = $derived(enTags);
 	$effect(() => {
-		tags = language === 'pt-BR' ? ptTags : enTags;
+		tags = language === 'pt-br' ? ptTags : enTags;
 	});
 
 	// Keep the selected tag as a key (language-independent)
